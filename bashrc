@@ -1,1 +1,0 @@
-/home/jmoosmann/.bashrc
