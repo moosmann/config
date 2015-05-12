@@ -54,3 +54,5 @@ source $FREESURFER_HOME/SetUpFreeSurfer.sh
 #export FSLDIR=`pwd`/fsl
 #. ${FSLDIR}/etc/fslconf/fsl.sh
 
+# required for building libwavelets
+export MATLAB_ROOT=usr/local/MATLAB/R2014b

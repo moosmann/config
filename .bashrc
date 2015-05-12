@@ -173,11 +173,12 @@ alias edit='emacs'
 alias editemacsconfig='emacsandquit $HOME/.emacs.d/init.el'
 alias ee='editemacsconfig'
 
-# Load .bashrd
+# source .bashrd
 alias bsource='source $HOME/.bashrc'
 # Edit and reload .bashrd
 alias editbashrc='emacs $HOME/.bashrc;source $HOME/.bashrc'
 alias eb='editbashrc'
+alias psource='source $HOME/.profile'
 
 # MATLAB short cut
 #alias ml='synclient HorizEdgeScroll=0 HorizTwoFingerScroll=0 && matlab -nosplash -desktop &'
@@ -535,8 +536,9 @@ alias xop='/home/hp9361/Software/imaging/xop/xop2.3/xop &'
 # cd aliases
 alias cdphd='cd ~/LATEX/phdthesis'
 alias cdfig='cd ~/LATEX/phdthesis/figures'
-alias cdref='cd ~/REFERENCES'
-alias cdrefile='cd ~/REFERENCES/Files'
+alias cdref='cd ~/Dropbox/REFERENCES'
+alias cdrefile='cd ~/Dropbox/REFERENCES/Files'
+alias cdlcr='cd ~/git-kth/LCR'
 
 # Show graphics cards and drivers
 alias lsvga='lspci | grep -i VGA'
@@ -565,3 +567,6 @@ function freesurfer_tutorial()
 # X-server
 alias xstop='sudo service lightdm stop'
 alias xstart='sudo service lightdm restart'
+
+# PyCharm
+#alias pycharm='$HOME/Software/PyCharm/pycharm-community-4.0.6/bin/pycharm.sh'
