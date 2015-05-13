@@ -34,11 +34,12 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 # ASTRA
 #export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6 
 #export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
-#export LD_LIBRARY_PATH=/usr/local/astra/lib:$LD_LIBRARY_PATH
+# PyASTRA
+export LD_LIBRARY_PATH=/usr/local/astra/lib:$LD_LIBRARY_PATH
 
 # NiftyRec
 #export LD_LIBRARY_PATH=/usr/local/niftyrec:$LD_LIBRARY_PATH
-#export LD_LIBRARY_PATH=/home/jmoosmann/Software/NiftyRec/NiftyRec-2.0.1/build/bin:$LD_LIBRARY_PATH
+#export LD_LIBRARY_PATH=~/Software/NiftyRec/NiftyRec-2.0.1/build/bin:$LD_LIBRARY_PATH
 #export LD_LIBRARY_PATH=/usr/local/lib/:/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 LD_LIBRARY_PATH=/usr/local/lib:/usr/local/niftyrec:$LD_LIBRARY_PATH
 

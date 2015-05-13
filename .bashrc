@@ -173,12 +173,15 @@ alias edit='emacs'
 alias editemacsconfig='emacsandquit $HOME/.emacs.d/init.el'
 alias ee='editemacsconfig'
 
-# source .bashrd
+# sourcing
 alias bsource='source $HOME/.bashrc'
+alias psource='source $HOME/.profile'
 # Edit and reload .bashrd
 alias editbashrc='emacs $HOME/.bashrc;source $HOME/.bashrc'
 alias eb='editbashrc'
-alias psource='source $HOME/.profile'
+# Edit and reload .profile
+alias editprofile='emacs $HOME/.profile;source $HOME/.profile'
+alias ep='editprofile'
 
 # MATLAB short cut
 #alias ml='synclient HorizEdgeScroll=0 HorizTwoFingerScroll=0 && matlab -nosplash -desktop &'
@@ -570,3 +573,6 @@ alias xstart='sudo service lightdm restart'
 
 # PyCharm
 #alias pycharm='$HOME/Software/PyCharm/pycharm-community-4.0.6/bin/pycharm.sh'
+
+# Spyder with multithread
+alias spydermt='spyder --multithread &'
