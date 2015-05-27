@@ -576,3 +576,23 @@ alias xstart='sudo service lightdm restart'
 
 # Spyder with multithread
 alias spydermt='spyder --multithread &'
+
+# git
+function gitstatus()
+{    
+    echo -e "\nConfig files: .bashrc and .profile";
+    git status ~/;
+
+    echo -e "\nEmacs:";
+    git status ~/.emacs.d;
+
+    echo -e "\nMATLAB:";
+    git status ~/matlab;
+
+    echo -e "\n";
+}
+
+# Restart ssh daemon sshd
+#alias sshdrestart='sudo /etc/init.d/sshd restart'
+#alias sshdrestart='sudo service ssh restart'
+alias sshdrestart='sudo restart ssh'

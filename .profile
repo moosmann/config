@@ -24,11 +24,12 @@ fi
 # Default EDITOR
 export EDITOR=emacsclient
 
+# LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+
 # NVIDIA CUDA
 #PATH=/usr/local/cuda/bin:$PATH
-#export PATH=/usr/local/cuda:/usr/local/cuda/bin:$PATH
 export PATH=/usr/local/cuda/bin:$PATH
-#export LIBRARY_PATH=/usr/lib/nvidia-343:$LIBRARY_PATH
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 
 # ASTRA
@@ -38,10 +39,8 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/usr/local/astra/lib:$LD_LIBRARY_PATH
 
 # NiftyRec
-#export LD_LIBRARY_PATH=/usr/local/niftyrec:$LD_LIBRARY_PATH
-#export LD_LIBRARY_PATH=~/Software/NiftyRec/NiftyRec-2.0.1/build/bin:$LD_LIBRARY_PATH
-#export LD_LIBRARY_PATH=/usr/local/lib/:/usr/local/cuda/lib64:$LD_LIBRARY_PATH
-LD_LIBRARY_PATH=/usr/local/lib:/usr/local/niftyrec:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/usr/local/niftyrec:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$HOME/Software/NiftyRec/NiftyRec-2.0.1/build/bin:$LD_LIBRARY_PATH
 
 # Python
 export PYTHONSTARTUP=~/.pythonrc
@@ -49,7 +48,6 @@ export PYTHONSTARTUP=~/.pythonrc
 # FreeSurfer
 export FREESURFER_HOME=/usr/local/freesurfer
 source $FREESURFER_HOME/SetUpFreeSurfer.sh
-
 
 # FSL
 #export FSLDIR=`pwd`/fsl
