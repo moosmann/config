@@ -44,6 +44,7 @@ export LD_LIBRARY_PATH=$HOME/Software/NiftyRec/NiftyRec-2.0.1/build/bin:$LD_LIBR
 
 # Python
 export PYTHONSTARTUP=~/.pythonrc
+export PYTHONPATH=~/git-kth/LCR/astra/python
 
 # FreeSurfer
 export FREESURFER_HOME=/usr/local/freesurfer
