@@ -114,7 +114,6 @@ if ! shopt -oq posix; then
 fi
 
 
-
 ############################################################
 ## PERSONAL SETTINGS
 ############################################################
@@ -129,6 +128,12 @@ alias lrt='ls -lrt'
 
 # LaTeX, dvipdf, acroread
 #alias lda='latex MHB_prl.tex && dvipdf MHB_prl.dvi && acroread MHB_prl.pdf &'
+
+# acroread
+function acro()
+{
+    acroread  $1 &
+}
 
 #grep aliases
 # alias psgrep='ps -eo pid,user,ni,%cpu,%mem,time,etime,start,comm | grep -e PID -e'
@@ -203,6 +208,8 @@ alias sitp='ssh -X julian@ssh-itp.particle.uni-karlsruhe.de'
 alias sanka8='ssh -XYp24 moosmann@anka8.anka.kit.edu'
 alias sanka8noX='ssh -Xp24 moosmann@anka8.anka.kit.edu'
 alias sjumo='ssh -X julian@192.168.0.101'
+alias sesrf='ssh -Xp5022 ls2395@firewall.esrf.fr'
+alias skth='ssh -X jmoosmann@130.237.41.55'
 
 # OLD VERSION, UPDATED IN AMSTERDAM
  # port forwarding to computational server over anka8
@@ -321,6 +328,8 @@ alias las='guake -n LAS -r las -e slas'
 alias lasnoX='guake -n LASNOX -r lasnoX -e slasnoX'
 alias anka8='guake -n ANKA8 -r anka8 -e sanka8'
 alias moschd='guake -n MOSCHD -r moschd -e smoschd'
+alias esrf='guake -n ESRF -r esrf -e sesrf'
+alias kth='guake -n KTH -r kth -e skth'
 
 # ssh function for guake
 function jumo ()
@@ -360,7 +369,7 @@ function nccpunoX ()
     guake -n NCCPUNOX$VAR -r nccpunoX$VAR -e  "ssh hp9361@anka-nc-cpu$VAR.anka.kit.edu"
 }
 
-#sshfs
+# sshfs
 USERID=43637;#ID of hp9361
 GROUPID=80605;#ANKA-universal-imaging-group
 alias anka8_home='sshfs -p24 moosman@anka8.anka.kit.edu:/home/moosman /home/hp9361/mounts/anka8_home -o uid=$USERID -o gid=$GROUPID'
@@ -386,7 +395,7 @@ function lsdf_ncgpu ()
     sshfs hp9361@anka-nc-gpu$VAR.anka.kit.edu:/mnt/tomoraid-LSDF /home/hp9361/mounts/ncgpu_lsdf -o uid=$USERID -o gid=$GROUPID
 }
 
-#mayavi2
+# mayavi2
 # function mavi ()
 # {
 #   mayavi2  -d $1 -m Outline -m GridPlane -m Axes -s "module_manager.scalar_lut_manager.show_scalar_bar = True"
@@ -446,7 +455,6 @@ function vidconverter ()
     done
 }
 
-
 # cd aliases for LSDF directories
 #if [ -f /mnt/tomoraid-LSDF/users/moosmann/bash_lsdf_aliases ]; then
 #    . /mnt/tomoraid-LSDF/users/moosmann/bash_lsdf_aliases
@@ -470,7 +478,6 @@ function countdir ()
 }
 alias countfolders='countdir'
  
-
 # connect smartphone camera via usb to laptop
 #alias usbcam='adb forward tcp:4747 tcp:4747 && droidcam &'
 
@@ -565,7 +572,6 @@ function freesurfer_tutorial()
     #source $FREESURFER_HOME/SetUpFreeSurfer.sh
     cd $SUBJECTS_DIR
 }
-
 
 # X-server
 alias xstop='sudo service lightdm stop'
