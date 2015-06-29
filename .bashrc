@@ -123,8 +123,7 @@ alias lla='ls -lAF'
 alias llh='ls -lh'
 alias lah='ls -Ah'
 alias lrt='ls -lrt'
-
-#alias pyhst='/opt/pyhst/PyHST'
+alias lsa='ls -A'
 
 # LaTeX, dvipdf, acroread
 #alias lda='latex MHB_prl.tex && dvipdf MHB_prl.dvi && acroread MHB_prl.pdf &'
