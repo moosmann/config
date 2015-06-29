@@ -1,0 +1,2014 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% GIT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Using GitHub API with personal access token (in the case that the use
+of ssh is restricted and standard https authentication with username
+and password fails):
+
+Go to github, navigate to Setting -> Applications
+Generate Personal access token AND SAVE IT.
+Use name of token as user name and the access token as password.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% NVIDIA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+to unistall driver run:
+nvidia-unistall
+----------------------------------------------------------------------
+to unistall cuda toolkit run uninstall scritp in 
+/usr/local/cuda.*.*/bin
+----------------------------------------------------------------------
+Inormation about GPUs
+nvidia-smi -l
+----------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PYTHON
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+Install python related package using pip
+sudo -H pip install PACKAGE
+
+List outdated packages
+pip list --outdated
+
+resolve dependencies before installation using:
+sudo apt-get build-dep PACKAGE
+----------------------------------------------------------------------
+pip VS apt
+
+Ubuntu Oneiric (and I expect newer versions too) install pip packages
+to /usr/local/lib/python2.7/dist-packages, and apt packages to
+/usr/lib/python2.7/dist-packages. So just check the former directory
+and sudo pip uninstall every package you find there.
+
+----------------------------------------------------------------------
+%% Build python wrapper for C code %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+
+copy arbitrary lib*py and modify:
+lib*py.cpp
+CMakeLists.txt
+setup.py
+
+----------------------------------------
+
+Install python wrapper for wavelet library
+
+enter build directory 
+ccmake ../ 
+or 
+cmake-gui ../ 
+
+configure following
+Ungrouped Entries
+  OPTIMIZATION ON
+  HIGH_PRECISION ON
+  MEX_ENABLED OFF
+PYTHON
+  PYTHON_ENABLE ON
+
+make
+
+sudo make libwaveletspyInstall
+
+----------------------------------------
+
+Write python wrapper
+
+----------------------------------------------------------------------
+Find installation location of module
+
+When you import a module, you usually can check the __file__ attribute
+of the module to see where the module is in your filesystem:
+
+module __file__ attribute
+
+import numpy
+numpy.__file__
+
+BUT! The file attribute is not present for C modules that are
+statically linked into the interpreter; for extension modules loaded
+dynamically from a shared library, it is the pathname of the shared
+library file
+
+
+import imp
+imp.find_module('NameOfModule')
+----------------------------------------------------------------------
+Search path
+
+import sys
+print '\n'.join(sys.path)
+
+----------------------------------------------------------------------
+examine your local namespace:
+
+>>> from pprint import pprint
+>>> pprint(locals())
+----------------------------------------------------------------------
+RL: building
+
+RLcpp: building
+
+cd build
+cmake ../
+make
+sudo make PyInstall
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% IPYTHON
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+Reloading submodules in IPython
+IPython comes with some automatic reloading magic:
+
+%load_ext autoreload
+%autoreload 2
+
+It will reload all changed modules every time before executing a new
+line. The way this works is slightly different than dreload. Some
+caveats apply, type %autoreload? to see what can go wrong.
+----------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+NOTES KTH MEDICAL IMAGING: Software, toolboxes, installation,
+reconstruction, bugs, 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+
+TESTING NIFTY TOOLBOX
+
+Running tt_demo_mlem_conebeam in Matlab
+
+results in Matlab crash: segemention violation
+
+terminal output:
+
+[NiftyReg CUDA ERROR] file '/home/jmoosmann/Software/NiftyRec/NiftyRec-2.0.1/transmission-lib_gpu/_tt_line_backproject_ray_gpu_kernels.cu' in line 213 : invalid device symbol.
+
+line 213f of _tt_line_backproject_ray_gpu_kernels.cu:
+
+    CUDA_SAFE_CALL( cudaMemcpyToSymbol("c_invViewMatrix_bk", invViewMatrix, sizeofMatrix, 0, cudaMemcpyHostToDevice) );
+//    CUDA_SAFE_CALL(cudaMemcpy(c_invViewMatrix_bk, invViewMatrix, sizeofMatrix, cudaMemcpyHostToDevice));
+
+No error messages occurs when using CPU instead of GPU (GPU=0).
+
+
+REINSTALLING NIFTYREC
+
+Toggling option NiftyRec_COMPILE_DOC when configruing with cmake-gui, error message occurs:
+
+CMake Warning (dev) in documentation/manual/CMakeLists.txt:
+  Syntax Warning in cmake code at
+
+    /home/jmoosmann/Software/NiftyRec/NiftyRec-2.0.1/documentation/manual/CMakeLists.txt:8:63
+
+  Argument not separated from preceding token by whitespace.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+Inserting white space in the above CMakeLists.txt solves the problem.
+
+
+
+NIFTYREC PYTHON
+
+to load NiftyRec module within python via
+
+from NiftyRec import NiftyRec
+
+environment variables have to set beforehand
+
+add 
+
+export LD_LIBRARY_PATH=/usr/local/lib/:/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+
+to $HOME/.profile
+
+Take care of the exact name of the cuda library: lib or lib64.
+
+
+NIFTYREC MATLAB
+
+tt_project_ray_mex takes as optional argument #9 USE_GPU=[0,1] which,
+however, has no effect. Computation is always executed on GPU. Tested
+with tt_demo_project_mod = modified version of tt_demo_project.
+
+
+WALNUT DATA
+
+for proper ground truth reconstruction from unprocessed sinogram with
+1200 projections:
+
+- replicate padding to remove incomplete data ring, symmetric padding
+not working for cone-beam setup
+
+- hot pixel filter removes broken pixel line artifacts, use of dark
+  (not dead) pixel filter smears out some fine structures, do not use
+  dark pixel filter
+
+--------------
+freeglut:
+/usr/lib/x86_64-linux-gnu/libglut.so
+
+----------------------------------------------------------------------
+Basic VI commands and principles
+----------------------------------------------------------------------
+vi has two modes: the command mode and the insert mode. In command
+mode, letters of the keyboard will be interpreted as commands. When
+you are in insert mode the same letters of the keyboard will type or
+edit text. vi always starts out in command mode.  You can type i to
+enter the insert mode. If you wish to leave insert mode and return to
+the command mode, hit the ESC key. If you're not sure where you are,
+hit ESC a couple of times and that should put you back in command
+mode.
+
+
+Change from the command mode to the insert mode: i
+
+If the Backspace key doesn't work properly on your system, try using
+the Ctrl h key combination.
+
+If you've just finished typing text, you're still in insert mode and
+will need to press ESC to return to the command mode.
+
+
+Closing and Saving Files
+
+:w	to save your file but not quit vi (this is good to do periodically in
+	case of machine crash!).
+:q	to quit if you haven't made any edits.
+:wq	to quit and save edits (basically the same as ZZ).
+----------------------------------------------------------------------
+
+
+
+
+----------------------------------------------------------------------
+pdf manipulation in linux: pdftk
+----------------------------------------------------------------------
+FIREFOX
+----------------------------------------------------------------------
+Add-ons:
+Adblock Plus
+FireGestures
+Instant Fox
+Location Bar Enhancer
+QuickFox Notes
+QuickWiki
+Xmarks
+Colorful Tabs
+Youtube High Definition
+Turn off the lights
+----------------------------------------------------------------------
+Firefox: Bookmarking not possible
+
+Close Firefox completely
+
+Open the Firefox profile folder (~/.mozilla/firefox/t*)
+
+Delete or rename all files named "places.sqlite", including
+"places.sqlite-journal" and any "places.sqlite.corrupt" files, if
+found (but first, see below, if a places.sqlite.corrupt file exists).
+----------------------------------------------------------------------
+Remove unwanted language packs
+
+They are located in (or similiar)
+
+/usr/lib/firefox-addons/extensions
+
+sudo rm /usr/lib/firefox-addons/extensions/langpack-en-ZA@firefox.mozilla.org.xpi
+
+Also check removing packages such as hunspell-en-ca hunspell-de-at etc.
+
+sudo apt-get purge hunspell-en-ca myspell-en-au myspell-en-za
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+THUNDERBIRD
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+Set up POP in mail clients
+
+Standard configuration instructions:
+Incoming Mail (POP3) Server - requires SSL: 	pop.gmail.com
+Use SSL: Yes
+Port: 995
+Outgoing Mail (SMTP) Server - requires TLS or SSL: 	smtp.gmail.com
+Use Authentication: Yes
+Port for TLS/STARTTLS: 587
+Port for SSL: 465
+Server timeouts 	Greater than 1 minute, we recommend 5
+Full Name or Display Name: 	[your name]
+Account Name or User Name: 	your full email address (including @gmail.com or @your_domain.com)
+Email Address: 	your email address (username@gmail.com or username@your_domain.com)
+Password: 	your Gmail password
+----------------------------------------------------------------------
+Thunderbird LDAP search is VERY slow on a large LDAP installation (MS
+AD in this case)
+
+Problem: after configuring an LDAP directory in the thunderbird
+address book, searching for entriers takes forever but doesn't find
+anything.
+
+Started wireshark, found out that a query is sent to the server
+alright. After 60 seconds, the server came back with a timeout failure
+(which the TB UI doesn't show, but the packet can be seen in
+wireshark).
+
+Looking at the LDAP query string shows why: it's a logical "or" of
+email, name, first name, last name, all of them using a "contains"
+operator: (|(email=*XXX*)(sn=*XXX*)) etc. This means the LDAP server
+can't use indexes, so it has to do four full table scans which take
+forever.
+
+The LDAP query string can be set in a hidden configuration option
+called "mail.addr_book.quicksearchquery.format", which is documented
+in https://developer.mozilla.org/en/Thunderbird/Hidden_prefs - it says
+the default string is
+pref("mail.addr_book.quicksearchquery.format","?(or(PrimaryEmail,c,@V)(DisplayName,c,@V)(FirstName,c,@V)(LastName,c,@V))");
+with the c meaning "contains". However, it doesn't list any other
+possibilities to use instead of "c", it just refers to the source
+code.
+
+That can be viewed at
+http://dxr.mozilla.org/comm-central/comm-central/mailnews/addrbook/src/nsAbQueryStringToExpression.cpp.html#l278
+
+where "bw" stands for "begins with".
+
+So, i changed the preference to
+"?(or(PrimaryEmail,bw,@V)(DisplayName,bw,@V)(FirstName,bw,@V)(LastName,bw,@V))");
+
+and look what happens - querys are fast again. Of course, you won't
+find anything containing your query anymore, just strings that begin
+with your query - but that's what you want in most cases anyway, and a
+working "starts with" is better than a non-functional "includes" in
+any case.
+
+config editor is found under: 
+ Einstellungen... > Erweitert > Allgemein > Konfiguration bearbeiten..
+----------------------------------------------------------------------
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+LINUX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+Disable ssh root login
+
+sudo emacs /etc/ssh/sshd_config
+Change PermitRootLogin without-password -> PermitRootLogin no
+
+Restart ssh daemon
+sudo service ssh restart
+----------------------------------------------------------------------
+Search for package using command line:
+apt-cache search *
+----------------------------------------------------------------------
+(WW) The directory "/usr/share/fonts/X11/cyrillic" does not exist.
+
+sudo apt-get install xfonts-cyrillic
+
+
+
+sudo apt-get install xfonts-100dpi
+
+sudo apt-get install xfonts-75dpi
+
+----------------------------------------------------------------------
+Stop X-server
+
+for UBUNTU 14.04 or higher
+
+sudo service lightdm stop
+
+for UBUNTU 14.04 or higher
+
+sudo service gdm stop
+
+----------------------------------------------------------------------
+Redirect output in bash
+
+foo > stdout.txt 2> stderr.txt
+
+or 
+
+foo 1> stdout.txt 2> stderr.txt
+
+or both in the same file
+
+foo > allout.txt 2>&1
+
+to append output to file use >> instead of >
+
+redirect stderr to stdout, then print combined streams and save them
+to out.log
+
+2>&1 | tee out.log
+
+----------------------------------------------------------------------
+Grafisches Frontend um .deb Pakte zu installieren: gdebi
+
+(ansonsten mit: sudo dpkg -i Paketnname.deb
+----------------------------------------------------------------------
+Adobe Reader acroread: Text in inaktiven Tabs nicht
+lesbar. Hintergrund hat die gleich Farbe wie der Text
+
+Ambiance theme:
+
+cd /usr/share/themes/Ambiance/gtk-2.0
+
+sudo gedit gtkrc
+
+>>>change fg_color from #4c4c4c to #000000
+
+ 
+
+Radiance theme:
+
+cd /usr/share/themes/Radiance/gtk-2.0
+
+sudo gedit gtkrc
+
+>>>change fg_color from #4c4c4c to #000000
+----------------------------------------------------------------------
+Konvertieren von Videos/Movies in fuer Microsoft Powerpoint 64-bit
+passendes Format mittels Kommando: avconv, Output Dateiname: avi,
+Codec: msmpeg4
+
+avconv -c msmpeg 
+
+----------------------------------------------------------------------
+kill PID = kill-15 PID
+more powerful kill signal:
+kill -9 PID
+or 
+kill -SIGKILL PID
+----------------------------------------------------------------------
+Inormation about GPUs
+nvidia-smi -l
+----------------------------------------------------------------------
+Admin / root / sudo Rechte wiederherstellen
+Im recovery mode starten, root shell ausfuehren
+Schreibschutz entfernen: mount -o remount,rw / 
+USER der Gruppe sudo hinzufuegen: adduser USER sudo
+----------------------------------------------------------------------
+Grafikkarte ermitteln
+lspci -nnk | grep -i VGA -A2
+----------------------------------------------------------------------
+Rechnernamen aendern
+
+Diese Änderungen sollte man in einer Rootshell oder im Recovery Modus
+vollziehen, da sonst das Risiko besteht, dass man sich aus dem Rechner
+aussperrt.
+
+Der Rechnername muss in zwei Dateien geändert werden. Die Änderungen
+kann man mit jedem beliebigen Editor ausführen.
+
+Zum einen muss die Datei /etc/hostname angepasst werden:
+
+meinrechnername
+
+Zum anderen muss die Datei /etc/hosts geändert werden:
+
+127.0.0.1       localhost
+127.0.1.1       meinrechnername
+...
+
+Danach kann der Rechnername mittels des Befehls
+
+sudo hostname -F /etc/hostname 
+
+gesetzt werden.
+----------------------------------------------------------------------
+Rootshell
+sudo -i
+exit
+----------------------------------------------------------------------
+NOTE ON RECUSRSIVELY COPYING HIDDEN FILES
+
+Do NOT copy files within a directory using an asterisk:
+cp -r DIR1/* DIR2
+
+The asterisk won't match hidden files starting with "."
+
+Instead simply use the command without any asterisk:
+cp -r DIR1 DIR2
+----------------------------------------------------------------------
+SSH port forwarding (ssh tunnel)
+moosmann@iss-moosmann:~$ ssh -f -L 12345:anka-nc-gpu1:22 anka8.fzk.de -p24 -N
+moosmann@iss-moosmann:~$ ssh -p12345 hp9361@localhost
+
+Eine ssh Verbindung wird mit anka8,port 24 aufgebaut. Der lokale
+Laptop port 12345 (-L 12345) wird dann uber anka8,port 24 auf
+anka-nc-gpu1,port 22 gemappt. D.h. anka-nc-gpu1 ist über den lokalen
+Port 12345 ansprechbar. D.h. weiterhin das man sich auf anka-nc-gpu1
+einloggt über den lokalen Port 12345 aber mit entsprechendem
+Nutzernamen: ssh -p12345 hp9361@localhost.
+
+ -N 
+
+Do not execute a remote command. This is useful for just forwarding
+  ports (protocol version 2 only).
+
+ -L [bind_address:]port:host:hostport
+
+Specifies that the given port on the local (client) host is to be
+forwarded to the given host and port on the remote side. This works by
+allocating a socket to listen to port on the local side, optionally
+bound to the specified bind_address. Whenever a connection is made to
+this port, the connection is forwarded over the secure channel, and a
+connection is made to host port hostport from the remote machine.
+
+----------------------------------------------------------------------
+Environment Variable
+
+Display Environment Variable
+$ set
+$ printenv
+$ env
+
+Change or Set Environment Variable
+You can use the following command to change the environment variable
+for the current session as per your shell.
+
+For Korn shell (KSH)
+var=value
+export var
+ 
+To set JAVA_PATH, enter:
+JAVA_PATH=/opt/jdk/bin
+export JAVA_PATH
+
+For Bourne shell (sh and bash)
+export var=value
+To set PATH, enter:
+export PATH=$PATH:/opt/bin:/usr/local/bin:$HOME/bin
+----------------------------------------------------------------------
+/dev/shm
+Introduction:
+/dev/shm is nothing but implementation of traditional shared memory concept. It is an efficient means of passing data between programs. One program will create a memory portion, which other processes (if permitted) can access. This will result into speeding up things on Linux. shm / shmfs is also known as tmpfs, which is a common name for a temporary file storage facility on many Unix-like operating systems. It is intended to appear as a mounted file system, but one which uses virtual memory instead of a persistent storage device. If you type mount command you will see /dev/shm as a tempfs file system. Therefore, it is a file system, which keeps all files in virtual memory. Everything in tmpfs is temporary in the sense that no files will be created on your hard drive. If you unmount a tmpfs instance, everything stored therein is lost. By default almost all Linux distros configured to use /dev/shm.
+----------------------------------------------------------------------
+Reverting Guake terminal tab names back to 'Terminal #'
+
+easiest way not to use vte prompt as tab names is to use the 
+`gconf-editor`:
+
+gconftool-2 --set /apps/guake/general/use_vte_titles --type boolean false
+----------------------------------------------------------------------
+obere Leiste fehlt
+unity --reset
+unity --replace
+----------------------------------------------------------------------
+Open images from command line
+xdg-open IMAGE
+eog -f IMAGE
+gnome-open IMAGE
+fbi (http://linux.bytesex.org/fbida/)
+
+Open videos form command line (even virtual console)
+mplayer
+----------------------------------------------------------------------
+cal, ncal — displays a calendar and the date of Easter
+----------------------------------------------------------------------
+find
+find Startverzeichnis [Optionen] Test Aktion
+
+Beispiele:
+find / -name "[Xx]*"
+
+find / -name "*.txt" -size +12000c
+
+findet also alle Dateien des gesamten Verzeichnisbaums, die auf .txt
+enden und größer als 12000 Byte sind
+
+find / -nouser -exec rm {} \;
+
+Nach der Aktion -exec folgt also der normale Programmaufruf für rm.
+Statt einer Datei existiert der Platzhalter „{}“ (zwei geschweifte
+Klammern). Dieser steht für alle Dateien, die find findet.
+Abgeschlossen werden muss der Befehl mit \; (Backslash, Semikolon).
+
+find / -nouser -exec rm {} +
+
+Das find-Kommando sammelt dabei solange Dateinamen bis die
+Längenbegrenzung für die Argumentliste erreicht ist. Das Leerzeichen,
+das Zeilenende und ähnliche Zeichen in Dateinamen werden dabei korrekt
+an das Programm rm übergeben.
+
+----------------------------------------------------------------------
+tar: erstellen, entpacken, ansehen
+
+Archive mit Inhalt von /etc und /home erstellen:
+
+tar cvf test.tar /etc/ /home/
+tar cvf - /etc /home | gzip > test.tar.gz
+tar czvf test.tar.gz /etc/ /home/         # *GNU tar* Kurzform
+tar -czvf test.tar.gz /etc/ /home/        # *GNU tar* Alternative
+
+Archive entpacken:
+
+tar xvf test.tar
+gunzip < test.tar.gz | tar xvf -
+tar xzvf test.tar.gz                      # *GNU tar* Kurzform
+tar -xzvf test.tar.gz                     # *GNU tar* Alternative
+
+Archivinhalt ansehen:
+
+tar tvf test.tar
+gunzip < test.tar.gz | tar tf -
+tar tzvf test.tar.gz                      # *GNU tar* Kurzform
+tar -tzvf test.tar.gz                     # *GNU tar* Alternative
+----------------------------------------------------------------------
+Find Number of CPU Cores Command
+nproc
+lscpu
+less /proc/cpuinfo
+----------------------------------------------------------------------
+Paketquellen im Terminal hinzufuegen
+
+sudo add-apt-repository 'deb PFAD/ZUR/QUELLE DISTRIBUTION KOMPONENTEN' 
+
+also z.B.:
+
+sudo add-apt-repository 'deb http://archive.ubuntu.com/ubuntu precise main restricted universe multiverse' 
+
+Danach müssen die Quellen immer mittels des Befehls apt-get update
+aktualisiert werden, erst dann können Pakete aus der neuen Quelle
+hinzugefügt werden.
+
+Gegebenenfalls muss noch ein Schlüssel zur Authentifizierung der
+Quelle hinzugefügt werden.
+----------------------------------------------------------------------
+ps
+
+report a snapshot of the current processes. To see every process on
+the system using standard syntax:
+
+ps -e 
+
+Display user-oriented format:
+
+SHOW ABSOLUTE COMMAND PATHS PLUS PARAMETERS. It also causes the
+command arguments to be printed (like -f). ps u
+----------------------------------------------------------------------
+psgrep
+
+find distinct process in processes list
+
+alias psgrep='ps -eo pid,user,ni,%cpu,%mem,time,etime,start,comm,cmd | grep -e PID -e'
+
+psgrep COMMAND
+
+----------------------------------------------------------------------
+cron 
+
+crontab - maintain crontab files for individual users
+crontab [-u user] [-l | -r | -e] file
+
+The -e option is used to edit the current crontab using the editor
+specified by the VISUAL or EDITOR environment variables. After you
+exit from the editor, the modified crontab will be installed
+automatically.
+
+Die Struktur ist wie folgt zu verstehen:
+
+* * * * * auszuführender Befehl
+┬ ┬ ┬ ┬ ┬
+│ │ │ │ │
+│ │ │ │ └──── Wochentag (0-7) (Sonntag =0 oder =7)
+│ │ │ └────── Monat (1-12)
+│ │ └──────── Tag des Monats (1-31)
+│ └────────── Stunde (0-23)
+└──────────── Minute (0-59)
+
+Beispiele von Crontabs:
+
+#M    S   T   M  W    Befehl
+5     *   *   *  *    /usr/bin/message.sh     #Befehl wird fünf Minuten nach jeder vollen Stunde aufgerufen.
+*/5   *   *   *  *    /usr/bin/message.sh     #Befehl wird alle 5 Minuten aufgerufen (die Schrittweite wird durch */Schrittweite angegeben).
+59    23  *   *  0    gzip /var/log/messages  #Befehl wird einmal pro Woche sonntags um 23:59 Uhr ausgeführt.
+0     0   *   *  *    gzip /var/log/auth.log  #Befehl wird täglich um 00:00 Uhr ausgeführt.
+20,30 1   *   *  1-5  /usr/bin/work.sh        #Befehl wird montags bis freitags jeweils um 01:20 und 01:30 ausgeführt.
+0     1   1-7 12 1    /usr/bin/work.sh        #Befehl wird am 1. bis 7. Dezember sowie an jedem Montag im Dezember um ein Uhr nachts ausgeführt.
+
+
+MAILTO=""
+#M   S   T   M  W    Befehl
+*/30 *   *   *  *    rsync -av /mnt/tomoraid-LSDF/users/moosmann/matlab/ $HOME/matlab_rsync/  #rsync matlab scripts on tomoraid3 to home folder
+
+----------------------------------------------------------------------
+Cron Job Prevent the sending of errors and output
+
+To prevent the sending of errors and output, add any one of the following at the end of the line for each cron job to redirect output to /dev/null.
+>/dev/null 2>&1.
+OR
+&> /dev/null
+OR
+set MAILTO="" variable at the start of your crontab file. This will also disable email. Edit/Open your cron jobs
+$ crontab -e
+At the top of the file, enter:
+MAILTO=""
+Save and close the file.
+----------------------------------------------------------------------
+Nautilus bookmarks are stored in ~/.gtk-bookmarks
+
+Nautilus uses uniform resource identifier (URI) syntax for bookmarks.
+Special URIs include:
+Code
+
+computer:/// - mounted devices and network
+file:/// - local files
+network:/// - available networks
+burn:/// - burning media
+smb:/// - windows/samba networks
+x-nautilus-desktop:/// - desktop objects and icons
+trash:/// - local trash
+----------------------------------------------------------------------
+Convert the AVI video to MP4 using command line
+mencoder input.avi -o output.mp4 -oac copy -ovc lavc -lavcopts vcodec=mpeg1video -of mpeg
+----------------------------------------------------------------------
+Terminal type: Print type and echo TERM
+tset -r
+tset -rs
+----------------------------------------------------------------------
+CPU info: cores, etc
+cat /proc/cpuinfo
+----------------------------------------------------------------------
+Show your L1 and L2 cache related information
+dmesg | grep cache
+----------------------------------------------------------------------
+Restore window manager:
+gtk-window-decorator --replace &
+emerald --replace &
+----------------------------------------------------------------------
+Redirect output:
+>   Redirect standard output
+>&  Redirect standard output and standard error
+<   Redirect standard input
+>!  Redirect standard output; overwrite file if it exists
+>&! Redirect standard output and standard error; overwrite file if it exists
+|   Redirect standard output to another command (pipe)
+>>  Append standard output
+>>& Append standard output and standard error
+----------------------------------------------------------------------
+Suppress standard output and standard error for shell (Redirection to
+nowhere: /dev/null)
+COMMAND >&/dev/null
+----------------------------------------------------------------------
+Suche MUSTER in allen Dateien im aktuellen Ordner (.) und allen
+Unterordner und gebe den Pfad der Datei bei erfolgreicher Suche in der
+Konsole aus:
+find . -exec grep "MUSTER" '{}' /dev/null \; -print
+Bei Gebrauch mit -name -print weglassen
+----------------------------------------------------------------------
+SHELL LOOPs
+for f in ABS{1..4}; do head "./$f/$f.par"; done
+for f in *{1..4}.par; do echo "check: $f"; done
+for f in /ABS{1..4}; do echo ".$f$f.par"; done
+----------------------------------------------------------------------
+Counting number of files in current directory
+ls -l | wc -l  counts the number of lines in the output of ls -l
+
+Recursively count files in linux directory
+find DIR_NAME -type f -print | wc -l
+----------------------------------------------------------------------
+Get computer's IP adress (LAN)
+/sbin/ifconfig
+----------------------------------------------------------------------
+Abhaengigkeiten installieren
+apt-get build-dep
+----------------------------------------------------------------------
+Permission right: 
+The first char is for the user, second for the group
+and the third is for other.  
+Octal specification: The high bit (4) is
+for read access, the middle bit (2) os for write access, and the low
+bit (1) is for execute access.
+----------------------------------------------------------------------
+IDs OF USERS AND GROUPS
+superuserrights are necessary
+
+id    print real and effective user and group IDs
+addgroup [options] [--gid ID] group
+
+Add an existing user to an existing group. If called with two
+non-option arguments, adduser will add an existing user to an existing
+group.
+
+adduser user group
+----------------------------------------------------------------------
+FUSE: operating on files on a remote computer using just a secure
+shell login on the remote computer
+SSHFS: filesystem client based on ssh
+sshfs [user@]host:[dir] mountpoint [options]
+Beispiel: sshfs moosmann@anka-tomo2.ka.fzk.de:/home/moosmann /home/moosmann/external_mounts/home_tomo2 -o uid=1000 -o gid=1009
+groups and members are listed in /etc/groups
+print all gid's/groupnames a user belongs to
+id -G user
+id -Gn user  
+unmounting
+fusermount -u FOLDER
+----------------------------------------------------------------------
+Print system information
+uname
+----------------------------------------------------------------------
+free
+----------------------------------------------------------------------
+SCREEN session:
+start screen session with name NAME: screen -S NAME
+screen -r  resume detached screen session
+screen -list list detached screen session 
+Befehle um die screen session anzusteuern mit C-a einleiten:
+C-a d    detach screen from this terminal
+C-a D D  detach an logut
+C-a c    start new screen tab (subsession)
+C-a "    lists all windows in a session
+C-a A    enter name for current window
+C-a S    Split the current region into two new ones.
+C-a TAB  zwischen subsessins wechseln
+C-a k
+C-a C-k     (kill)        Destroy current window.
+C-a q
+C-a C-q     (xon)	Send a control-q to the current window.
+----------------------------------------------------------------------
+convert multiple images preserving filenames (here: tif to png)
+for file in *.tif ; do convert "$file" "${file/%tif/png}" ; done
+or
+format=eps;echo $format;for file in *.$format ; do convert "$file" "${file/%$format/png}";done
+or define function
+function imconverter ()
+{
+  echo -e '\nConvert' $1' images to' $2' images\n'
+  for file in *.$1;do convert "$file" "${file/%$1/$2}";done
+}
+----------------------------------------------------------------------
+if default application (nautilus) to open a folder changed then the
+file mimeapps.list was changed/is misconfigured
+~/.local/share/applications/mimeapps.list. Solution: in
+'inode/directory' change it to 'inode/directory=nautilus.desktop;'
+----------------------------------------------------------------------
+When window frames disappear / Wenn Fensterrahmen verschwinden
+GNOME:  gtk-window-decorator & 
+	bzw. um Compiz zu beenden
+	nohup metacity --replace & 
+KDE:	kde-window-decorator & 
+	bzw. um Compiz zu beenden
+	kwin --replace & 
+----------------------------------------------------------------------
+ls-R database
+The "database" read by Kpathsea is a line-oriented file of plain text.
+The format is that generated by GNU (and perhaps other) ls programs
+given the `-R' option, as follows.
+ * Blank lines are ignored.
+ * If a line begins with `/' and ends with a colon, it's the name of a
+   directory.
+ * All other lines name entries in the most recently seen directory.
+   `/''s in such lines will produce possibly-strange results.
+ * Files with no preceding directory line are ignored. 
+----------------------------------------------------------------------
+Hide current working directory in terminal
+export PS1='$(ppwd \l)\u@\h > '
+----
+export PS1='\u@\h: '
+
+That results in oli@bert: for my prompt.
+
+If you really want something as minimalist as you ask for, try this:
+
+export PS1='> '
+
+You can attach that to the end of your ~/.bashrc file to have it persist between logins.
+
+You can also get creative with some colours. Here's what I use on my servers:
+
+export PS1='\[\033[0;35m\]\h\[\033[0;33m\] \w\[\033[00m\]: '
+--------
+Just to expand on Oli's answer (and so that I have a bookmark for those short-hand symbols):
+
+The bash prompt (stefano@linux:~$) is only the first of a couple of prompts you might see,:
+
+    PS1: The default promt you see when you open a shell
+
+    It's value is stored in an environment variable called PS1. To see its value, type
+
+    echo $PS1
+
+    This will give you something like
+
+    \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\u@\h:\w\$
+
+    To change it, you can set a new value for the variable:
+
+    export PS1="\u > "
+
+    This will result in a prompt like this:
+
+    stefano > 
+
+    PS2: is your secondary prompt. This get's shown when a command is not finished. Type echo "asd and hit enter, the secondary prompt will let you enter more lines until you close the inverted commas.
+
+    PS3 is the prompt used for select(2)
+
+    PS4 is the prompt used for alt text stack traces (default: +)
+
+To make the changes permanent, you append them to the end of .bash_profile (or .bashrc, see this question) in your home directory.
+
+Here's a more or less complete list of shorthand that you can use when composing these:
+
+    \a     The 'bell' charakter
+    \A     24h Time
+    \d     Date (e.g. Tue Dec 21)
+    \e     The 'escape' charakter
+    \h     Hostname (up to the first ".")
+    \H     Hostname
+    \j     No. of jobs currently running (ps)
+    \l     Current tty
+    \n     Line feed
+    \t     Time (hh:mm:ss)
+    \T     Time (hh:mm:ss, 12h format)
+    \r     Carriage return
+    \s     Shell (i.e. bash, zsh, ksh..)
+    \u     Username
+    \v     Bash version
+    \V     Full Bash release string
+    \w     Current working directory
+    \W     Last part of the current working directory
+    \!     Current index in history
+    \#     Command index
+    \$     A "#" if you're root, else "$"
+    \\     Literal Backslash
+    \@     Time (12h format with am/pm)
+
+You can of course insert any literal string, and any command:
+
+export PS1="\u \$(pwd) > "
+
+Where $(pwd) stands in place of "the output of" pwd.
+
+    If the command substitution is escaped, as in \$(pwd), it's evaluated every time the prompt is displayed, otherwise, as in $(pwd), it's only evaluated once when bash is started.
+
+If you want your prompt to feature colours, you can use bash's colour codes to do it. The code consists of three parts:
+
+40;33;01
+
+    The first part before the semicolon represents the text style.
+        00=none
+        01=bold
+        04=underscore
+        05=blink
+        07=reverse
+        08=concealed
+
+    The second and third part are the colour and the background color:
+        30=black
+        31=red
+        32=green
+        33=yellow
+        34=blue
+        35=magenta
+        36=cyan
+        37=white
+
+Each part can be omitted, assuming starting on the left. i.e. "1" means bold, "1;31" means bold and red. And you would get your terminal to print in colour by escaping the instruction with \33[ and ending it with an m. 33, or 1B in hexadecimal, is the ascii sign "ESCAPE" (a special character in the ascii character set). Example:
+
+"\33[1;31mHello World\33[m"
+
+Prints "Hello World" in bright red.
+----------------------------------------------------------------------
+echo 	Ausgabe von Text, Formatierte Ausgabe von Text
+
+Die beste Hilfe zu dem Befehl echo erhält man mit "info echo". Die Manual-Seite
+"man 1 echo" enthält weniger Informationen.
+
+Der Befehl echo leitet eine Zeichenfolge zur Standard-Ausgabe und kann verwendet werden für:
+•   	Die einfache unformatierte Textausgabe
+• 	Die formatierte Textausgabe
+• 	Um Text in eine Datei zu schreiben und
+diese dabei ggf. auch zu Erstellen.
+
+Der Befehl lautet:
+
+echo [Option] [Zeichenfolge]
+
+Wobei die Option -e mit Hilfe von Steuerzeichen eine formatierte Ausgabe erzeugt. Hier die meiner Ansicht nach wichtigsten Steuerzeichen:
+\a                   	Warnton
+\f 	Form-Feed
+\n 	Neue Zeile
+\t 	Horizontaler Tab
+\\ 	Backslash
+\NNN 	Das Zeichen dessen ASCII-Code das Äquivalent zu
+NNN Oktal ist. Wenn NNN keine gültige Oktalzahl
+ist, wird "\NNN" ausgedruckt.
+
+Weitere Escape-Zeichen s. info echo.
+----------------------------------------------------------------------
+Check mouse and keyboard strokes: xev
+----------------------------------------------------------------------
+Festplatten formatieren/ Formatierung
+grafisch/GUI: gparted
+----------------------------------------------------------------------
+FEDORA
+
+gnome-terminal doesn't start anymore with error message:
+
+GConf Error: Configuration server couldn't be contacted: D-BUS error:
+The GConf daemon is currently shutting down.
+
+Solution: killall gconfg-2
+----------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+KIT - ISS - LAS - Uni Ka
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+VPN to KIT
+grafisch: jnc kit
+commando zeile: jnc -n kit
+config file: ~/.juniper_networks/network_connect/config/kit.conf
+Info:
+http://www.scc.kit.edu/dienste/vpn.php
+Zugang:
+https://vpn.kit.edu/dana-na/auth/url_default/welcome.cgi
+----------------------------------------------------------------------
+ab sofort kann ein JIRA-Issue per Mail an jira@iss.fzk.de kommentiert
+werden. Im Subject muß nur die Issue-ID stehen. Der Text wird dann als
+Kommentar hinzugefügt.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+UBUNTU
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Befehl ausführen, Short Cut
+Alt + F2
+----------------------------------------------------------------------
+Alte Laufleisten (Scrollleisten) nutzen
+
+Um die alten (aus GNOME 2 bekannten) Laufleisten wieder herzustellen,
+verwendet man die folgenden Kommandos in einem Terminal [1] :
+
+sudo apt-get remove overlay-scrollbar 
+sudo bash 
+echo "export LIBOVERLAY_SCROLLBAR=0" > /etc/X11/Xsession.d/80-disableoverlayscrollbars 
+----------------------------------------------------------------------
+Script: Change primary monitor / monitor switch
+#!/bin/bash
+# Author: Andrew Martin
+# Credit: http://ubuntuforums.org/showthread.php?t=1309247
+echo "Enter the primary display from the following:"			# prompt for the display
+xrandr --prop | grep "[^dis]connected" | cut --delimiter=" " -f1	# query connected monitors
+ 
+read choice								# read the users's choice of monitor
+ 
+xrandr --output $choice --primary					# set the primary monitor
+----------------------------------------------------------------------
+Short cut to open GNOME-terminal in Ubuntu:
+Ctrrl+Alt+T works by default in Ubuntu 11.
+----------------------------------------------------------------------
+Sicherheit/Passwortabfrage aendern unter /usr/share/polkit-1/actions
+bei <allow_active> Wert (yes/no/auth_admin_keep) aendern
+Passwortabfrage bei Proxywechsel ausschalten:
+    com.ubuntu.systemservice.policy
+       com.ubuntu.systemservice.setproxy
+          <allow_active> auth_admin_keep -> yes
+Following change seems no longer to be necessary in Ubuntu 11.10 and 12.04
+   org.gnome.gconf.defaults.policy
+	org.gnome.gconf.defaults.set-system
+            <allow_active>auth_admin -> yes
+----------------------------------------------------------------------
+Proxyausnahmen in Ubuntu 11.10
+17. Oktober 2011
+
+Seit ein paar Tagen läuft bei mir das neue Ubuntu 11.10 Oneiric
+Ocelot. Neben zahlreichen netten Änderungen gibt es aber auch seltsame
+Entscheidungen.
+
+So ist beispielsweise die Einstellung eines Netzwerk-Proxy aus einer
+eigenen Anwendung in die Systemeinstellungen unter Netzwerk gewandert.
+Was aber noch schlimmer ist, ist die Tatsache, dass die Einstellungen
+für Proxy-Ausnahmen überhaupt nicht mehr vorhanden sind.
+
+Um entsprechende Ausnahmen dennoch einzurichten muss man den
+dconf-editor bemühen. Dort werden die Ausnahmen unter system – proxy
+manuell in den Schlüssel ignore-hosts eingetragen. Die Beschreibung
+erklärt, dass Hostnamen (auch mit Wildcards wie *.domain.com),
+IP-Adressen und Netzmasken zulässig sind.
+----------------------------------------------------------------------
+CHANGE KEYBOARD LAYOUT VIA SHORTCUT / TASTATUR LAYOUT ÄNDERN MIT TASTENKOMBINATION
+Shift + Caps Lock (Umschalt- und Feststelltaste)
+----------------------------------------------------------------------
+Disable window maximize when titlebar dragged to top of screen?
+Personally I think The Grid plugin has some neat features in it like
+letting you resize windows using Ctrl+Alt+Number Pad.
+----------------------------------------------------------------------
+If you want to keep that functionality but remove the Maximize when
+you drag a window to the top do the following:
+
+- Open CompizConfig Settings Manager
+- Click on the "Grid" in the "Window Management" category
+- Click on the "Edges" tab
+- Open the "Resize Actions" drop down
+- Change the "Top Edge" drop down to "None"
+- Close CompizConfig and you're all done.
+
+Note that if you don't have the CompizConfig Setting Manager
+installed, you can use gconf-editor (start it from terminal) and go to:
+
+- apps -> compiz-1 -> pluging -> grid -> screen0 -> options -> top_edge_action
+
+set this value to 0
+----------------------------------------------------------------------
+Which gcc version is in use
+gcc --version
+----------------------------------------------------------------------
+Compiler optimisation flags
+GCC
+
+In addition to the architecture independent -O[0123s] option
+hierarchy, architecture dependent optimisations are controlled by the
+-march=<cpu-type> and -mtune=<cpu-type> options. The <cpu-type>
+argument (not surprisingly) describes the type of cpu for which to
+optimise the compiled code. The -mtune option will generate code that
+is optimised for the given cpu type which will nevertheless run on cpu
+types other than the optimisation target. On the other hand, -march
+will attempt to optimise more aggressively at the expense of reducing
+portability to other cpu types. Optimisations implied by -mtune are a
+subset of -march optimisations, and thus it is only necessary to
+specify -march if the the maximum level of optimisation is desired.
+
+With version of gcc before 4.3, 32-bit code should be compiled with
+the "prescott" as the cpu-type argument to -march or -mtune whereas
+64-bit code should use the "nocona" argument. Gcc 4.3 however
+introduces "core2" as a valid argument to the -mtune and -march
+options which should be used. Alternatively, as of gcc 4.2, the
+"native" argument is supported. This will automatically determine the
+cpu-type on which compilation is taking place and apply optimisations
+specific to that cpu.
+
+----------------------------------------------------------------------
+For people who have an Intel Pentium4 [Solo/Dual/Quad] Core processor can setup:
+   $ export CXXFLAGS="-march=nocona -msse -msse2 -msse3"
+For people who have an Intel Atom processor can setup:
+   $ export CXXFLAGS="-march=atom -msse -msse2 -msse3"
+For people who have an AMD (mobile) Athlon 64/FX/Sempron:
+  $  export CXXFLAGS="-march=k8-sse3 -msse -msse2 -msse3"
+----------------------------------------------------------------------
+apt/aptitude search and install
+apt-cache search PAKET
+sudo apt-get install PAKET
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+UBUNTU UNITY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Clear/Prevent Recent Documents under Files & Folders in Ubuntu Unity
+This post was written by admin on March 23, 2011
+Posted Under: General
+
+First of all, open up a terminal window for commands:
+
+1.) To clear recent documents, use:
+
+rm ~/.local/share/zeitgeist/activity.sqlite
+zeitgeist-daemon --replace
+
+2.) To prevent new items from being created, use:
+
+echo -n > ~/.recently-used.xbel
+sudo chattr +i .recently-used.xbel
+
+If you change your mind, use this to restore:
+
+sudo chattr -i .recently-used.xbel
+
+UPDATE: ACTIVITY LOG MANAGER has been released. This is a GUI tool
+that allows you to tweak the Zeitgeist history: you can delete part of
+the Zeitgeist history, blacklist some applications or prevent logging
+certain types of files as well as blacklist folders.
+
+Install it using the commands below:
+
+sudo add-apt-repository ppa:zeitgeist/ppa
+sudo apt-get update
+sudo apt-get upgrade
+zeitgeist-daemon --replace
+sudo apt-get install activity-log-manager
+
+----------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+EMACS 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+Reload config file
+
+use the command load-file 
+
+M-x load-file
+
+then press return twice to accept the default filename, which is the
+current file being edited
+
+Alternatively, move the point to the end of any sexp and press C-x C-e
+to execute just that sexp.
+
+----------------------------------------------------------------------
+Disable suspend mode (Ctrl z) in emacs:
+
+Here is how you can unbind the key and (optionally) bind that key
+sequence to Undo
+
+Add the following to your .emacs file:
+	
+;; Unbind Pesky Sleep Button
+(global-unset-key [(control z)])
+(global-unset-key [(control x)(control z)])
+
+If you’d also like to bind the undo function to this key as it is now free to use, add the following lines as well:
+	
+;; Windows Style Undo
+(global-set-key [(control z)] 'undo)
+----------------------------------------------------------------------
+Insert a non-graphic character type C-q (quote-insert)
+----------------------------------------------------------------------
+M-x goto-line: M-g g
+----------------------------------------------------------------------
+check spelling of current word: M-$
+----------------------------------------------------------------------
+WINDOWS/LINUX: Replace control characters: 
+C-q C-m	gives ^M
+M-x 	replace-string C-q C-m
+M-x 	query-replace C-q C-m
+----------------------------------------------------------------------
+Change font size in the buffer
+`C-x C-+’ and ‘C-x C--’ to increase or decrease the buffer text size
+----------------------------------------------------------------------
+Nach der Installation von Emacs findet sich eine aktuelle Version der
+Referenzkarte im Verzeichnis /usr/share/emacs/Version/etc/refcards/.
+----------------------------------------------------------------------
+copy/kill a rectangular selection
+
+C-x r k
+    Kill the text of the region-rectangle, saving its contents as the “last killed rectangle” (kill-rectangle).
+C-x r d
+    Delete the text of the region-rectangle (delete-rectangle).
+C-x r y
+    Yank the last killed rectangle with its upper left corner at point (yank-rectangle).
+C-x r o
+    Insert blank space to fill the space of the region-rectangle (open-rectangle). This pushes the previous contents of the region-rectangle rightward.
+C-x r c
+    Clear the region-rectangle by replacing all of its contents with spaces (clear-rectangle). 
+
+----------------------------------------------------------------------
+emacs server mode
+
+    Run the command server-start in an existing Emacs process: either
+    type M-x server-start, or put the expression (server-start) in
+    your init file (see Init File). The existing Emacs process is the
+    server; when you exit Emacs, the server dies with the Emacs
+    process.
+
+    Run Emacs as a daemon, using the ‘--daemon’ command-line
+    option. See Initial Options. When Emacs is started this way, it
+    calls server-start after initialization, and returns control to
+    the calling terminal instead of opening an initial frame; it then
+    waits in the background, listening for edit requests.
+
+Either way, once an Emacs server is started, you can use a shell
+command called emacsclient to connect to the Emacs process and tell it
+to visit a file. You can then set the EDITOR environment variable to
+‘emacsclient’, so that external programs will use the existing Emacs
+process for editing.
+
+The simplest way to use the emacsclient program is to run the shell
+command ‘emacsclient file’, where file is a file name. This connects
+to an Emacs server, and tells that Emacs process to visit file in one
+of its existing frames—either a graphical frame, or one in a text
+terminal (see Frames). You can then select that frame to begin
+editing.
+
+/usr/bin/emacsclient -a /usr/bin/emacs FILE
+----------------------------------------------------------------------
+Case senstive incremental search: 
+
+Toggle on case sensitivity via M-c after incremental search, C-s, has
+started
+----------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+EMACS: AUCTEX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+----------------------------------------------------------------------
+Exlude commands to be checked by aspell
+
+The manual says that you need to add the following to the command
+line:
+
+--add-tex-command cref op
+
+Here op means that each command (\cref) may have one
+optional parameter and has one mandatory parameter, and neither should
+be checked (if you want to check the optional one, use Op instead).
+
+Update: the proper syntax (for some versions of aspell?) might be
+
+--add-tex-command="citep op" --add-tex-command="citet op"
+
+To add the setting to the configuration file /etc/aspell.conf or
+~/.aspell.conf
+
+add-tex-command cref op
+
+----------------------------------------------------------------------
+\ref and \eqref
+
+The command \ref is defined in the LaTeX Kernel. The command \eqref is
+defined by amsmath.
+
+\eqref puts brackets around the reference number. It's also places the
+references in in \upshape (or \textup), to match the equation
+reference exactly (Thanks to Werner). This is shown in the example
+below.
+----------------------------------------------------------------------
+Change dvi viewer: 
+!! deprecated !!
+LaTeX -> Customize AUCteX -> Browse Options
+-> Tex Command -> Tex Output View Style
+----------------------------------------------------------------------
+Commenting out
+C-c ; comment out all lines in the current region
+C-c % comment out the current paragraph
+----------------------------------------------------------------------
+How to configure Emacs and AUCTeX to work with a PDF viewer
+Posted on February 23, 2011 by Mathieu
+
+I’m writing my thesis in LaTeX, using Emacs and the AUCTeX
+environment. Today I managed to configure AUCTeX to generate PDFs
+(that’s the easy part), but also to correlate the LaTeX source and the
+PDF file (that’s way trickier). As it was painful to make it work,
+here is an easy how-to which only uses Emacs’ graphical interface.
+
+    Open a tex file with Emacs.
+
+    In the LaTeX menu, go to “Customize AUCTeX” and click on “Extend this menu”.
+
+    Then go again to LaTeX, “Customize AUCTeX”, go to the “Tex
+    Command” submenu and click on the included “Tex command” item.
+
+    You are now in the “Tex command group” configuration buffer,
+    scroll down until you reach “Tex Pdf Mode”. Its value is off
+    (nil), click on the “Toggle” button to activate this mode. Click
+    on the “State” button and select “Save for Future Sessions”.
+    AUCTeX will now compile your tex file using pdflatex and produce a
+    pdf output. That was the easy part.
+
+    Still in the “Tex command group” configuration buffer, scroll all
+    the way down and click on the special item called “Tex View”. In
+    the “Tex view group” buffer, you have two things to do : activate
+    the correlate mode between the PDF and the tex file, and declare a
+    PDF viewer which can read these correlations. At the moment, only
+    Okular does the trick in Debian Sid.
+
+    To activate the correlate mode :
+        item “Tex Source Correlate Method”, click on the “Value Menu” button and select “synctex” and save for future sessions,
+        item “Tex Source Correlate Start Server”, select “Always” and save,
+        item “Tex Source Correlate Mode”, toggle it on and save.
+
+    To set Okular as the default PDF viewer :
+        item “Tex View Program List”, right arrow, then button “INS”
+            name: Okular
+            choice: Command
+            command: okular --unique %o#src:%n%b
+        item “Tex View Program Selection”, right arrow, then “INS”
+            choice: Single predicate
+            single predicate: output-pdf
+	    viewer: Okular (if you just added Okular to the Tex View Program List,
+	    this choice might not appear, but if you restart Emacs it will show
+	    up)
+
+    Save both for future sessions. Close Emacs, re-open your tex file
+    and voilà.
+
+    To configure Okular: Settings, Configure Okular, Editor, select
+    Emacs client.
+
+To use Forward search from Emacs to Okular, just hit Ctrl+C Ctrl+V to
+call the viewer. Okular will center its display on the intended line
+of the pdf.
+
+To use Inverse search from Okular to Emacs, just hit Shift+Left mouse
+click on the pdf. Emacs will come up and position the cursor at the
+intended line of the TeX source.
+
+I started using information from bleedingmind, lost hours and was
+finally saved by Luis Finotti’s post.
+
+AUCTeX can also display the compilation errors in Emacs and point
+exactly to the wrong part of your source code. To enable this or fix
+its behaviour (e.g. when it opens a blank buffer strangely named
+“Debian” in place of your TeX source), you might need to set up TeX to
+produce file:line:error style messages. To do that,
+
+    as a root or sudo user,
+    open /etc/texmf/texmf.d/95NonPath.cnf (on Debian),
+    change “file_line_error_style = f” to “file_line_error_style = t” and save,
+    run “update-texmf” which regenerates /etc/texmf/texmf.cnf from the files in /etc/texmf/texmf.d/ .
+----------------------------------------------------------------------
+!!!! For a more recent installation an update of “TeX View Program List
+command” with the TexLive 2011 version is needed !!!!
+okular needs absolute paths
+
+okular –unique %o#src:%n`pwd`/./%b
+
+----------------------------------------------------------------------
+
+ LaTeX Inverse PDF Search with Emacs
+
+Posted in Computers by Armchair Guy on September 2, 2010
+
+Latex is such a time hog that I’m always in search of ways to improve
+my efficiency. My editor of choice is emacs. I’ve tried other editors
+but it usually turns out that there is some “tail” feature that I
+can’t find in any other editor. By “tail” feature I mean a feature
+that is used either very rarely or by very few people.
+
+I’ve tried LyX, which is described as a WYSIWYM (What You See Is What
+You Mean) editor. It’s actually quite brilliant, and I do use it for
+simple MS Word-style documents. I’d use it in conjunction with emacs,
+switching back and forth between LyX and LaTeX source code editing, if
+it were not for the fact that it messes up LaTeX source code big time
+(all source code formatting is lost, making it pretty unreadable).
+
+So I stick to emacs. One of the problems with a non-WYSIWYG editor for
+a language like LaTeX is it is hard to spot what you’re looking at. If
+you’re looking at a PDF file, it’s really hard to find the tex code
+that corresponds to what you’re seeing in the PDF. This is where
+Inverse PDF Search comes in.
+
+What inverse PDF search does is allow you to click on a location in
+the PDF file and be transported to the corresponding spot in the LaTeX
+source. I find this tremendously useful.
+
+Under Ubuntu 10.04 “Lucid Lynx”, this works almost out of the box,
+with a little bit of work. Here are the steps.
+
+1 First, install Okular, the KDE PDF viewer. This may require a huge
+number of KDE libraries. Evince is nice but doesn’t support inverse
+PDF search yet.
+    
+2 In okular, go to Settings > Configure Okular > Editor and change the
+editor to “emacs client”, and the command to “emacsclient -a emacs
+--no-wait +%l %f“.
+  
+3 Make sure you have Emacs 23. This is the default in Ubuntu 10.04.
+
+4 We have to start emacs in server mode so that okular can talk to it.
+Add this line somewhere in your .emacs file: (server-start) The next
+time emacs is started, it will be in server mode.
+
+5 When emacs compiles using latex, it has to include “source
+specials”. Roughly, this is an index connecting every position in the
+PDF file to a line number in the source file. To create the index, a
+latex package called synctex must be installed. Under Ubuntu 10.04
+this is included in the package texlive-extra-utils, so make sure
+that’s installed.
+
+6 To tell emacs to always use PDF (i.e. compile with pdflatex instead
+of latex) insert the line (add-hook ‘LaTeX-mode-hook ‘TeX-PDF-mode)
+into your .emacs. This step is optional if you don’t want to
+automatically pick PDF each time, but everything in this post pertains
+to PDF.
+ 
+7 Tell emacs to compile using source specials by adding the following
+line to your .emacs: ‘(LaTeX-command “latex -synctex=1″)
+Alternatively, when editing a tex file, go to the menu LaTeX >
+Customize AUCTeX > Extend this menu; then LaTeX > Customize AUCTeX >
+TeX Command > LaTeX Command, then change “latex” to “latex -synctex=1”
+and click “Save for future sessions”.
+ 
+8 To tell emacs/AUCTeX to use okular rather than evince, add the
+following to .emacs: ‘(TeX-output-view-style ‘((“^pdf$” “.” “okular
+%s.pdf”))). Alternatively, this can be done through the customization
+menu LaTeX > Customize AUCTeX > Extend this menu; then LaTeX >
+Customize AUCTeX > TeX Command > TeX Output View Style and change
+evince %o %(outpage) to okular %o %(outpage). Click “Save for future
+sessions”.
+
+When you restart emacs and use AUCTeX to compile under PDF (using C-c
+C-c), it should compile with source specials. (You can manually
+compile with source specials using the command pdflatex -synctex=1
+filename.tex at the command line, but it’s easier to use AUCTeX from
+emacs.) After compilation is done, the AUCTeX view command (also using
+C-c C-c) should start up okular. To use inverse search, Shift+Left
+Click on a position in the PDF file in okular. The cursor should jump
+to the corresponding line in emacs.
+
+Note. It’s possible to omit step 7 and instead insert
+\usepackage{pdfsync} in the preamble of the TeX file. This uses
+pdfsync, which is older than synctex. But this has two drawbacks.
+First, your LaTeX source file is now less portable (if you send it to
+someone without the pdfsync style file). Second, the accuracy of the
+source specials generated using this method is atrocious: Shift+Left
+Click only places you in the general vicinity of the point you’re
+looking for, may be 15 or 20 lines above or below, and worst of all,
+is not even monotone (you click a later spot on the PDF, you might
+jump to an earlier spot in the source). Using step 7 is much better.
+
+----------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+LATEX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+pgf / Tikz: TikZ node with includegraphics, anchor
+
+\node [draw=black, anchor=south west] (label) at (0,0) {\includegraphics{my.pdf}};
+
+----------------------------------------------------------------------
+Briefvorlagen:
+
+g-brief
+
+dinbrief
+
+GUI: tk-brief
+----------------------------------------------------------------------
+Integralzeichen:
+
+Standard
+\int_a^b f(x) dx, 
+
+Schoener
+\int_a^b \! f(x) \, \mathrm{d}x.
+
+Mehrfachintegral
+\iint\limits_D \, \dif x\,\dif y \quad \iiint\limits_E \, \dif x\,\dif y\,\mathrm{d}z
+
+Geschlossenes Kurvenintegral
+\oint \! \nabla f \, \dif t = 0
+
+----------------------------------
+
+ohne Grenzen
+\int
+
+mit Grenzen rechts vom Integralzeichen
+\int_{-N}^N 
+
+mit Grenzen uber und unter dem Integralzeichen
+\int\limits_{-N}^N 	\int\limits_{-N}^N
+
+Mehrfachintegral, Grenzen rechts
+\iint_A \iiint_A \iiiint_A
+
+Ringintegral bzw. Kurvenintegral
+\oint_c
+----------------------------------------------------------------------
+little fraction sign: \tfrac{x}{y}, requires amsmath or 
+similar package
+----------------------------------------------------------------------
+get non free fonts
+sudo getnonfreefonts-sys
+----------------------------------------------------------------------
+Bei Problem mit Blocksatz und Silbentrennung in figure captions:
+\PassOptionsToPackage{caption=false}{subfig} 
+\usepackage{subfig}
+In diesem Beispiel ist das Packet subfig der Problemverursacher, da es
+wohl die Einstellungen ueberschreibt.
+----------------------------------------------------------------------
+Um MiKTeX nur zum Installieren fehlender Pakete in TeX Live zu
+verwenden, muss in jedem Befehl [3] das livetex-Verzeichnis angegeben
+werden:
+
+mpm --update-db --install-root=/usr/share/texmf-texlive/ 
+Benutzung
+
+Der MiKTeX Package Manager wird über das Terminal [2] bedient. Er funktioniert fast analog zu apt-get auf dem Terminal:
+
+Liste der verfügbaren Pakete aktualisieren:
+
+sudo mpm --update-db 
+
+Liste der verfügbaren Pakete auflisten:
+
+sudo mpm --list 
+
+Informationen zu einem bestimmten Paket anzeigen:
+
+sudo mpm --list|grep GESUCHTESPAKET 
+
+Ein bestimmtes Paket installieren:
+
+sudo mpm --install=GESUCHTESPAKET  
+
+Bei der Installation eines Paketes kann auch direkt der Pfad zur TeX-Distribution angeben werden (hier TeXLive)
+
+sudo mpm --install=GESUCHTESPAKET --install-root=/usr/share/texmf-texlive/ 
+
+Die neuen Pakete müssen noch bei LaTeX registriert werden:
+
+sudo texhash 
+
+oder bei einer TeXLive Installation:
+
+sudo mktexlsr 
+
+Nun können die neuen Pakete benutzt werden.
+
+Der MikTeX Package Manager bietet auch eine grafische Oberfläche (einige Funktionen fehlen hier aber noch):
+
+sudo mpm --admin 
+
+Weitere Befehle und Hilfen zur Benutzung finden sich auf der Manpage und im MikTeX-Wiki
+
+----------------------------------------------------------------------
+LaTeX Konfiguration
+local folder:
+LF=/usr/local/share/texmf/
+save style files under LF/tex/latex
+For kitbeamertheme.sty maybe one needs arial and urw-arial fonts.
+Download (maybe via Miktex) and extract the ua1.zip in the main zip
+folder to the local- or systemtexfolder.
+!!      Don't forgte to run texhash (create ls-R databases) or
+        mktexlsr.
+!!!!    For font installation one has to run updmap. (Update font map
+        files for TeX output drivers.)
+!!!!!!  For nonlocal systemwise installation one has to run
+        updmap-sys. (Update font map files for TeX output drivers
+        system-wide.)
+----------------------------------------------------------------------
+BEAMER ERROR MESSAGES
+How to get rid of those beamer warnings
+
+September 27th, 2008 by Stefan Kottwitz
+
+Many users of the beamer class are irritated by several beamer
+warnings at every compiler run that are not caused by themselves, I’m
+referring to the beamer version 3.07. Those warnings are not really
+important, but it’s a good habit to debug all warnings instead of just
+ignoring them, otherwise an important warning could easily be
+overlooked.
+
+When I compile this really small example:
+
+\documentclass{beamer}
+\begin{document}
+\begin{frame}
+Test
+\end{frame}
+\end{document}
+
+I’m getting 6 warnings, after the second compilation of course less, but these 4 warnings remain:
+
+   1. Package pgf Warning: This package is obsolete and no longer
+      needed on input line 13.
+   2. Package hyperref Warning: Option `pdfpagelabels’ is turned off
+      (hyperref) because \thepage is undefined.
+      Hyperref stopped early
+   3. LaTeX Font Warning: Font shape `OT1/cmss/m/n’ in size <4> not
+      available (Font) size <5> substituted on input line 6.
+   4. LaTeX Font Warning: Size substitutions with differences (Font)
+      up to 1.0pt have occurred.
+
+Let’s eliminate those warnings:
+
+   1. beamer.cls is loading the obsolete package pgfbaseimage.sty that
+   does nothing but loads pgfcore and prints out this warning. If you
+   put a file with the same name pgfbaseimage.sty somewhere into your
+   texmf directory (TEXMFHOME for example) or into the directory of
+   your tex document containing just the line \RequirePackage{pgfcore}
+   the warning will disappear.
+   2. Set pdfpagelabels to false by yourself, by providing a beamer
+   class option: hyperref={pdfpagelabels=false}
+   3. beamerbasefont.sty defines the commands \Tiny and \TINY to
+   choose very small font sizes. Redefine at least \Tiny or load a
+   font providing that size, for instance Latin Modern.
+   4. fixed by 3.
+
+The new file:
+
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+\let\Tiny=\tiny
+\begin{document}
+\begin{frame}
+Test
+\end{frame}
+\end{document}
+
+will not cause warnings any more. Using those workarounds you won’t be
+annoyed by unnecessary warnings during development of presentations.
+Though the redefinition of \Tiny will fix it for Computer Modern fonts
+I recommend to consider to use Latin Modern instead:
+
+\usepackage{lmodern}
+----------------------------------------------------------------------
+CHANGE FONT SIZE IN LATEX DOCUMENTS
+----------------------------------------------------------------------
+Font Sizes:
+        \tiny
+        \scriptsize
+        \footnotesize
+        \small
+        \normalsize
+        \large
+        \Large
+        \LARGE
+        \huge
+        \Huge 
+----------------------------------------------------------------------
+Put \displaystyle inside the "group" with the thing you want big. For
+example, compare the in-line expressions $\frac{1}{x + \frac1x}$ and
+$\displaystyle \frac{1}{x - \frac1x}$ and $\displaystyle \frac{1}{x -
+{\displaystyle \frac1x}}$ to see how the scope of the \displaystyle
+command works.
+----------------------------------------------------------------------
+Wie kann ich die Schriftgröße relativ zur aktuell verwendeten
+eine Stufe kleiner oder größer wählen?
+
+Mit dem Paket `relsize' kann man die Schriftgröße um einige Stufen
+kleiner oder größer als die aktuell verwendete wählen. Hierzu dienen
+die Anweisungen \smaller, \larger oder \relsize{n} bzw.
+\textsmaller{text}, \textlarger{text} und \mathsmaller{formel},
+\mathlarger{formel}. Will man die Schriftgröße aller Fußnoten,
+Bildunterschriften oder Überschriften um eine Stufe kleiner oder
+größer wählen, so ist es besser die Makros für Fußnoten,
+Unterschriften bzw. Überschriften entsprechend abzuändern. Dies kann
+sehr einfach mit Paketen wie `footmisc', `caption2', `titlesec' oder
+`sectsty', die an anderer Stelle erwähnt werden, erfolgen.
+
+relsize:  CTAN: macros/latex/contrib/misc/relsize.sty
+----------------------------------------------------------------------
+\everymath
+----------------------------------------------------------------------
+To get equal sizes, you could use \DeclareMathSizes in your preamble.
+The syntax is \DeclareMathSizes{display size}{text size}{script
+size}{scriptscript size}. You could simply set all to your default
+font size.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+IMAGEJ / FIJI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+Fiji does not update
+Delete following files:
+ij-core-2.0.0-SNAPSHOT.jar
+ij-updater-core
+----------------------------------------------------------------------
+Problem launching FIJI:
+
+moosmann@iss-moosmann:~$ fiji 
+Re-executing with correct library lookup path
+Found that JAVA_HOME was: '/usr/lib/jvm/java-6-openjdk/'
+Could not launch system-wide Java (No such file or directory)
+
+Solution:
+
+sudo emacs /usr/bin/fiji
+- replace the following line:
+export JAVA_HOME=/usr/lib/jvm/java-6-openjdk/
+by this one:
+export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-????/
+----------------------------------------------------------------------
+draw selection to the image: 
+Edit -> Draw (Ctr-D) and save image as usual.
+Color and line can be changed in newer version via: 
+Edit -> Selection -> Properties
+----------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+MATLAB
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+Latex in labels and legends
+
+Don't forget $$ when using latex
+xlabel('$\lambda z {\bf \xi }^2$', 'Interpreter','LaTex')
+
+In legend use {} to seperated legend strings from parameters
+legend(h, ...
+{'data: S = 1','data: S = 100','data: S = 370','data: S = 500','fit: S = 1','fit: S = 100','fit: S = 370','fit: S = 500'}, ...
+    'Interpreter','latex')
+----------------------------------------------------------------------
+MEvent. Case! When Two-Finger Scrolling
+
+synclient HorizEdgeScroll=0 HorizTwoFingerScroll=0
+matlab -desktop
+----------------------------------------------------------------------
+Print or save figures using print(), or saveas(handle,filename,format)
+where format for eps (vector graphics) should be following:
+
+PostScript black and white
+-dps
+
+PostScript color
+-dpsc
+	
+PostScript Level 2 black and white
+-dps2
+	
+PostScript Level 2 color
+-dpsc2 
+
+Default on UNIX is Level 2. Use doc print or help print to see from
+the table of print devices the supported formats.
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+Get name of current .m file from within that .m file:
+mfilename
+----------------------------------------------------------------------
+inputname
+inmem
+repmat  duplicate matrix/array
+----------------------------------------------------------------------
+How can I see which toolboxes I have installed? 
+help toolboxdir
+----------------------------------------------------------------------
+Information (name,type,file (location)) about a function with name
+'fname' functions(@fname)
+----------------------------------------------------------------------
+import saved workspace varibles (foo.mat) into the workspace: load foo.mat
+----------------------------------------------------------------------
+The font used within figure windows
+These are the fonts used in titles and labels. They are under the
+user's control from the MATLAB Command Window. The font size or the
+font name can be set for individual figures, or the default used by
+MATLAB can be changed with the MATLAB command set as described in the
+MATLAB documentation.
+For example to change to a 20 point font as the default in all figures
+and axes, the commands
+
+  set(0,'defaultaxesfontsize',20);
+  set(0,'defaulttextfontsize',20);
+----------------------------------------------------------------------
+Matlab: Figures als EPS speichern
+Wenn man in Matlab einen Graphen erstellt, und diesen dann über das
+normale Exportmenü als EPS exportiert, hat das Resultat immer einen
+störenden weißen Rand um den eigentlichen Graphen. Das kann man
+umgehen.
+
+Der Rand um den eigentlichen Graphen stört vor allem dann, wenn man
+ihn als Abbildung in ein LaTeX-Dokument einfügen will und auch für
+Publikationen ist er störend.
+
+Man kann Graphen allerdings auch ohne das Exportmenü als EPS-Dateien
+sichern. Praktischerweise ist dann auch der Rand weg. Dazu muss man
+folgenden Code eingeben:
+
+Fig = figure
+figure(Fig)
+% Hier den eigentlichen Code zum Erstellen des Graphen einfügen
+% Hier den eigentlichen Code zum Erstellen des Graphen einfügen
+% Hier den eigentlichen Code zum Erstellen des Graphen einfügen
+set(Fig,'position',[0 0, 800 550])
+set(Fig,'PaperPositionMode','Auto')
+saveas(Fig,'DATEINAME','epsc')
+
+Erklärung:
+Zeile 1: Anstatt Fig kann man natürlich auch jede andere Bezeichnung wählen
+Zeile 6: 0 0 = Position des Fensters auf dem Bildschirm
+Zeile 6: 800 550 = Größe des Graphen in Pixel
+Zeile 7: Verhindert, dass Matlab beim Exportieren die Größe des Graphen ändert
+Zeile 8: Speichert den Graphen Fig als EPS-Datei unter dem gewählten
+      	 Namen im Matlab-Verzeichnis ab
+
+Wirft man diese paar Zeilen in ein m-File, kann man mit nur einem
+Klick hochwertige EPS-Dateien erstellen, die sich ohne Probleme in
+LaTeX einfügen lassen und auch für Publikationen geeignet sind.
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ASTRA toolboox
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+Follow instructions in README.txt
+
+Before running configure, check gcc and g++ version and modify if
+necessary:
+sudo rm gcc; sudo ln -s gcc-4.7 gcc
+sudo rm g++; sudo ln -s g++-4.7 g++
+
+Configure command
+./configure --with-cuda=/usr/local/cuda --with-matlab=/usr/local/MATLAB/R2014b --with-python --prefix=/usr/local/astra 
+
+----------------------------------------------------------------------
+
+COMPILATION OUTPUT AFTER MAKE INSTALL:
+
+jmoosmann@moosmann:~/Software/ASTRA/astra-1.5/build/linux$ sudo make install
+[sudo] password for jmoosmann: 
+./install-sh -m 755 -d /usr/local/astra/lib
+./libtool --mode=install ./install-sh -m 644 libastra.la /usr/local/astra/lib
+libtool: install: ./install-sh -m 644 .libs/libastra.so.0.0.0 /usr/local/astra/lib/libastra.so.0.0.0
+libtool: install: (cd /usr/local/astra/lib && { ln -s -f libastra.so.0.0.0 libastra.so.0 || { rm -f libastra.so.0 && ln -s libastra.so.0.0.0 libastra.so.0; }; })
+libtool: install: (cd /usr/local/astra/lib && { ln -s -f libastra.so.0.0.0 libastra.so || { rm -f libastra.so && ln -s libastra.so.0.0.0 libastra.so; }; })
+libtool: install: ./install-sh -m 644 .libs/libastra.lai /usr/local/astra/lib/libastra.la
+libtool: install: warning: remember to run `libtool --finish /usr/local/lib'
+./libtool --mode=finish /usr/local/astra/lib
+libtool: finish: PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/sbin" ldconfig -n /usr/local/astra/lib
+----------------------------------------------------------------------
+Libraries have been installed in:
+   /usr/local/astra/lib
+
+If you ever happen to want to link against installed libraries
+in a given directory, LIBDIR, you must either use libtool, and
+specify the full pathname of the library, or use the `-LLIBDIR'
+flag during linking and do at least one of the following:
+   - add LIBDIR to the `LD_LIBRARY_PATH' environment variable
+     during execution
+   - add LIBDIR to the `LD_RUN_PATH' environment variable
+     during linking
+   - use the `-Wl,-rpath -Wl,LIBDIR' linker flag
+   - have your system administrator add LIBDIR to `/etc/ld.so.conf'
+
+See any operating system documentation about shared libraries for
+more information, such as the ld(1) and ld.so(8) manual pages.
+----------------------------------------------------------------------
+./install-sh -m 755 -d /usr/local/astra/matlab
+./install-sh -m 755 -d /usr/local/astra/matlab/mex
+./install-sh -m 755 -d /usr/local/astra/matlab/tools
+./install-sh -m 644 matlab/mex/astra_mex_algorithm_c.mexa64 matlab/mex/astra_mex_data2d_c.mexa64 matlab/mex/astra_mex_c.mexa64 matlab/mex/astra_mex_matrix_c.mexa64 matlab/mex/astra_mex_projector_c.mexa64 matlab/mex/astra_mex_projector3d_c.mexa64 matlab/mex/astra_mex_data3d_c.mexa64 /usr/local/astra/matlab/mex
+./install-sh -m 644 ../../matlab/tools/*.m /usr/local/astra/matlab/tools
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+Compilation warning from nvcc:
+
+nvcc warning : The 'compute_11', 'compute_12', 'compute_13', 'sm_11', 'sm_12', and 'sm_13' architectures are deprecated, and may be removed in a future release.
+
+Fix:
+
+The nvcc doesn't like compute_1X flags where X is 1,2,3. Simply remove
+this: -gencode arch=compute_11,code=sm_11 code from the Makefile and
+you should compile correctly.
+----------------------------------------------------------------------
+Cuda kernel error
+Failed to force completion of cuda kernels: 4: unspecified launch failure
+% Use GPU #1 for the reconstruction. (The default is #0.)
+cfg.option.GPUindex = 1;
+----------------------------------------------------------------------
+Information about usage of ASTRA toolbox memory
+astra_mex_data2d('info')
+astra_mex_data3d('info')
+----------------------------------------------------------------------
+Clear all ASTRA toolbox memory
+astra_clear
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+PyASTRAToolbox
+----------------------------------------------------------------------
+Install Python wrapper for ASTRA
+
+sudo ./install.sh -i ~/Software/ASTRA/astra-1.5/include/ -l /usr/local/astra/  -p /usr/bin/python  -c /usr/local/cuda 
+
+----------------------------------------------------------------------
+ERROR MESSAGE WHEN RUNNING install.sh:
+
+Traceback (most recent call last):
+  File "builder.py", line 40, in <module>
+    if StrictVersion(Cython.__version__)>=StrictVersion('0.13'):
+  File "/usr/lib/python2.7/distutils/version.py", line 40, in __init__
+    self.parse(vstring)
+  File "/usr/lib/python2.7/distutils/version.py", line 107, in parse
+    raise ValueError, "invalid version number '%s'" % vstring
+ValueError: invalid version number '0.20.1post0'
+
+SOLVED BY:
+
+Replace following in  line builder.py
+
+    if StrictVersion(Cython.__version__)>=StrictVersion('0.13'):
+
+by
+
+    if StrictVersion(Cython.__version__[0:4])>=StrictVersion('0.13'):
+
+----------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+XDVI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+reread screen: C-r (or left-click on screen)
+----------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ENGLISH GRAMMAR
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+while:
+
+The Rule: "While" can be used to mean "during the time that," and it
+can be used to mean "whereas."
+
+In the former case, while is not preceded by a comma.
+In the latter case, while must be preceded by a comma.
+
+So: I can't study while my little brother is beating on his drum.
+And: The Blue Ridge mountains are beautiful, while the Rockies are grand.
+
+Purists and copyeditors tend to frown on the use of "while" to mean
+"whereas," because the meaning depends upon the comma and points of
+punctuation have a perverse way of not being where they should be. If
+you choose to use "while" to mean "whereas," it's important to be
+assiduous in your punctuation.
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+WINDOWS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+Recovery Mode / Wiederherstellungsmodus starten:
+Shift oder ESC Taste drucken waehrend der Bootloader angezeigt wird.
+----------------------------------------------------------------------
+----------------------------------------------------------------------
