@@ -549,6 +549,8 @@ alias cdfig='cd ~/LATEX/phdthesis/figures'
 alias cdref='cd ~/Dropbox/REFERENCES'
 alias cdrefile='cd ~/Dropbox/REFERENCES/Files'
 alias cdlcr='cd ~/git-kth/LCR'
+alias cdastra='cd /usr/local/astra'
+alias cdpyastra='cd /usr/local/astra/python'
 
 # Show graphics cards and drivers
 alias lsvga='lspci | grep -i VGA'

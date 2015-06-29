@@ -10,7 +10,11 @@ ones(10) * ones(10);
 %% ASTRA toolbox
 addpath( genpath( '/usr/local/astra/matlab/' ) );
 % ASTRA toolbox sample scripts
-addpath( [getenv('HOME') '/Software/ASTRA/astra-1.5/samples/' ] );
+% When using version from sourceforge
+%addpath( [getenv('HOME') '/Software/ASTRA/astra-1.5/samples/' ] );
+% When using git version
+addpath( [getenv('HOME') '/Software/ASTRA/astra-toolbox/samples/matlab' ] );
+
 % SPOT
 addpath( [getenv('HOME') '/Software/ASTRA/spot-1.2/' ] );
 

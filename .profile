@@ -37,6 +37,7 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 #export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 # PyASTRA
 export LD_LIBRARY_PATH=/usr/local/astra/lib:$LD_LIBRARY_PATH
+export PYTHONPATH=/usr/local/astra/python:$PYTHONPATH
 
 # NiftyRec
 export LD_LIBRARY_PATH=/usr/local/niftyrec:$LD_LIBRARY_PATH
@@ -44,7 +45,7 @@ export LD_LIBRARY_PATH=$HOME/Software/NiftyRec/NiftyRec-2.0.1/build/bin:$LD_LIBR
 
 # Python
 export PYTHONSTARTUP=~/.pythonrc
-export PYTHONPATH=~/git-kth/LCR/astra/python
+export PYTHONPATH=~/git-kth/LCR/astra/python:$PYTHONPATH
 
 # FreeSurfer
 export FREESURFER_HOME=/usr/local/freesurfer
