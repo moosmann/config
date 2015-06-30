@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% GIT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+----------------------------------------------------------------------
 Using GitHub API with personal access token (in the case that the use
 of ssh is restricted and standard https authentication with username
 and password fails):
@@ -9,8 +9,13 @@ and password fails):
 Go to github, navigate to Setting -> Applications
 Generate Personal access token AND SAVE IT.
 Use name of token as user name and the access token as password.
+----------------------------------------------------------------------
+Save username and password or name token and token, respectively using
+credetnial helper
 
-
+git config credential.helper store
+and then make a push/pull/etc that requires a authentication
+----------------------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% NVIDIA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
