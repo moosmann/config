@@ -13,12 +13,68 @@ Use name of token as user name and the access token as password.
 Save username and password or name token and token, respectively using
 credetnial helper
 
-git config credential.helper store
-and then make a push/pull/etc that requires a authentication
+git config credential.helper store and then make a push/pull/etc that
+requires a authentication
 ----------------------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% NVIDIA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+Installation of NVIDIA driver with dkms support
+
+The following relates to the installation of the NVIDIA driver only
+and not to CUDA. In the case the CUDA toolkit installer is used,
+download the (latest) driver seperately or extract it from the bundled
+installer
+
+cuda_*_linux.run --extract=<ABSOLUTE_PATH>
+
+For newer driver releases, steps 0-2 are not needed.
+
+
+0. uninstall current driver, probably X-server needs to be stopped
+beforehand:
+
+sudo ./*.run -uninstall
+
+1. Build driver modules for the current kernel
+
+sudo sh ./<DRIVER>.run -K
+
+2. Reboot:
+
+sudo reboot
+
+No need to reboot multiple times and switch adapters.
+Reference: Ubuntu Wiki: Nvidia Manual - Kernel and Mesa Updates
+
+
+Make sure to use the same gcc/g++ version with which the kernel was
+build and stop the X-server (see xstop alias in .bashrc for Ubuntu
+12.04):
+
+To be complete, For driver release >=304 it is possible to register
+its module to DKMS. DKMS will take care of building it for each newly
+installed kernel.
+
+3. Install DKMS (For some reasons, it may not be installed already)
+
+sudo apt-get install dkms
+
+4. Reinstall nVidia driver with DKMS option.
+
+sudo sh ./<DRIVER>.run --dkms
+
+5. After this, it should be no need to redo the steps above any
+more. A way to verify/check after new kernel install:
+
+dkms status
+
+References:
+
+Registering the NVIDIA Kernel Module with DKMS
+sh ./<DRIVER>.run --advanced-options
+
 ----------------------------------------------------------------------
 to unistall driver run:
 nvidia-unistall
@@ -32,6 +88,21 @@ nvidia-smi -l
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PYTHON
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+matplotlib: animated plotting within loop
+
+import matplotlib
+matplotlib.use("qt4agg")
+from matplotlib import pyplot as plt
+
+fig = plt.figure()
+axis = fig.add_subplot(111)
+
+for i in range(30000):
+    axis.plot(i,i,'o')
+    if i > 5:
+        plt.pause(1)
+plt.close()
 ----------------------------------------------------------------------
 Install python related package using pip
 sudo -H pip install PACKAGE
