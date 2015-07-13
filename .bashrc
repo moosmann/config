@@ -580,6 +580,9 @@ alias xstart='sudo service lightdm restart'
 
 # PyCharm
 #alias pycharm='$HOME/Software/PyCharm/pycharm-community-4.0.6/bin/pycharm.sh'
+alias pycharm-professional='/usr/local/pycharm/bin/pycharm.sh'
+alias pycharm-community='/usr/local/pycharm-community/bin/pycharm.sh'
+alias pycharm='pycharm-professional'
 
 # Spyder with multithread
 alias spydermt='spyder --multithread &'

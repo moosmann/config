@@ -1410,6 +1410,8 @@ Commenting out
 C-c ; comment out all lines in the current region
 C-c % comment out the current paragraph
 ----------------------------------------------------------------------
+WORKS!!!!!!!!!!!!!!!!!!!!!
+
 How to configure Emacs and AUCTeX to work with a PDF viewer
 Posted on February 23, 2011 by Mathieu
 
@@ -1426,6 +1428,8 @@ here is an easy how-to which only uses Emacs’ graphical interface.
     Then go again to LaTeX, “Customize AUCTeX”, go to the “Tex
     Command” submenu and click on the included “Tex command” item.
 
+    
+    DONE via latex.el
     You are now in the “Tex command group” configuration buffer,
     scroll down until you reach “Tex Pdf Mode”. Its value is off
     (nil), click on the “Toggle” button to activate this mode. Click
@@ -1433,18 +1437,21 @@ here is an easy how-to which only uses Emacs’ graphical interface.
     AUCTeX will now compile your tex file using pdflatex and produce a
     pdf output. That was the easy part.
 
+    DONE via latex.el and custom.el, see below
     Still in the “Tex command group” configuration buffer, scroll all
     the way down and click on the special item called “Tex View”. In
     the “Tex view group” buffer, you have two things to do : activate
     the correlate mode between the PDF and the tex file, and declare a
     PDF viewer which can read these correlations. At the moment, only
     Okular does the trick in Debian Sid.
-
+    
+    DONE via latex.el
     To activate the correlate mode :
         item “Tex Source Correlate Method”, click on the “Value Menu” button and select “synctex” and save for future sessions,
         item “Tex Source Correlate Start Server”, select “Always” and save,
         item “Tex Source Correlate Mode”, toggle it on and save.
 
+    DONE via custom.el
     To set Okular as the default PDF viewer :
         item “Tex View Program List”, right arrow, then button “INS”
             name: Okular
@@ -1492,33 +1499,14 @@ okular needs absolute paths
 okular –unique %o#src:%n`pwd`/./%b
 
 ----------------------------------------------------------------------
-
- LaTeX Inverse PDF Search with Emacs
+!! DEPRECATED
+LaTeX Inverse PDF Search with Emacs
 
 Posted in Computers by Armchair Guy on September 2, 2010
 
-Latex is such a time hog that I’m always in search of ways to improve
-my efficiency. My editor of choice is emacs. I’ve tried other editors
-but it usually turns out that there is some “tail” feature that I
-can’t find in any other editor. By “tail” feature I mean a feature
-that is used either very rarely or by very few people.
-
-I’ve tried LyX, which is described as a WYSIWYM (What You See Is What
-You Mean) editor. It’s actually quite brilliant, and I do use it for
-simple MS Word-style documents. I’d use it in conjunction with emacs,
-switching back and forth between LyX and LaTeX source code editing, if
-it were not for the fact that it messes up LaTeX source code big time
-(all source code formatting is lost, making it pretty unreadable).
-
-So I stick to emacs. One of the problems with a non-WYSIWYG editor for
-a language like LaTeX is it is hard to spot what you’re looking at. If
-you’re looking at a PDF file, it’s really hard to find the tex code
-that corresponds to what you’re seeing in the PDF. This is where
-Inverse PDF Search comes in.
-
 What inverse PDF search does is allow you to click on a location in
 the PDF file and be transported to the corresponding spot in the LaTeX
-source. I find this tremendously useful.
+source.
 
 Under Ubuntu 10.04 “Lucid Lynx”, this works almost out of the box,
 with a little bit of work. Here are the steps.
