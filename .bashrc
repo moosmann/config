@@ -559,6 +559,7 @@ alias catdriver='cat /proc/driver/nvidia/version'
 alias echold_library_path='echo $LD_LIBRARY_PATH'
 alias echolibrary_path='echo $LIBRARY_PATH'
 alias echopath='echo $PATH'
+alias echocudaroot='echo $CUDA_ROOT'
 
 # ParaView
 #alias paraview='$HOME/Software/ParaView/ParaView-4.3.1-Linux-64bit/bin/paraview'
@@ -579,10 +580,49 @@ alias xstop='sudo service lightdm stop'
 alias xstart='sudo service lightdm restart'
 
 # PyCharm
-#alias pycharm='$HOME/Software/PyCharm/pycharm-community-4.0.6/bin/pycharm.sh'
 alias pycharm-professional='/usr/local/pycharm/bin/pycharm.sh'
 alias pycharm-community='/usr/local/pycharm-community/bin/pycharm.sh'
-alias pycharm='pycharm-professional'
+#alias pycharm='pycharm-professional'
+alias pycharm='pycharm-community'
+
+# Install PyCharm
+function installPyCharmCommunity(){
+    
+    # Arguments and variables
+    local FILE=$1;
+    local INSTALLDIR=$2
+    local SYMLINK=$3
+    local PYCHARM=${FILE%.tar.gz}    
+    if [ -z "${2}" ]; then
+	INSTALLDIR=/usr/local/;
+    fi
+    if [ -z "${3}" ]; then
+	SYMLINK=pycharm-community
+    fi
+
+    # Usage
+    if [ -z "${1}" ]; then
+	echo -e USAGE: installPyCharm TARGZFILE INSTALLDIR SYMLINKNAME \(DEFAULT: \$1 $INSTALLDIR $SYMLINK\);
+	return
+    fi
+
+    echo -e Unpack $FILE to $INSTALLDIR
+    sudo tar xfz $FILE --directory $INSTALLDIR
+
+    echo -e Remove symbolic link \'$SYMLINK\' to
+    readlink $INSTALLDIR$SYMLINK
+    sudo rm $INSTALLDIR$SYMLINK
+
+    echo -e Create new symbolic link \'$SYMLINK\' to $INSTALLDIR$PYCHARM:
+    sudo ln -rs  $INSTALLDIR/$PYCHARM $INSTALLDIR$SYMLINK
+    readlink $INSTALLDIR$SYMLINK
+
+    echo -e To open PyCharm run pycharm.sh from the bin subdirectory:
+    ls $INSTALLDIR$SYMLINK/bin/pycharm.sh
+    
+    echo Optionally, delete deprecated pycharm installations
+}
+
 
 # Spyder with multithread
 alias spydermt='spyder --multithread &'

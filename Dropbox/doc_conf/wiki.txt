@@ -16,6 +16,10 @@ credetnial helper
 git config credential.helper store and then make a push/pull/etc that
 requires a authentication
 ----------------------------------------------------------------------
+show list of tracked files
+
+git ls-tree -r master --name-only
+----------------------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% NVIDIA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
