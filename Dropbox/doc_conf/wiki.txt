@@ -323,12 +323,6 @@ Closing and Saving Files
 :q	to quit if you haven't made any edits.
 :wq	to quit and save edits (basically the same as ZZ).
 ----------------------------------------------------------------------
-
-
-
-
-----------------------------------------------------------------------
-pdf manipulation in linux: pdftk
 ----------------------------------------------------------------------
 FIREFOX
 ----------------------------------------------------------------------
@@ -435,6 +429,20 @@ config editor is found under:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 LINUX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+very fast image viewer from command line
+
+feh
+
+view images in order using feh
+
+feh `ls -v *.png`
+----------------------------------------------------------------------
+pdf manipulation in linux: 
+
+pdftk
+
+pdfmod: edit PDFs by moving pages around and deleting them. It’s in apt.
 ----------------------------------------------------------------------
 Disable ssh root login
 
@@ -1117,6 +1125,15 @@ Kommentar hinzugefügt.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 UBUNTU
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+Programme kompilieren
+
+siehe
+http://wiki.ubuntuusers.de/programme_kompilieren
+
+Bibliotheksuche via commando zeile
+apt-file -l find libgtk | grep dev 
+----------------------------------------------------------------------
 Befehl ausführen, Short Cut
 Alt + F2
 ----------------------------------------------------------------------

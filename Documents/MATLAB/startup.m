@@ -55,3 +55,7 @@ close all;
 
 %% Scripts and functions
 addpath( genpath( [getenv('HOME') '/matlab'] ) );
+
+%%  Increase MATLAB figure performance by using OpenGL rendering
+% unsure if it works, try next time when performance is low
+% set(0, 'DefaultFigureRenderer', 'OpenGL');
