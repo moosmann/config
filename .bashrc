@@ -521,7 +521,7 @@ alias treed='tree -d'
 # open files
 #alias gnomeshorts='emacs $HOME/Documents/gnomeShorts.txt '&
 #alias shorts='gnomeshorts'
-alias wiki='emacs $HOME/Dropbox/doc_conf/wiki.txt &'
+alias wiki='emacs $HOME/wiki.txt &'
 alias media='/usr/bin/libreoffice -o $HOME/Dropbox/doc_conf/media.ods &'
 
 # start globus connect
