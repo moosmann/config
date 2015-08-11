@@ -454,6 +454,14 @@ function vidconverter ()
     done
 }
 
+# create poster images from video
+function posterimage ()
+{
+    local file=$1
+    avconv -i $file -vframes 1 -an -f image2 -y ${file/.avi/}.jpg
+}
+
+
 # cd aliases for LSDF directories
 #if [ -f /mnt/tomoraid-LSDF/users/moosmann/bash_lsdf_aliases ]; then
 #    . /mnt/tomoraid-LSDF/users/moosmann/bash_lsdf_aliases
