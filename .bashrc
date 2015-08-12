@@ -561,6 +561,7 @@ alias cdpyastra='cd /usr/local/astra/python'
 
 # Show graphics cards and drivers
 alias lsvga='lspci | grep -i VGA'
+alisa lsvgakernel='lspci -knn | grep -A2 VGA'
 alias catdriver='cat /proc/driver/nvidia/version'
 
 # echo 
