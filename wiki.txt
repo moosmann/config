@@ -140,7 +140,8 @@ to /usr/local/lib/python2.7/dist-packages, and apt packages to
 and sudo pip uninstall every package you find there.
 
 ----------------------------------------------------------------------
-%% Build python wrapper for C code %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Build python wrapper for C code
 ----------------------------------------------------------------------
 
 copy arbitrary lib*py and modify:
