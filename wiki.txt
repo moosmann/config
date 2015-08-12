@@ -24,6 +24,21 @@ git ls-tree -r master --name-only
 %% NVIDIA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ----------------------------------------------------------------------
+Ubuntu start screen freezes and/or login screen is looping after
+entering password
+
+Probable cause: X-server was not configured probably after CUDA
+installation
+
+Solution:
+
+Boot in recovery mode and try to login via terminal
+
+Remove /home/USER/.Xauthority
+
+reboot
+
+----------------------------------------------------------------------
 Installation of NVIDIA driver with dkms support
 
 The following relates to the installation of the NVIDIA driver only
