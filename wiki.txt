@@ -1482,7 +1482,8 @@ here is an easy how-to which only uses Emacs’ graphical interface.
     PDF viewer which can read these correlations. At the moment, only
     Okular does the trick in Debian Sid.
     
-    DONE via latex.el
+    DONE via latex.el !!! Probably has to be done via custom.el or
+    manually via customize Auctex
     To activate the correlate mode :
         item “Tex Source Correlate Method”, click on the “Value Menu” button and select “synctex” and save for future sessions,
         item “Tex Source Correlate Start Server”, select “Always” and save,
@@ -1494,6 +1495,8 @@ here is an easy how-to which only uses Emacs’ graphical interface.
             name: Okular
             choice: Command
             command: okular --unique %o#src:%n%b
+	    !! OR, see belwo
+	    command: okular --unique %o#src:%n`pwd`/./%b
         item “Tex View Program Selection”, right arrow, then “INS”
             choice: Single predicate
             single predicate: output-pdf
@@ -1527,13 +1530,14 @@ produce file:line:error style messages. To do that,
     as a root or sudo user,
     open /etc/texmf/texmf.d/95NonPath.cnf (on Debian),
     change “file_line_error_style = f” to “file_line_error_style = t” and save,
-    run “update-texmf” which regenerates /etc/texmf/texmf.cnf from the files in /etc/texmf/texmf.d/ .
+    run “update-texmf” which regenerates /etc/texmf/texmf.cnf from the
+    files in /etc/texmf/texmf.d/ .
 ----------------------------------------------------------------------
 !!!! For a more recent installation an update of “TeX View Program List
 command” with the TexLive 2011 version is needed !!!!
 okular needs absolute paths
 
-okular –unique %o#src:%n`pwd`/./%b
+okular --unique %o#src:%n`pwd`/./%b
 
 ----------------------------------------------------------------------
 !! DEPRECATED

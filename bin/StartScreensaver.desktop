@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Icon[de_DE]=gnome-panel-launcher
+Name[de_DE]=StartScreensaver
+Exec=gnome-screensaver-command -a
+Name=Start Screensaver
+Icon=gnome-panel-launcher

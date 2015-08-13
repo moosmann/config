@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Exec=/home/jmoosmann/bin/runMatlab.sh
+Name=Matlab
+Comment=Open Matlab
+Icon=/home/jmoosmann/bin/icons/Matlab_Logo.png
