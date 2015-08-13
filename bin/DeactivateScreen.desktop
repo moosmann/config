@@ -4,11 +4,8 @@
 Version=1.0
 Type=Application
 Terminal=false
-Icon[de_DE]=~/bin/icons/DeactivateScreen.jpg
-Name[de_DE]=DeactivateScreen
 Exec=xset dpms force off
 Comment[de_DE]=Bildschirm deaktivieren
 Name=DeactivateScreen
 Comment=Bildschirm deaktivieren
-Icon=~/bin/icons/DeactivateScreen.jpg
-
+Icon=DeactivateScreen

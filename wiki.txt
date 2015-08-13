@@ -446,6 +446,18 @@ config editor is found under:
 LINUX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ----------------------------------------------------------------------
+*.desktop files: Use of relative paths for scripts and icons
+
+For scripts use relative paths w.r.t. to HOME directory simply without
+leading slash, e.g. to start the script under $HOME/bin/script.sh
+simply use Exec=bin/script.sh
+
+For icons its differnt. There use default search paths for icons and
+.png files instead of jpg. Default search paths are:
+$HOME/.icons, /usr/share/icons or /usr/share/pixmaps
+(convention for the freedesktop)
+
+----------------------------------------------------------------------
 very fast image viewer from command line
 
 feh

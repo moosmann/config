@@ -2,10 +2,8 @@
 Version=1.0
 Type=Application
 Terminal=false
-Icon[de_DE]=/home/jmoosmann/bin/icons/wiki_emacs_128x128.png
 Exec=/usr/bin/emacsclient -a /usr/bin/emacs ~/wiki.txt
-Name[de_DE]=wiki
-Comment[de_DE]=Opens the file ' wiki.txt' in emacs
 Name=wiki
 Comment=Opens the 'wiki.txt' in emacs
-Icon=/home/jmoosmann/bin/icons/wiki_emacs_128x128.png
+Icon=wiki_emacs_128x128.png
+
