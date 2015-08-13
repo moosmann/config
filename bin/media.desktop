@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Exec=/usr/bin/libreoffice -o ./Dropbox/files/media.ods
+Name=media
+Comment=Opens the file ~/Dropbox/files/media.ods with LibreOffice Calc
+Icon=media.png
