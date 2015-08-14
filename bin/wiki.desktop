@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Exec=/usr/bin/emacsclient -a /usr/bin/emacs ~/wiki.txt
+Name=wiki
+Comment=Opens the 'wiki.txt' in emacs
+Icon=wiki_emacs_128x128.png
+

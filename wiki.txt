@@ -24,6 +24,21 @@ git ls-tree -r master --name-only
 %% NVIDIA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ----------------------------------------------------------------------
+Ubuntu start screen freezes and/or login screen is looping after
+entering password
+
+Probable cause: X-server was not configured probably after CUDA
+installation
+
+Solution:
+
+Boot in recovery mode and try to login via terminal
+
+Remove /home/USER/.Xauthority
+
+reboot
+
+----------------------------------------------------------------------
 Installation of NVIDIA driver with dkms support
 
 The following relates to the installation of the NVIDIA driver only
@@ -125,7 +140,8 @@ to /usr/local/lib/python2.7/dist-packages, and apt packages to
 and sudo pip uninstall every package you find there.
 
 ----------------------------------------------------------------------
-%% Build python wrapper for C code %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Build python wrapper for C code
 ----------------------------------------------------------------------
 
 copy arbitrary lib*py and modify:
@@ -429,6 +445,18 @@ config editor is found under:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 LINUX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+*.desktop files: Use of relative paths for scripts and icons
+
+For scripts use relative paths w.r.t. to HOME directory simply without
+leading slash, e.g. to start the script under $HOME/bin/script.sh
+simply use Exec=bin/script.sh
+
+For icons its differnt. There use default search paths for icons and
+.png files instead of jpg. Default search paths are:
+$HOME/.icons, /usr/share/icons or /usr/share/pixmaps
+(convention for the freedesktop)
+
 ----------------------------------------------------------------------
 very fast image viewer from command line
 
@@ -1431,77 +1459,81 @@ Commenting out
 C-c ; comment out all lines in the current region
 C-c % comment out the current paragraph
 ----------------------------------------------------------------------
-WORKS!!!!!!!!!!!!!!!!!!!!!
+AUCTex inverse search from Okular to emacs
+
+!!!Make sure Browse tool is selected in Okular!!!
 
 How to configure Emacs and AUCTeX to work with a PDF viewer
 Posted on February 23, 2011 by Mathieu
 
-I’m writing my thesis in LaTeX, using Emacs and the AUCTeX
-environment. Today I managed to configure AUCTeX to generate PDFs
-(that’s the easy part), but also to correlate the LaTeX source and the
-PDF file (that’s way trickier). As it was painful to make it work,
-here is an easy how-to which only uses Emacs’ graphical interface.
+Open a tex file with Emacs.
 
-    Open a tex file with Emacs.
+In the LaTeX menu, go to “Customize AUCTeX” and click on “Extend this menu”.
 
-    In the LaTeX menu, go to “Customize AUCTeX” and click on “Extend this menu”.
+Then go again to LaTeX, “Customize AUCTeX”, go to the “Tex
+Command” submenu and click on the included “Tex command” item.
 
-    Then go again to LaTeX, “Customize AUCTeX”, go to the “Tex
-    Command” submenu and click on the included “Tex command” item.
+PROCEDURE:
 
-    
-    DONE via latex.el
-    You are now in the “Tex command group” configuration buffer,
-    scroll down until you reach “Tex Pdf Mode”. Its value is off
-    (nil), click on the “Toggle” button to activate this mode. Click
-    on the “State” button and select “Save for Future Sessions”.
-    AUCTeX will now compile your tex file using pdflatex and produce a
-    pdf output. That was the easy part.
+DONE via latex.el
+You are now in the “Tex command group” configuration buffer,
+scroll down until you reach “Tex Pdf Mode”. Its value is off
+(nil), click on the “Toggle” button to activate this mode. Click
+on the “State” button and select “Save for Future Sessions”.
+AUCTeX will now compile your tex file using pdflatex and produce a
+pdf output. That was the easy part.
 
-    DONE via latex.el and custom.el, see below
-    Still in the “Tex command group” configuration buffer, scroll all
-    the way down and click on the special item called “Tex View”. In
-    the “Tex view group” buffer, you have two things to do : activate
-    the correlate mode between the PDF and the tex file, and declare a
-    PDF viewer which can read these correlations. At the moment, only
-    Okular does the trick in Debian Sid.
-    
-    DONE via latex.el
-    To activate the correlate mode :
-        item “Tex Source Correlate Method”, click on the “Value Menu” button and select “synctex” and save for future sessions,
-        item “Tex Source Correlate Start Server”, select “Always” and save,
-        item “Tex Source Correlate Mode”, toggle it on and save.
+DONE via latex.el and custom.el, see below
+Still in the “Tex command group” configuration buffer, scroll all
+the way down and click on the special item called “Tex View”. In
+the “Tex view group” buffer, you have two things to do : activate
+the correlate mode between the PDF and the tex file, and declare a
+PDF viewer which can read these correlations. At the moment, only
+Okular does the trick in Debian Sid.
 
-    DONE via custom.el
-    To set Okular as the default PDF viewer :
-        item “Tex View Program List”, right arrow, then button “INS”
-            name: Okular
-            choice: Command
-            command: okular --unique %o#src:%n%b
-        item “Tex View Program Selection”, right arrow, then “INS”
-            choice: Single predicate
-            single predicate: output-pdf
+DONE via latex.el, maybe has to be done via custom.el or
+manually via customize Auctex
+To activate the correlate mode :
+    item “Tex Source Correlate Method”, click on the “Value Menu” button and select “synctex” and save for future sessions,
+    item “Tex Source Correlate Start Server”, select “Always” and save,
+    item “Tex Source Correlate Mode”, toggle it on and save.
+
+DONE via custom.el
+To set Okular as the default PDF viewer :
+    item “Tex View Program List”, right arrow, then button “INS”
+        name: Okular
+        choice: Command
+        command: okular --unique %o#src:%n%b
+	    !! OR, see belwo
+	    command: okular --unique %o#src:%n`pwd`/./%b
+    item “Tex View Program Selection”, right arrow, then “INS”
+        choice: Single predicate
+        single predicate: output-pdf
 	    viewer: Okular (if you just added Okular to the Tex View Program List,
 	    this choice might not appear, but if you restart Emacs it will show
 	    up)
 
-    Save both for future sessions. Close Emacs, re-open your tex file
-    and voilà.
+Save both for future sessions. Close Emacs, re-open your tex file
+and voilà.
 
-    To configure Okular: Settings, Configure Okular, Editor, select
-    Emacs client.
+To configure Okular: 
+Settings, Configure Okular, Editor, select Emacs client.
 
 To use Forward search from Emacs to Okular, just hit Ctrl+C Ctrl+V to
 call the viewer. Okular will center its display on the intended line
-of the pdf.
+of the pdf. 
 
 To use Inverse search from Okular to Emacs, just hit Shift+Left mouse
 click on the pdf. Emacs will come up and position the cursor at the
-intended line of the TeX source.
+intended line of the TeX source. Make sure Browse tool is selected!!
 
-I started using information from bleedingmind, lost hours and was
-finally saved by Luis Finotti’s post.
 
+!!!! For a more recent installation an update of “TeX View Program List
+command” with the TexLive 2011 version is needed !!!!
+okular needs absolute paths
+
+okular --unique %o#src:%n`pwd`/./%b
+----------------------------------------------------------------------
 AUCTeX can also display the compilation errors in Emacs and point
 exactly to the wrong part of your source code. To enable this or fix
 its behaviour (e.g. when it opens a blank buffer strangely named
@@ -1511,93 +1543,21 @@ produce file:line:error style messages. To do that,
     as a root or sudo user,
     open /etc/texmf/texmf.d/95NonPath.cnf (on Debian),
     change “file_line_error_style = f” to “file_line_error_style = t” and save,
-    run “update-texmf” which regenerates /etc/texmf/texmf.cnf from the files in /etc/texmf/texmf.d/ .
-----------------------------------------------------------------------
-!!!! For a more recent installation an update of “TeX View Program List
-command” with the TexLive 2011 version is needed !!!!
-okular needs absolute paths
+    run “update-texmf” which regenerates /etc/texmf/texmf.cnf from the
+    files in /etc/texmf/texmf.d/ .
 
-okular –unique %o#src:%n`pwd`/./%b
 
 ----------------------------------------------------------------------
-!! DEPRECATED
-LaTeX Inverse PDF Search with Emacs
-
-Posted in Computers by Armchair Guy on September 2, 2010
-
-What inverse PDF search does is allow you to click on a location in
-the PDF file and be transported to the corresponding spot in the LaTeX
-source.
-
-Under Ubuntu 10.04 “Lucid Lynx”, this works almost out of the box,
-with a little bit of work. Here are the steps.
-
-1 First, install Okular, the KDE PDF viewer. This may require a huge
-number of KDE libraries. Evince is nice but doesn’t support inverse
-PDF search yet.
-    
-2 In okular, go to Settings > Configure Okular > Editor and change the
-editor to “emacs client”, and the command to “emacsclient -a emacs
---no-wait +%l %f“.
-  
-3 Make sure you have Emacs 23. This is the default in Ubuntu 10.04.
-
-4 We have to start emacs in server mode so that okular can talk to it.
-Add this line somewhere in your .emacs file: (server-start) The next
-time emacs is started, it will be in server mode.
-
-5 When emacs compiles using latex, it has to include “source
-specials”. Roughly, this is an index connecting every position in the
-PDF file to a line number in the source file. To create the index, a
-latex package called synctex must be installed. Under Ubuntu 10.04
-this is included in the package texlive-extra-utils, so make sure
-that’s installed.
-
-6 To tell emacs to always use PDF (i.e. compile with pdflatex instead
-of latex) insert the line (add-hook ‘LaTeX-mode-hook ‘TeX-PDF-mode)
-into your .emacs. This step is optional if you don’t want to
-automatically pick PDF each time, but everything in this post pertains
-to PDF.
- 
-7 Tell emacs to compile using source specials by adding the following
-line to your .emacs: ‘(LaTeX-command “latex -synctex=1″)
-Alternatively, when editing a tex file, go to the menu LaTeX >
-Customize AUCTeX > Extend this menu; then LaTeX > Customize AUCTeX >
-TeX Command > LaTeX Command, then change “latex” to “latex -synctex=1”
-and click “Save for future sessions”.
- 
-8 To tell emacs/AUCTeX to use okular rather than evince, add the
-following to .emacs: ‘(TeX-output-view-style ‘((“^pdf$” “.” “okular
-%s.pdf”))). Alternatively, this can be done through the customization
-menu LaTeX > Customize AUCTeX > Extend this menu; then LaTeX >
-Customize AUCTeX > TeX Command > TeX Output View Style and change
-evince %o %(outpage) to okular %o %(outpage). Click “Save for future
-sessions”.
-
-When you restart emacs and use AUCTeX to compile under PDF (using C-c
-C-c), it should compile with source specials. (You can manually
-compile with source specials using the command pdflatex -synctex=1
-filename.tex at the command line, but it’s easier to use AUCTeX from
-emacs.) After compilation is done, the AUCTeX view command (also using
-C-c C-c) should start up okular. To use inverse search, Shift+Left
-Click on a position in the PDF file in okular. The cursor should jump
-to the corresponding line in emacs.
-
-Note. It’s possible to omit step 7 and instead insert
-\usepackage{pdfsync} in the preamble of the TeX file. This uses
-pdfsync, which is older than synctex. But this has two drawbacks.
-First, your LaTeX source file is now less portable (if you send it to
-someone without the pdfsync style file). Second, the accuracy of the
-source specials generated using this method is atrocious: Shift+Left
-Click only places you in the general vicinity of the point you’re
-looking for, may be 15 or 20 lines above or below, and worst of all,
-is not even monotone (you click a later spot on the PDF, you might
-jump to an earlier spot in the source). Using step 7 is much better.
-
-----------------------------------------------------------------------
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 LATEX
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+tikz line break in node
+
+1 option: 
+
+use \\ and mandatory option align=left (or center, ...) in node
+----------------------------------------------------------------------
 pgf / Tikz: TikZ node with includegraphics, anchor
 
 \node [draw=black, anchor=south west] (label) at (0,0) {\includegraphics{my.pdf}};

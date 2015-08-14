@@ -210,41 +210,11 @@ alias sjumo='ssh -X julian@192.168.0.101'
 alias sesrf='ssh -Xp5022 ls2395@firewall.esrf.fr'
 alias skth='ssh -X jmoosmann@130.237.41.55'
 
-# OLD VERSION, UPDATED IN AMSTERDAM
- # port forwarding to computational server over anka8
-# function portforward ()
-# {
-#   local SERVER=$1;
-#     if [ -z "${1}" ]; then
-# 	SERVER=anka-nc-gpu1;
-#     fi
-#   local SERVERLOGIN=$2;
-#     if [ -z "${2}" ]; then
-# 	SERVERLOGIN=hp9361;
-#     fi
-#     local LOCALPORT=$3;
-#     if [ -z "${3}" ]; then
-# 	LOCALPORT=12345;
-#     fi
-#     local SECURECHANNEL=$4;
-#     if [ -z "${4}" ]; then
-# 	SECURECHANNEL=anka8.anka.kit.edu;
-#     fi
-#     local SECURECHANNELPORT=$5;
-#     if [ -z "${5}" ]; then
-# 	SECURECHANNELPORT=24;
-#     fi
-
-#   echo -e Usage: portforward SERVER SERVERLOGIN LOCALPORT SECURECHANNEL SECURECHANNELPORT \(default: $SERVER $SERVERLOGIN $LOCALPORT $SECURECHANNEL $SECURECHANNELPORT\) 
-
-#   guake -n $SERVER -r "$SERVER on port $LOCALPORT" -e "ssh -X -f -L $LOCALPORT:$SERVER:22 $USER@$SECURECHANNEL -p$SECURECHANNELPORT -N;ssh -Xp$LOCALPORT $SERVERLOGIN@localhost;echo Local port $LOCALPORT is forwarded to port 22 of server $SERVER via port $SECURECHANNELPORT of $USER@$SECURECHANNEL Login to $SERVERLOGIN@$SERVER"
-# }
-
-
 # port forwarding to computational server over anka8
 function portforward ()
 {    
-    local LOCALPORT=$1;
+    #local LOCALPORT=$1;
+    LOCALPORT=$1;
     local SERVER=$2;
     if [ -z "${2}" ]; then
 	SERVER=anka-tomo2;
@@ -598,12 +568,12 @@ alias pycharm='pycharm-community'
 function installPyCharmCommunity(){
     
     # Arguments and variables
-    local FILE=$1;
+    local FILE=$1
     local INSTALLDIR=$2
     local SYMLINK=$3
     local PYCHARM=${FILE%.tar.gz}    
     if [ -z "${2}" ]; then
-	INSTALLDIR=/usr/local/;
+	INSTALLDIR=/usr/local/
     fi
     if [ -z "${3}" ]; then
 	SYMLINK=pycharm-community
@@ -637,21 +607,35 @@ function installPyCharmCommunity(){
 alias spydermt='spyder --multithread &'
 
 # git
-function gitstatus()
+alias gitShowTrackedFiles='git ls-tree -r master --name-only'
+
+function gitStatus()
 {    
-    echo -e "\nConfig files: .bashrc and .profile";
-    git status ~/;
+    local cwd=$(pwd)
 
-    echo -e "\nEmacs:";
-    git status ~/.emacs.d;
+    echo -e "\nConfig repo: .bashrc, .profile, bin, ..."
+    cd ~/
+    git status 
 
-    echo -e "\nMATLAB:";
-    git status ~/matlab;
+    echo -e "\nEmacs repo:"
+    cd ~/.emacs.d
+    git status 
 
-    echo -e "\n";
+    echo -e "\nMATLAB repo:"
+    cd ~/matlab
+    git status 
+
+    echo -e "\n"
+    
+    cd $cwd
 }
 
 # Restart ssh daemon sshd
 #alias sshdrestart='sudo /etc/init.d/sshd restart'
 #alias sshdrestart='sudo service ssh restart'
 alias sshdrestart='sudo restart ssh'
+
+######################################################################
+# temporary project links
+alias cdhamburg='cd /home/jmoosmann/latex/beamer/2015-08-17_Moosmann_Hamburg-Philipps'
+alias hamburg='pdfpc /home/jmoosmann/latex/beamer/2015-08-17_Moosmann_Hamburg-Philipps/hamburg.pdf'
