@@ -567,12 +567,12 @@ alias pycharm='pycharm-community'
 function installPyCharmCommunity(){
     
     # Arguments and variables
-    local FILE=$1;
+    local FILE=$1
     local INSTALLDIR=$2
     local SYMLINK=$3
     local PYCHARM=${FILE%.tar.gz}    
     if [ -z "${2}" ]; then
-	INSTALLDIR=/usr/local/;
+	INSTALLDIR=/usr/local/
     fi
     if [ -z "${3}" ]; then
 	SYMLINK=pycharm-community
@@ -606,18 +606,27 @@ function installPyCharmCommunity(){
 alias spydermt='spyder --multithread &'
 
 # git
-function gitstatus()
+alias gitShowTrackedFiles='git ls-tree -r master --name-only'
+
+function gitStatus()
 {    
-    echo -e "\nConfig files: .bashrc and .profile";
-    git status ~/;
+    local cwd=$(pwd)
 
-    echo -e "\nEmacs:";
-    git status ~/.emacs.d;
+    echo -e "\nConfig repo: .bashrc, .profile, bin, ..."
+    cd ~/
+    git status 
 
-    echo -e "\nMATLAB:";
-    git status ~/matlab;
+    echo -e "\nEmacs repo:"
+    cd ~/.emacs.d
+    git status 
 
-    echo -e "\n";
+    echo -e "\nMATLAB repo:"
+    cd ~/matlab
+    git status 
+
+    echo -e "\n"
+    
+    cd $cwd
 }
 
 # Restart ssh daemon sshd
