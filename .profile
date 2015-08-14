@@ -31,8 +31,6 @@ export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 #PATH=/usr/local/cuda/bin:$PATH
 export PATH=/usr/local/cuda/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
-export CUDA_ROOT=/usr/local/cuda/bin
-export CUDA_DEVICE=0
 
 # ASTRA
 #export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6 
