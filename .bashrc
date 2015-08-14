@@ -637,5 +637,5 @@ alias sshdrestart='sudo restart ssh'
 
 ######################################################################
 # temporary project links
-alias cdhamburg='cd /home/jmoosmann/latex/beamer/2015-08-17_Moosmann_Hamburg-Philipps'
-alias hamburg='pdfpc /home/jmoosmann/latex/beamer/2015-08-17_Moosmann_Hamburg-Philipps/hamburg.pdf'
+alias cdhamburg='cd ~/latex/beamer/2015-08-17_Moosmann_Hamburg-Philipps'
+alias hamburg='pdfpc ~/latex/beamer/2015-08-17_Moosmann_Hamburg-Philipps/hamburg.pdf'
