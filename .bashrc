@@ -540,6 +540,9 @@ alias echolibrary_path='echo $LIBRARY_PATH'
 alias echopath='echo $PATH'
 alias echocudaroot='echo $CUDA_ROOT'
 
+# CUDA version
+alias cudaversion='nvcc --version'
+
 # ParaView
 #alias paraview='$HOME/Software/ParaView/ParaView-4.3.1-Linux-64bit/bin/paraview'
 #alias pv='paraview'
@@ -550,7 +553,7 @@ function freesurfer_tutorial()
     #Set variables to point FreeSurfer to data
     export TUTORIAL_DATA=/media/datadrive/FreeSurfer_Tutorial_Datasets
     export SUBJECTS_DIR=$TUTORIAL_DATA/buckner_data/tutorial_subjs/
-    #source $FREESURFER_HOME/SetUpFreeSurfer.sh
+    source $FREESURFER_HOME/SetUpFreeSurfer.sh
     cd $SUBJECTS_DIR
 }
 
@@ -634,6 +637,10 @@ function gitStatus()
 #alias sshdrestart='sudo /etc/init.d/sshd restart'
 #alias sshdrestart='sudo service ssh restart'
 alias sshdrestart='sudo restart ssh'
+
+# pip
+alias pipUpgradeAllPythonPackages='sudo -H pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U'
+alias pipListOutdatePackages='pip list -o --allow-all-external'
 
 ######################################################################
 # temporary project links

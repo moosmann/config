@@ -45,12 +45,14 @@ export LD_LIBRARY_PATH=$HOME/Software/NiftyRec/NiftyRec-2.0.1/build/bin:$LD_LIBR
 
 # Python
 export PYTHONSTARTUP=~/.pythonrc
-export PYTHONPATH=~/git/LCR/astra/python:$PYTHONPATH
-export PYTHONPATH=~/git/LCR/astra/libastra:$PYTHONPATH
+export PYTHONPATH=~/git/LCR/libastra/python:$PYTHONPATH
+export PYTHONPATH=~/git/LCR/libastra/pyastra:$PYTHONPATH
+export PYTHON_NUMPY_INCLUDE_DIR=/usr/local/lib/python2.7/dist-packages/numpy/core/include
 
 # FreeSurfer
 export FREESURFER_HOME=/usr/local/freesurfer
-source $FREESURFER_HOME/SetUpFreeSurfer.sh
+# putting statement in bash, to check if it works
+# source $FREESURFER_HOME/SetUpFreeSurfer.sh
 
 # FSL
 #export FSLDIR=`pwd`/fsl

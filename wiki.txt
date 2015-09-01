@@ -24,6 +24,23 @@ git ls-tree -r master --name-only
 %% NVIDIA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ----------------------------------------------------------------------
+CUDA version
+
+nvcc --version
+
+gives the CUDA compiler version (which matches the toolkit version).
+
+From application code, you can query the runtime API version with
+
+cudaRuntimeGetVersion()
+
+or the driver API version with
+
+cudaDriverGetVersion()
+
+As Daniel points out, deviceQuery is an SDK sample app that queries
+the above, along with device capabilities.
+----------------------------------------------------------------------
 Ubuntu start screen freezes and/or login screen is looping after
 entering password
 
@@ -95,18 +112,70 @@ Registering the NVIDIA Kernel Module with DKMS
 sh ./<DRIVER>.run --advanced-options
 
 ----------------------------------------------------------------------
-to unistall driver run:
-nvidia-unistall
+to unistall driver run: nvidia-unistall
 ----------------------------------------------------------------------
-to unistall cuda toolkit run uninstall scritp in 
+to unistall cuda toolkit run uninstall scritp in
 /usr/local/cuda.*.*/bin
 ----------------------------------------------------------------------
-Inormation about GPUs
-nvidia-smi -l
+Inormation about GPUs nvidia-smi -l
 ----------------------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PYTHON
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+Statement after import
+__metaclass__ = type 
+not needed when inheriting from object
+class CLASSNAME(object)
+----------------------------------------------------------------------
+In-place type conversion of numpy.ndarray
+
+You can make a view with a different dtype (as long as the itemsize
+remains the same), and then copy in-place into the view:
+
+import numpy as np
+x = np.arange(10, dtype='int32')
+y = x.view('float32')
+y[:] = x
+
+print(y)
+
+yields
+
+array([ 0.,  1.,  2.,  3.,  4.,  5.,  6.,  7.,  8.,  9.], dtype=float32)
+
+To show the conversion was in-place, note that copying from x to y
+altered x:
+
+print(x)
+
+prints
+
+array([         0, 1065353216, 1073741824, 1077936128, 1082130432,
+       1084227584, 1086324736, 1088421888, 1090519040, 1091567616])
+----------------------------------------------------------------------
+PYLINT 
+
+reduce output via disabling reports:
+pylint -rn
+is equal to 
+pylint –reports=n
+
+Get rid of messages like :
+Module MODULE has no MEMBER member (no-member)
+pylint  --extension-pkg-whitelist=MODUL
+
+Get help on messages, e.g.
+C:342, 0: Invalid constant name "sets" (invalid-name)
+
+pylint --help-msg=invalid-name
+----------------------------------------------------------------------
+ipython notebooks in pychamr IDE, as of 2015-08-24
+
+only works with ipython version 2.4.1 since In Ipython 3.0 the kernel
+messaging protocol and notebook format have changed.
+
+sudo -H pip install 'ipython==2.4.1'
 ----------------------------------------------------------------------
 matplotlib: animated plotting within loop
 
@@ -141,7 +210,32 @@ and sudo pip uninstall every package you find there.
 
 ----------------------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ODL
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+ODLpp make error
+
+Error message while make:
+
+[ 40%] Building CXX object ODLpp/CMakeFiles/odlpp_cuda.dir/cuda.cpp.o
+/home/jmoosmann/git/LCR/ODLpp/ODLpp/cuda.cpp:2:31: fatal error: numpy/numpyconfig.h: No such file or directory
+ #include <numpy/numpyconfig.h>
+                               ^
+compilation terminated.
+make[2]: *** [ODLpp/CMakeFiles/odlpp_cuda.dir/cuda.cpp.o] Error 1
+make[1]: *** [ODLpp/CMakeFiles/odlpp_cuda.dir/all] Error 2
+make: *** [all] Error 2
+
+
+Solution:
+Set
+PYTHON_NUMPY_INCLUDE_DIR
+to
+/usr/local/lib/python2.7/dist-packages/numpy/core/include
+----------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Build python wrapper for C code
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ----------------------------------------------------------------------
 
 copy arbitrary lib*py and modify:
@@ -445,6 +539,21 @@ config editor is found under:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 LINUX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+Graphical user interfaces/backends
+
+GTK+
+
+or the GIMP toolkit, multiplattform toolkit for creating GUI, written
+in C/C++
+
+python backend: PyGTK: for creating programs with a GUI using python,
+multiplattform, free
+
+Qt
+independent technology for cross-platform development
+
+
 ----------------------------------------------------------------------
 *.desktop files: Use of relative paths for scripts and icons
 
