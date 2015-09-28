@@ -1,4 +1,35 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PyCharm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+keymaps
+
+Ctrl + Shift + F7 (Edit | Find | Highlight Usages in File) to quickly
+highlight usages of some
+
+F3, Shift+F3 Navigate through highlighted usages
+ESCAPE, ESCAPE Remove highlighting
+
+Ctrl + Shift + Backspace (Navigate | Last Edit Location)
+
+Alt + Shift + P when between parentheses of a method call lists valid
+parameters
+
+Alt + Shift + Q Indentation of text
+
+Ctrl + Shift + P Pylint
+
+Ctrl + Alt + G Open declaration
+
+Alt + Enter Show intention and quick fixes
+
+Ctrl + Shif + J Smart line join
+
+Alt + / Basic code completion
+
+Alt + Up/Down Move between methods in Editor
+----------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% GIT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ----------------------------------------------------------------------
@@ -54,6 +85,10 @@ Boot in recovery mode and try to login via terminal
 Remove /home/USER/.Xauthority
 
 reboot
+
+ALTERNATIVELY:
+instead of remove .Xauthority run 
+sudo nvidia-xconfig
 
 ----------------------------------------------------------------------
 Installation of NVIDIA driver with dkms support
@@ -123,10 +158,9 @@ Inormation about GPUs nvidia-smi -l
 %% PYTHON
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ----------------------------------------------------------------------
-Statement after import
-__metaclass__ = type 
-not needed when inheriting from object
-class CLASSNAME(object)
+----------------------------------------------------------------------
+Statement after import __metaclass__ = type not needed when inheriting
+from object class CLASSNAME(object)
 ----------------------------------------------------------------------
 In-place type conversion of numpy.ndarray
 
@@ -539,6 +573,9 @@ config editor is found under:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 LINUX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+Update PCI hardware database
+update-pciids
 ----------------------------------------------------------------------
 Graphical user interfaces/backends
 

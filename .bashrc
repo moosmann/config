@@ -639,10 +639,15 @@ function gitStatus()
 alias sshdrestart='sudo restart ssh'
 
 # pip
-alias pipUpgradeAllPythonPackages='sudo -H pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U'
+alias pipUpgradeAllPythonPackages='pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs sudo -H pip install -U'
 alias pipListOutdatePackages='pip list -o --allow-all-external'
+
+# ubuntu version
+alias ubuntuversion='lsb_release -a'
 
 ######################################################################
 # temporary project links
 alias cdhamburg='cd ~/latex/beamer/2015-08-17_Moosmann_Hamburg-Philipps'
 alias hamburg='pdfpc ~/latex/beamer/2015-08-17_Moosmann_Hamburg-Philipps/hamburg.pdf'
+
+alias tem='~/Software/TEM/TEM-simulator_1.3/src/TEM-simulator'
