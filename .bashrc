@@ -134,6 +134,12 @@ function acro()
     acroread  $1 &
 }
 
+# qpdfview
+function q()
+{
+    qp $1 &
+}
+
 #grep aliases
 # alias psgrep='ps -eo pid,user,ni,%cpu,%mem,time,etime,start,comm | grep -e PID -e'
 function psgrep() 
@@ -430,6 +436,11 @@ function posterimage ()
     local file=$1
     avconv -i $file -vframes 1 -an -f image2 -y ${file/.avi/}.jpg
 }
+function posterimagempg ()
+{
+    local file=$1
+    ffmpeg -y -i  $file -vframes 1 -ss 00:00:10 -an -vcodec png -f rawvideo ${file/.mpg/}.png
+}
 
 
 # cd aliases for LSDF directories
@@ -605,7 +616,6 @@ function installPyCharmCommunity(){
     echo Optionally, delete deprecated pycharm installations
 }
 
-
 # Spyder with multithread
 alias spydermt='spyder --multithread &'
 
@@ -649,5 +659,5 @@ alias ubuntuversion='lsb_release -a'
 # temporary project links
 alias cdhamburg='cd ~/latex/beamer/2015-08-17_Moosmann_Hamburg-Philipps'
 alias hamburg='pdfpc ~/latex/beamer/2015-08-17_Moosmann_Hamburg-Philipps/hamburg.pdf'
-
+alias lcr='emacs ~/latex/lcr/report.tex &'
 alias tem='~/Software/TEM/TEM-simulator_1.3/src/TEM-simulator'

@@ -3,8 +3,7 @@
 a = gpuArray(1); 
 clear a;
 
-% Shall fix for Matlab bug: “dlopen: cannot load any more object with
-% static TLS”
+% Fix Matlab bug: “dlopen: cannot load any more object with static TLS”
 ones(10) * ones(10);
 
 %% ASTRA toolbox
@@ -28,6 +27,7 @@ addpath( [ getenv('HOME') '/Software/SPAMS/spams-matlab/test_release/' ] );
 addpath( [ getenv('HOME') '/Software/SPAMS/spams-matlab/data/' ] ); 
 setenv( 'MKL_NUM_THREADS', '1'); 
 setenv( 'MKL_SERIAL', 'YES');
+setenv( 'MKL_DYNAMIC', 'NO');
 
 %% Aedes
 addpath( [getenv('HOME') '/Software/aedes' ] );
@@ -52,6 +52,9 @@ clear fsfasthome fsfasttoolbox;
 %% Set default color map to grayscale instead of jet
 set(groot,'DefaultFigureColormap',gray)
 close all;
+
+%% DTI code
+addpath( genpath( [getenv('HOME') '/Software/DTIcode/dticode/matlab'] ) );
 
 %% Scripts and functions
 addpath( genpath( [getenv('HOME') '/matlab'] ) );

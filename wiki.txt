@@ -1,8 +1,55 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ODL and general python thingies
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+LCR/ODL/odl/examples/convolution_class.py
+
+Difference()._apply: 
+what does rhs.asarray()? acces to numpy array. Does this also work 
+for Rn?
+what does out[:] do? Access to numpy array? (it is the same type as 
+rhs?
+Copy because direct acces via
+out[0][:-1,:] = asarr[1:,:]-asarr[:-1,:] not possible?
+why not using slice object as in numpy.gradient or numpy.diff
+self.domain in call of adjoint should be self.range?
+
+if l is instance of  odl.discr.l2_discr.Vector, what does l[:] return
+
+Why ndarray acces 'directly' via asarray while in 
+LCR/ODL/odl/examples/tomography_simrec2d.py
+access is via data.ntuples.data?
+Why is data stored in different attributes?
+if v is instance of odl.discr.l2_discr.Vector.data, then v.ntuples.data
+if v is instance of odl.Rn, in v.data
+
+Again comparing the above files? Why is the adjoint initialized in
+__init__ for the Projector but not in Difference?
+
+
+What to use for an operator? How to adopt operator for different
+spaces?
+
+How to implement operator that are used in optimization regarding the
+domain? Use of original or vectorized (ravel) arrays?
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PyCharm
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ----------------------------------------------------------------------
 keymaps
+
+Alt + Home: Navigation bar pops up
+
+Following three work in Editor and completion popup list
+Ctrl+Q View | Quick Documentation
+Alt+Shift+P View | Parameter Info
+Ctrl+Alt+G Navigate | Declaration
+
+Ctrl + X, B Pops up switcher dialogue window. Similiar to emacs
+behavior.
+
+Alt + Y Choose content to paste (selection windows pops up)
 
 Ctrl + Shift + F7 (Edit | Find | Highlight Usages in File) to quickly
 highlight usages of some
@@ -158,6 +205,23 @@ Inormation about GPUs nvidia-smi -l
 %% PYTHON
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ----------------------------------------------------------------------
+Investigating Inheritance
+
+If you want to find out whether a class is a subclass of another, you
+can use the built-in method issubclass:
+
+>>> issubclass(SPAMFilter, Filter)
+True
+>>> issubclass(Filter, SPAMFilter)
+False
+
+     If you have a class and want to know its base classes, you can
+access its special attribute __bases__:
+
+>>> SPAMFilter.__bases__
+(<class __main__.Filter at 0x171e40>,)
+>>> Filter.__bases__
+()
 ----------------------------------------------------------------------
 Statement after import __metaclass__ = type not needed when inheriting
 from object class CLASSNAME(object)
