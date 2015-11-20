@@ -498,6 +498,7 @@ alias treed='tree -d'
 #
 # cd
 #alias cdscratch='cd /export/scratch1/moosmann/'
+alias astra_configure='./configure --with-cuda=/usr/local/cuda --with-matlab=/usr/local/MATLAB/R2014b --with-python=python3 --prefix=/usr/local/astra'
 
 # open files
 #alias gnomeshorts='emacs $HOME/Documents/gnomeShorts.txt '&
@@ -546,10 +547,11 @@ alias lsvgakernel='lspci -knn | grep -A2 VGA'
 alias catdriver='cat /proc/driver/nvidia/version'
 
 # echo 
-alias echold_library_path='echo $LD_LIBRARY_PATH'
-alias echolibrary_path='echo $LIBRARY_PATH'
-alias echopath='echo $PATH'
-alias echocudaroot='echo $CUDA_ROOT'
+alias echo_ld_library_path='echo $LD_LIBRARY_PATH'
+alias echo_library_path='echo $LIBRARY_PATH'
+alias echo_path='echo $PATH'
+alias echo_cudaroot='echo $CUDA_ROOT'
+alias echo_ld_preload='echo $LD_PRELOAD'
 
 # CUDA version
 alias cudaversion='nvcc --version'
@@ -654,6 +656,9 @@ alias pipListOutdatePackages='pip list -o --allow-all-external'
 
 # ubuntu version
 alias ubuntuversion='lsb_release -a'
+
+alias gto47='echo link to compiler version 4.7;sudo rm gcc; sudo ln -s gcc-4.7 gcc; sudo rm g++; sudo ln -s g++-4.7 g++'
+alias gto48='echo  link to compiler version 4.8;sudo rm gcc; sudo ln -s gcc-4.8 gcc; sudo rm g++; sudo ln -s g++-4.8 g++'
 
 ######################################################################
 # temporary project links

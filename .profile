@@ -31,6 +31,7 @@ export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 #PATH=/usr/local/cuda/bin:$PATH
 export PATH=/usr/local/cuda/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/usr/lib/nvidia-352:$LD_LIBRARY_PATH
 
 # Pyhst
 export CUDAHOME=/usr/local/cuda
@@ -41,13 +42,15 @@ export CUDAHOME=/usr/local/cuda
 # PyASTRA
 export LD_LIBRARY_PATH=/usr/local/astra/lib:$LD_LIBRARY_PATH
 export PYTHONPATH=/usr/local/astra/python:$PYTHONPATH
+export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libpython2.7.so:$LD_PRELOAD
 
 # NiftyRec
-export LD_LIBRARY_PATH=/usr/local/niftyrec:$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=$HOME/Software/NiftyRec/NiftyRec-2.0.1/build/bin:$LD_LIBRARY_PATH
+#export LD_LIBRARY_PATH=/usr/local/niftyrec:$LD_LIBRARY_PATH 
+#export LD_LIBRARY_PATH=$HOME/Software/NiftyRec/NiftyRec-2.0.1/build/bin:$LD_LIBRARY_PATH
 
 # Python
 export PYTHONSTARTUP=~/.pythonrc
+export PYTHONPATH=~/Dropbox/python:$PYTHONPATH
 #export PYTHONPATH=~/git/LCR/libastra/python:$PYTHONPATH
 #export PYTHONPATH=~/git/LCR/libastra/pyastra:$PYTHONPATH
 # export PYTHONPATH=~/git/LCR/ODL/odl:$PYTHONPATH
@@ -76,4 +79,4 @@ export ITK_DIR=$HOME/git/ITK/ITK-bin
 # PyCharm error message at start up related to (not personlly
 # encounterd) problem: Keyboard input sometimes is blocked when IBus
 # is active
-IBUS_ENABLE_SYNC_MODE=1
+# IBUS_ENABLE_SYNC_MODE=1

@@ -102,6 +102,18 @@ git ls-tree -r master --name-only
 %% NVIDIA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ----------------------------------------------------------------------
+When problems also check:
+ldd /usr/lib/nvidia-*/libGL.so.*
+
+Try adding
+/usr/lib/nvidia-352:
+to LD_LIBRARY_PATH
+
+!!If login screen loops: Try login using a differn graphical backend
+and open administration window for proprietary drivers and change
+driver to nvidia (maybe via back and forth setting). nvidia-update
+worked for me.
+----------------------------------------------------------------------
 CUDA version
 
 nvcc --version
@@ -2131,8 +2143,7 @@ Follow instructions in README.txt
 
 Before running configure, check gcc and g++ version and modify if
 necessary:
-sudo rm gcc; sudo ln -s gcc-4.7 gcc
-sudo rm g++; sudo ln -s g++-4.7 g++
+sudo rm gcc; sudo ln -s gcc-4.7 gcc; sudo rm g++; sudo ln -s g++-4.7 g++
 
 Configure command
 ./configure --with-cuda=/usr/local/cuda --with-matlab=/usr/local/MATLAB/R2014b --with-python --prefix=/usr/local/astra 
@@ -2180,7 +2191,9 @@ more information, such as the ld(1) and ld.so(8) manual pages.
 ----------------------------------------------------------------------
 Compilation warning from nvcc:
 
-nvcc warning : The 'compute_11', 'compute_12', 'compute_13', 'sm_11', 'sm_12', and 'sm_13' architectures are deprecated, and may be removed in a future release.
+nvcc warning : The 'compute_11', 'compute_12', 'compute_13', 'sm_11',
+'sm_12', and 'sm_13' architectures are deprecated, and may be removed
+in a future release.
 
 Fix:
 

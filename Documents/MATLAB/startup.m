@@ -12,10 +12,11 @@ addpath( genpath( '/usr/local/astra/matlab/' ) );
 % When using version from sourceforge
 %addpath( [getenv('HOME') '/Software/ASTRA/astra-1.5/samples/' ] );
 % When using git version
-addpath( [getenv('HOME') '/Software/ASTRA/astra-toolbox/samples/matlab' ] );
+addpath( [getenv('HOME') '/git/astra-toolbox/samples/matlab' ] );
 
 % SPOT
-addpath( [getenv('HOME') '/Software/ASTRA/spot-1.2/' ] );
+% new astra version should include ASTRA
+%addpath( [getenv('HOME') '/Software/ASTRA/spot-1.2/' ] );
 
 %% NiftyRec toolbox
 addpath('/usr/local/niftyrec/matlab/');
