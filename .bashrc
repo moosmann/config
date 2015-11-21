@@ -637,5 +637,15 @@ alias sshdrestart='sudo restart ssh'
 
 ######################################################################
 # temporary project links
-alias cdhamburg='cd /home/jmoosmann/latex/beamer/2015-08-17_Moosmann_Hamburg-Philipps'
-alias hamburg='pdfpc /home/jmoosmann/latex/beamer/2015-08-17_Moosmann_Hamburg-Philipps/hamburg.pdf'
+alias cdhamburg='cd ~/hamburg'
+alias hamburg='pdfpc ~/hamburg/hamburg.pdf'
+alias hamburgwindowedmode='pdfpc -w ~/hamburg/hamburg.pdf'
+alias hamburgswitchscreen='pdfpc -s ~/hamburg/hamburg.pdf'
+
+
+alias cdgoettingen='cd ~/latex/beamer/2015-11-06_Moosmann_Goettingen'
+alias goettingentex='e ~/latex/beamer/2015-11-06_Moosmann_Goettingen/goettingen.tex'
+alias goettingenokular='okular ~/latex/beamer/2015-11-06_Moosmann_Goettingen/goettingen.pdf'
+alias goettingen='pdfpc ~/latex/beamer/2015-11-06_Moosmann_Goettingen/goettingen.pdf'
+alias goettingenwindowedmode='pdfpc -w ~/latex/beamer/2015-11-06_Moosmann_Goettingen/goettingen.pdf'
+alias goettingenswitchscreen='pdfpc ~/latex/beamer/2015-11-06_Moosmann_Goettingen/goettingen.pdf'

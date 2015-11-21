@@ -446,6 +446,47 @@ config editor is found under:
 LINUX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ----------------------------------------------------------------------
+----------------------------------------------------------------------
+mittlere maustaste mit der tastatur simulieren
+
+Ohne Skript
+
+Systemeinstellungen > Tastatur > Tastenkürzel > Eigene Tastenkürzel > "+"
+
+    Name: middleClick
+
+    Befehl: xdotool click 2
+
+Tastenkombination wählen.
+
+-----------------------
+Mit Skript:
+
+xdtool installieren:
+sudo apt-get install xdotool
+
+Skript anlegen:
+emacs ~/bin/middleClick.sh
+
+Folgendes in das Skript schreiben:
+#!/bin/bash
+
+exit 0
+
+Speichern und ausführbar machen:
+chmod +x ~/.scripts/middleClick.sh
+
+Taste/Tastenkuerzel zuweisen:
+Systemeinstellungen > Tastatur > Tastenkürzel > Eigene Tastenkürzel >
+"+"
+
+    Name: middleClick
+
+    Befehl: /home/<USERNAME>/.scripts/middleClick.sh
+
+Tastenkombination wählen.
+
+----------------------------------------------------------------------
 *.desktop files: Use of relative paths for scripts and icons
 
 For scripts use relative paths w.r.t. to HOME directory simply without

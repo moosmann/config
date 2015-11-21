@@ -36,25 +36,25 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 #export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6 
 #export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 # PyASTRA
-export LD_LIBRARY_PATH=/usr/local/astra/lib:$LD_LIBRARY_PATH
-export PYTHONPATH=/usr/local/astra/python:$PYTHONPATH
+#export LD_LIBRARY_PATH=/usr/local/astra/lib:$LD_LIBRARY_PATH
+#export PYTHONPATH=/usr/local/astra/python:$PYTHONPATH
 
 # NiftyRec
-export LD_LIBRARY_PATH=/usr/local/niftyrec:$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=$HOME/Software/NiftyRec/NiftyRec-2.0.1/build/bin:$LD_LIBRARY_PATH
+#export LD_LIBRARY_PATH=/usr/local/niftyrec:$LD_LIBRARY_PATH
+#export LD_LIBRARY_PATH=$HOME/Software/NiftyRec/NiftyRec-2.0.1/build/bin:$LD_LIBRARY_PATH
 
 # Python
-export PYTHONSTARTUP=~/.pythonrc
-export PYTHONPATH=~/git/LCR/astra/python:$PYTHONPATH
-export PYTHONPATH=~/git/LCR/astra/libastra:$PYTHONPATH
+#export PYTHONSTARTUP=~/.pythonrc
+#export PYTHONPATH=~/git/LCR/astra/python:$PYTHONPATH
+#export PYTHONPATH=~/git/LCR/astra/libastra:$PYTHONPATH
 
 # FreeSurfer
-export FREESURFER_HOME=/usr/local/freesurfer
-source $FREESURFER_HOME/SetUpFreeSurfer.sh
+#export FREESURFER_HOME=/usr/local/freesurfer
+#source $FREESURFER_HOME/SetUpFreeSurfer.sh
 
 # FSL
 #export FSLDIR=`pwd`/fsl
 #. ${FSLDIR}/etc/fslconf/fsl.sh
 
 # required for building libwavelets
-export MATLAB_ROOT=usr/local/MATLAB/R2014b
+#export MATLAB_ROOT=usr/local/MATLAB/R2014b
