@@ -210,6 +210,8 @@ alias sjumo='ssh -X julian@192.168.0.101'
 alias sesrf='ssh -Xp5022 ls2395@firewall.esrf.fr'
 alias skth='ssh -X jmoosmann@130.237.41.55'
 
+alias prinkth='echo 130.237.41.55'
+
 # port forwarding to computational server over anka8
 function portforward ()
 {    

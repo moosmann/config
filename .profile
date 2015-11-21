@@ -58,3 +58,5 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 
 # required for building libwavelets
 #export MATLAB_ROOT=usr/local/MATLAB/R2014b
+
+export kth=130.237.41.55
