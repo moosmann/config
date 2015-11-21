@@ -446,6 +446,13 @@ config editor is found under:
 LINUX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ----------------------------------------------------------------------
+getdeb software portal 
+
+GetDeb is an unofficial project with the mission to provide the latest
+open source and freeware applications for the current Ubuntu Linux
+release, in an easy to install manner.
+
+Eg. pycharm
 ----------------------------------------------------------------------
 mittlere maustaste mit der tastatur simulieren
 
