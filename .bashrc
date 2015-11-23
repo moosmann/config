@@ -561,10 +561,10 @@ alias xstop='sudo service lightdm stop'
 alias xstart='sudo service lightdm restart'
 
 # PyCharm
-alias pycharm-professional='/usr/local/pycharm/bin/pycharm.sh'
-alias pycharm-community='/usr/local/pycharm-community/bin/pycharm.sh'
+#alias pycharm-professional='/usr/local/pycharm/bin/pycharm.sh'
+#alias pycharm-community='/usr/local/pycharm-community/bin/pycharm.sh'
 #alias pycharm='pycharm-professional'
-alias pycharm='pycharm-community'
+#alias pycharm='pycharm-community'
 
 # Install PyCharm
 function installPyCharmCommunity(){
