@@ -50,7 +50,7 @@ export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libpython2.7.so:$LD_PRELOAD
 
 # Python
 export PYTHONSTARTUP=~/.pythonrc
-export PYTHONPATH=~/Dropbox/python:$PYTHONPATH
+# export PYTHONPATH=~/Dropbox/python:$PYTHONPATH
 #export PYTHONPATH=~/git/LCR/libastra/python:$PYTHONPATH
 #export PYTHONPATH=~/git/LCR/libastra/pyastra:$PYTHONPATH
 # export PYTHONPATH=~/git/LCR/ODL/odl:$PYTHONPATH
@@ -62,21 +62,21 @@ export FREESURFER_HOME=/usr/local/freesurfer
 # source $FREESURFER_HOME/SetUpFreeSurfer.sh
 
 # FSL
-#export FSLDIR=`pwd`/fsl
+export FSLDIR=`pwd`/fsl
 #. ${FSLDIR}/etc/fslconf/fsl.sh
 
 # required for building libwavelets
 export MATLAB_ROOT=usr/local/MATLAB/R2014b
 
 # RTK
-export RTK_DIR=$HOME/git/RTK/RTK-bin
+export RTK_DIR=$HOME/git/RTK/RTK-bin 
 #export RTK_LIBRARIES=$HOME/git/RTK/RTK-bin
 
 # ITK
-#export ITK_LIBRARIES=$HOME/git/ITK/ITK-bin
 export ITK_DIR=$HOME/git/ITK/ITK-bin
+#export ITK_LIBRARIES=$HOME/git/ITK/ITK-bin
 
 # PyCharm error message at start up related to (not personlly
 # encounterd) problem: Keyboard input sometimes is blocked when IBus
 # is active
-# IBUS_ENABLE_SYNC_MODE=1
+IBUS_ENABLE_SYNC_MODE=1

@@ -280,6 +280,15 @@ C:342, 0: Invalid constant name "sets" (invalid-name)
 
 pylint --help-msg=invalid-name
 ----------------------------------------------------------------------
+python version used in ipython
+
+$ which ipython
+/usr/local/bin/ipython
+
+Change first line to desired python version
+#!/usr/bin/python
+
+----------------------------------------------------------------------
 ipython notebooks in pychamr IDE, as of 2015-08-24
 
 only works with ipython version 2.4.1 since In Ipython 3.0 the kernel

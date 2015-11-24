@@ -651,14 +651,19 @@ function gitStatus()
 alias sshdrestart='sudo restart ssh'
 
 # pip
-alias pipUpgradeAllPythonPackages='pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs sudo -H pip install -U'
-alias pipListOutdatePackages='pip list -o --allow-all-external'
+alias pip2UpgradeAllPythonPackages='pip2 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs sudo -H pip2 install -U'
+alias pip2ListOutdatePackages='pip2 list -o --allow-all-external'
+alias pip3UpgradeAllPythonPackages='pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs sudo -H pip3 install -U'
+alias pip3ListOutdatePackages='pip3 list -o --allow-all-external'
 
 # ubuntu version
 alias ubuntuversion='lsb_release -a'
 
 alias gto47='echo link to compiler version 4.7;sudo rm gcc; sudo ln -s gcc-4.7 gcc; sudo rm g++; sudo ln -s g++-4.7 g++'
 alias gto48='echo  link to compiler version 4.8;sudo rm gcc; sudo ln -s gcc-4.8 gcc; sudo rm g++; sudo ln -s g++-4.8 g++'
+
+# mouse middle click
+alias middleClick='~/bin/middleClick.sh'
 
 ######################################################################
 # temporary project links
