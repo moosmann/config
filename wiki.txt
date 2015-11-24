@@ -653,11 +653,21 @@ any case.
 config editor is found under: 
  Einstellungen... > Erweitert > Allgemein > Konfiguration bearbeiten..
 ----------------------------------------------------------------------
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 LINUX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+Fatal python error when executing man/mandb command
+
+$ man
+Fatal Python error: PyThreadState_Get: no current thread
+Aborted (core dumped)
+
+Error is due to miconfigured LD_PRELOAD which is probably a remnant of
+a previous pyastra configuration.
+
+export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libpython2.7.so:$LD_PRELOAD
+
 ----------------------------------------------------------------------
 Update PCI hardware database
 update-pciids

@@ -665,6 +665,10 @@ alias gto48='echo  link to compiler version 4.8;sudo rm gcc; sudo ln -s gcc-4.8 
 # mouse middle click
 alias middleClick='~/bin/middleClick.sh'
 
+# update-pciids - download new version of the PCI ID list
+# This is in order that lspci show correct GPU model and version
+alias pciids_update='update-pciids'
+
 ######################################################################
 # temporary project links
 alias cdhamburg='cd ~/latex/beamer/2015-08-17_Moosmann_Hamburg-Philipps'

@@ -42,7 +42,7 @@ export CUDAHOME=/usr/local/cuda
 # PyASTRA
 export LD_LIBRARY_PATH=/usr/local/astra/lib:$LD_LIBRARY_PATH
 export PYTHONPATH=/usr/local/astra/python:$PYTHONPATH
-export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libpython2.7.so:$LD_PRELOAD
+# export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libpython2.7.so:$LD_PRELOAD
 
 # NiftyRec
 #export LD_LIBRARY_PATH=/usr/local/niftyrec:$LD_LIBRARY_PATH 
