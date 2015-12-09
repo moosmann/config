@@ -37,6 +37,51 @@ domain? Use of original or vectorized (ravel) arrays?
 %% PyCharm
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ----------------------------------------------------------------------
+PyCharm's (Interactive) Console is not working
+
+Do NOT add source roots to python path
+
+otherwise following error occurs.
+
+/home/jmoosmann/VirtualEnv/odl_python3/bin/python /usr/local/pycharm-community-5.0.1/helpers/pydev/pydevconsole.py 42163 47363
+Traceback (most recent call last):
+  File "/usr/local/pycharm-community-5.0.1/helpers/pydev/pydevconsole.py", line 4, in <module>
+    from code import InteractiveConsole
+  File "/usr/lib/python3.4/code.py", line 9, in <module>
+    import traceback
+  File "/usr/lib/python3.4/traceback.py", line 3, in <module>
+    import linecache
+  File "/usr/lib/python3.4/linecache.py", line 10, in <module>
+    import tokenize
+  File "/usr/lib/python3.4/tokenize.py", line 28, in <module>
+    import collections
+  File "/usr/lib/python3.4/collections/__init__.py", line 11, in <module>
+    from operator import itemgetter as _itemgetter, eq as _eq
+  File "/home/jmoosmann/git/LCR/odl/odl/operator/__init__.py", line 25, in <module>
+    from . import default_ops
+  File "/home/jmoosmann/git/LCR/odl/odl/operator/default_ops.py", line 22, in <module>
+    from future import standard_library
+  File "/home/jmoosmann/VirtualEnv/odl_python3/lib/python3.4/site-packages/future/standard_library/__init__.py", line 65, in <module>
+    import logging
+  File "/usr/lib/python3.4/logging/__init__.py", line 28, in <module>
+    from string import Template
+  File "/usr/lib/python3.4/string.py", line 49, in <module>
+    from collections import ChainMap
+ImportError: cannot import name 'ChainMap'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/pycharm-community-5.0.1/helpers/pydev/pydevconsole.py", line 6, in <module>
+    from pydevconsole_code_for_ironpython import InteractiveConsole
+  File "/usr/local/pycharm-community-5.0.1/helpers/pydev/pydevconsole_code_for_ironpython.py", line 105
+    except SyntaxError, err:
+                      ^
+SyntaxError: invalid syntax
+
+Process finished with exit code 1
+
+----------------------------------------------------------------------
 Activate a virtualenv inside PyCharm's terminal
 
 Create a file .pycharmrc in your home folder with the following contents
