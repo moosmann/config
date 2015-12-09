@@ -37,6 +37,19 @@ domain? Use of original or vectorized (ravel) arrays?
 %% PyCharm
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ----------------------------------------------------------------------
+Activate a virtualenv inside PyCharm's terminal
+
+Create a file .pycharmrc in your home folder with the following contents
+
+source ~/.bashrc
+source ~/pycharmvenv/bin/activate
+
+Using your virtualenv path as the last parameter.
+
+Then set the shell Preferences->Project Settings->Shell path to
+
+/bin/bash --rcfile ~/.pycharmrc
+----------------------------------------------------------------------
 keymaps
 
 Alt + Home: Navigation bar pops up
