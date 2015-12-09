@@ -80,6 +80,13 @@ Alt + Up/Down Move between methods in Editor
 %% GIT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ----------------------------------------------------------------------
+Change the URI (URL) for a remote Git repository
+
+git remote set-url origin git://new.url.here
+----------------------------------------------------------------------
+Update submodules
+git submodule foreach git pull
+----------------------------------------------------------------------
 Using GitHub API with personal access token (in the case that the use
 of ssh is restricted and standard https authentication with username
 and password fails):
@@ -104,6 +111,9 @@ git ls-tree -r master --name-only
 ----------------------------------------------------------------------
 When problems also check:
 ldd /usr/lib/nvidia-*/libGL.so.*
+
+----------------------------------------------------------------------
+The following did not work (properly)
 
 Try adding
 /usr/lib/nvidia-352:
@@ -216,6 +226,290 @@ Inormation about GPUs nvidia-smi -l
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PYTHON
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+Matplotlib in virtualenv
+
+Creates symbolic links to the required globally installed Python
+packages to solve the problem of them being inaccessible:
+
+ln -sf /usr/lib/python2.7/dist-packages/{glib,gobject,cairo,gtk-2.0,pygtk.py,pygtk.pth} $VIRTUAL_ENV/lib/python2.7/site-packages
+
+This has to be don before:
+pip install matplotlib. 
+
+Otherwise it won't detect at compile time that you have the backend
+GTK dependencies in the virtualenv. 
+
+Finally, set the backend to GTKAgg or whatever in
+~/.config/matplotlib/matplotlibrc 
+
+If file does not exist copy matplotlibrc from
+/lib/python2.7/site-packages/matplotlib/mpl-data in the virtualenv.
+----------------------------------------------------------------------
+Plotting in python
+
+Overview of plotting with matplotlib and related problems and issues
+
+The following overview is largely taken from [Usage of
+matplotlib](http://matplotlib.org/faq/usage_faq.html?highlight=usage),
+which is probably the best read to start with matplotlib, with
+augmented comments.
+
+# Matplotlib
+
+matplotlib is an object-oriented plotting library, typically
+interfaced via the matplotlib module pyplot.
+
+pyplot provides a state-machine environment similar to MATLAB with
+ convenient methods to create figures, axes, images, colorbars,
+ subplots, etc
+
+pylab is a convenience module that bulk import pyplot and numpy in a
+single namespace. It is no longer recommended, but still
+used in IPython/jupyter notebooks for creation of inline plots.
+
+For non-interactive plotting it is suggested to use pyplot to create
+the figures and then the object-oriented interface for plotting.
+
+## Backends
+
+matplotlib supports several backends targeting different
+output formats differentiating two types:
+
+1. interface (or interactive) backends (for use in pygtk, wxpython,
+tkinter, qt4, macosx, etc) 
+
+2.  hardcopy (or non-interactive) backends to create image files (PNG,
+SVG, PDF, PS, etc)
+
+There are four ways to set the backend:
+
+1. The backend parameter in your `matplotlibrc` file
+
+2. Setting the `MPLBACKEND` environment variable
+
+3. To set the backend for a single script, one can alternatively use
+the `-d` command line argument (DEPRECATED):
+
+```python script.py -dbackend```
+
+4. If the script depends on a specific backend one can use:
+```
+import matplotlib
+matplotlib.use('backend')
+```
+
+This must be done BEFORE importing matplotlib.pyplot. Calling use()
+after pyplot has been imported will have no effect.
+
+Customizaton for graphical user interfaces: matplotlib separates the
+concept of the renderer (the thing that actually does the drawing)
+from the canvas (the place where the drawing goes). The canonical
+renderer for user interfaces is Agg which uses the Anti-Grain
+Geometry C++ library to make a raster (pixel) image of the
+figure. All of the user interfaces except macosx can be used with agg
+rendering, e.g., WXAgg, GTKAgg, QT4Agg, TkAgg. In addition, some of
+the user interfaces support other rendering engines. For example,
+with GTK, you can also select GDK rendering (backend GTK) or Cairo
+rendering (backend GTKCairo).
+
+
+## Interactive Mode
+
+Interactive backends PERMIT but do NOT ensure plotting to the screen.
+ Whether and when plotting to the screen occurs, and whether a script
+ or shell session continues after a plot is drawn on the screen,
+ depends on the functions and methods that are called, and on a state
+ variable that determines whether matplotlib is in “interactive
+ mode”. The default Boolean value is set by the matplotlibrc file, and
+ may be customized like any other configuration parameter (see
+ Customizing matplotlib). It may also be set via
+ matplotlib.interactive(), and its value may be queried via
+ matplotlib.is_interactive(). Turning interactive mode on and off in
+ the middle of a stream of plotting commands, whether in a script or
+ in a shell, is rarely needed and potentially confusing, so in the
+ following we will assume all plotting is done with interactive mode
+ either on or off
+
+Interactive mode may also be turned on via 
+matplotlib.pyplot.ion()
+and turned off via 
+matplotlib.pyplot.ioff()
+
+Interactive mode only works with suitable backends in ipython and in
+the ordinary python shell, but it does not work eg in the IDLE or
+PyCharm IDEs.
+
+
+### Interactive Example Plotting a Graph (not an image)
+
+To my experience, this does not work when using plt.imshow().
+
+import matplotlib.pyplot as plt
+plt.ion()
+plt.plot([1.6, 2.7])
+
+Using interactive mode AND pyplot functions, the plot is updated after
+each of the following lines: 
+plt.title("interactive test")
+plt.xlabel("index")
+
+
+Using a reference to the Axes instance, and calling a method of that
+instance:
+
+ax = plt.gca()
+ax.plot([3.1, 2.2])
+
+do NOT update the figure because the Axes methods do not include an
+automatic call to draw_if_interactive(); that call is added by the
+pyplot functions.  Using methods to update the plot on the screen, one
+needs to call draw():
+
+plt.draw()
+
+Plotting image updates in an iteration worked (to my experience) using
+the experimental function
+plt.pause(t)
+with t (in seconds) small, eg 0.1, but not zero (can cause failure).
+
+
+### NON-INTERACTIVE EXAMPLE
+
+To my experience, the following often does NOT work when using
+plt.imshow(). If it does depends on the choice of the backend, or even
+if the image is saved as file.
+```
+import matplotlib.pyplot as plt
+plt.ioff()
+plt.plot([1.6, 2.7])
+```
+So far nothing should have shown up on the screen (unless using macosx
+backend, which is anomalous). To make the plot appear use
+```
+plt.show()
+```
+Now, the plot should be visible, but your terminal command line is unresponsive;
+the `show()` command blocks the input of additional commands until the
+plot window is killed manually.
+
+What good is this–being forced to use a blocking function? Suppose you
+need a script that plots the contents of a file to the screen. You
+want to look at that plot, and then end the script. Without some
+blocking commands such as `show()`, the script would flash up the plot
+and then end immediately, leaving nothing on the screen.
+
+Non-interactive mode delays all drawing until `show()` is
+called.
+
+In order to avoid blocking the experimental option 
+`plt.show(block=False)`
+can be triggered which sometimes works, often not.
+
+## IPython
+
+Inline plotting within the IPython console is activated via
+```
+%matplotlib inline
+```
+which specifies the backend (and will produce an error if it is not an
+ipython notebook session)
+
+
+## PyCharm
+
+In PyCharm using the ODL method `show` either results in no figure showing
+up at all or if the figure showing the console freezes. In the latter
+case when aiming to create several only the first figure is show. More
+severely, each time the console freezes a python process is starting
+to run at 100% CPU usage.
+
+PyCharm is done in Java.  matplotlib doesn't have any Jave based
+backends, thus it is unlikely that inline plotting is possible within
+pycharm.
+
+
+## Jupyter
+
+Recently, the (Mathematica-like) notebook functionality (required for
+inline plotting) was split from IPython  into a seperated
+package called jupyter.  Inline plotting in a notebook works  using 
+```
+%matplotlib inline
+```
+
+
+## Spyder
+
+Know issue: only works with IPython version < 4 and
+matplotlib version 1.5
+
+
+
+More control can be gained by directly using the matplotlib's
+first-level object-oriented interface explicitly creating and keeping
+track of figure and axes objects.  This quickly becomes cumbersome and
+especially for displaying figures, 2D images, or interactively
+plotting the online documentation and most of the examples mostly
+utilize pyplot methods.
+
+
+# CONCLUSION
+
+The situation is really totally comletely messed up since it depdends
+on the IDE, graphical backend, renderer, ipython / jupyter version,
+python version, matplotlib method (plt.plot or plt.image), matplotlib
+versions, implementation. Regarding the latter point, both
+functionalities (plot image updates in iterations (interactive mode)
+and produce a small series of figures which are displayed at once)
+already worked for me, but a simple replacement of functions and
+methods didn't do the job in ODL.
+
+Thus in general one cannot expect that plotting will work (for
+Linux).
+
+If at all, only provide very rudimentary support for plotting via
+plt.show() which should work in ipython and thus in spyder (situation
+for Windows and Mac is unclear to me).
+
+Examples with working inline plotting using plt.show() can written in
+an ipython / jupyter notebook.
+
+Be aware that plt.show() can cause a program freeze.
+
+
+TRY
+
+
+matplotlib.pyplot.draw()
+
+    Redraw the current figure.
+
+    This is used in interactive mode to update a figure that has been
+    altered, but not automatically re-drawn. This should be only
+    rarely needed, but there may be ways to modify the state of a
+    figure with out marking it as stale.
+
+    A more object-oriented alternative, given any Figure instance,
+    fig, that was created using a pyplot function, is:
+
+    fig.canvas.draw_idle()
+
+
+matplotlib.pyplot.show(*args, **kw)¶
+
+    Display a figure. When running in ipython with its pylab mode,
+    display all figures and return to the ipython prompt.
+
+    In non-interactive mode, display all figures and block until the
+    figures have been closed; in interactive mode it has no effect
+    unless figures were created prior to a change from non-interactive
+    to interactive mode (not recommended). In that case it displays
+    the figures but does not block.
+
+    A single experimental keyword argument, block, may be set to True
+    or False to override the blocking behavior described above.
+
 ----------------------------------------------------------------------
 Investigating Inheritance
 
@@ -2165,7 +2459,25 @@ necessary:
 sudo rm gcc; sudo ln -s gcc-4.7 gcc; sudo rm g++; sudo ln -s g++-4.7 g++
 
 Configure command
-./configure --with-cuda=/usr/local/cuda --with-matlab=/usr/local/MATLAB/R2014b --with-python --prefix=/usr/local/astra 
+./configure --with-cuda=/usr/local/cuda --with-matlab=/usr/local/MATLAB/R2014b --with-python=/usr/bin/python2 --prefix=/usr/local/astra 
+
+----------------------------------------------------------------------
+README.txt
+
+Requirements: g++, boost, CUDA (driver+toolkit), Matlab and/or Python (2.7 or 3.x)
+
+cd build/linux
+./autogen.sh   # when building a git version
+./configure --with-cuda=/usr/local/cuda \
+            --with-matlab=/usr/local/MATLAB/R2012a \
+            --with-python \
+            --prefix=/usr/local/astra
+make
+make install
+Add /usr/local/astra/lib to your LD_LIBRARY_PATH.
+Add /usr/local/astra/matlab and its subdirectories (tools, mex)
+  to your matlab path.
+Add /usr/local/astra/python to your PYTHONPATH.
 
 ----------------------------------------------------------------------
 

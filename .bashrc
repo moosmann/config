@@ -125,8 +125,16 @@ alias lah='ls -Ah'
 alias lrt='ls -lrt'
 alias lsa='ls -A'
 
-# LaTeX, dvipdf, acroread
-#alias lda='latex MHB_prl.tex && dvipdf MHB_prl.dvi && acroread MHB_prl.pdf &'
+# Set some generic aliases
+alias o='less'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias .......='cd ../../../../../..'
+alias ........='cd ../../../../../../..'
+alias cd..='cd ..'
 
 # acroread
 function acro()
@@ -156,17 +164,6 @@ function psgrep()
 {
     ris2xml $1 | xml2bib > "${1/%ris/bib}"
 }
-
-# Set some generic aliases
-alias o='less'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias ......='cd ../../../../..'
-alias .......='cd ../../../../../..'
-alias ........='cd ../../../../../../..'
-alias cd..='cd ..'
 
 # emacs
 #export EDITOR=emacsclient
@@ -198,6 +195,8 @@ alias ep='editprofile'
 alias ml='$HOME/bin/runMatlab.sh &'
 alias mln='$HOME/bin/runMatlabConsole.sh'
 #alias mln='matlab -nosplash -nodesktop -nodisplay'
+
+## SSH ###############################################################
 
 # some ssh aliases
 alias sufonoX='ssh hp9361@ufosrv1.anka.kit.edu'
@@ -369,6 +368,7 @@ function lsdf_ncgpu ()
     echo "Mount LSDF on /mnt/LSDF/ using anka-nc-gpu$VAR.anka.kit.edu"
     sshfs hp9361@anka-nc-gpu$VAR.anka.kit.edu:/mnt/tomoraid-LSDF /home/hp9361/mounts/ncgpu_lsdf -o uid=$USERID -o gid=$GROUPID
 }
+## SSH END ###########################################################
 
 # mayavi2
 # function mavi ()
@@ -511,13 +511,13 @@ alias globusconnect='~/bin/globusconnectpersonal-2.0.2/globusconnect &'
 alias gb='globusconnect'
 
 # define phd working directory in  bash variable
-pd=~/LATEX/phdthesis/
+# pd=~/LATEX/phdthesis/
 # open phdthesis.tex
 #alias phd='cd ~/LATEX/phdthesis/;emacs phdthesis.tex&'
-function phd ()
-{
-    guake -n phd -r phd -e "cd ~/LATEX/phdthesis/ && e phdthesis.tex "
-}
+# function phd ()
+# {
+#     guake -n phd -r phd -e "cd ~/LATEX/phdthesis/ && e phdthesis.tex "
+# }
 
 # fex belwue
 alias fexsend='$HOME/bin/fex/fexsend'
@@ -552,6 +552,7 @@ alias echo_library_path='echo $LIBRARY_PATH'
 alias echo_path='echo $PATH'
 alias echo_cudaroot='echo $CUDA_ROOT'
 alias echo_ld_preload='echo $LD_PRELOAD'
+alias echo_workon_home='echo $WORKON_HOME'
 
 # CUDA version
 alias cudaversion='nvcc --version'
@@ -624,26 +625,27 @@ alias spydermt='spyder --multithread &'
 # git
 alias gitShowTrackedFiles='git ls-tree -r master --name-only'
 
-function gitStatus()
-{    
-    local cwd=$(pwd)
+# NOT WORKING PROPERLY
+# function gitStatus()
+# {    
+#     local cwd=$(pwd)
 
-    echo -e "\nConfig repo: .bashrc, .profile, bin, ..."
-    cd ~/
-    git status 
+#     echo -e "\nConfig repo: .bashrc, .profile, bin, ..."
+#     cd ~/
+#     git status 
 
-    echo -e "\nEmacs repo:"
-    cd ~/.emacs.d
-    git status 
+#     echo -e "\nEmacs repo:"
+#     cd ~/.emacs.d
+#     git status 
 
-    echo -e "\nMATLAB repo:"
-    cd ~/matlab
-    git status 
+#     echo -e "\nMATLAB repo:"
+#     cd ~/matlab
+#     git status 
 
-    echo -e "\n"
+#     echo -e "\n"
     
-    cd $cwd
-}
+#     cd $cwd
+# }
 
 # Restart ssh daemon sshd
 #alias sshdrestart='sudo /etc/init.d/sshd restart'
@@ -655,6 +657,7 @@ alias pip2UpgradeAllPythonPackages='pip2 freeze --local | grep -v '^\-e' | cut -
 alias pip2ListOutdatePackages='pip2 list -o --allow-all-external'
 alias pip3UpgradeAllPythonPackages='pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs sudo -H pip3 install -U'
 alias pip3ListOutdatePackages='pip3 list -o --allow-all-external'
+alias pipSecurity='pip install requests[security]'
 
 # ubuntu version
 alias ubuntuversion='lsb_release -a'
@@ -668,6 +671,18 @@ alias middleClick='~/bin/middleClick.sh'
 # update-pciids - download new version of the PCI ID list
 # This is in order that lspci show correct GPU model and version
 alias pciids_update='update-pciids'
+
+# source virtualenvwrapper
+function senv(){
+
+    local workondir=$1;
+    if [ -z "${1}" ]; then
+	
+	workondir=~/VirtualEnv
+    fi
+    export WORKON_HOME=$workondir
+    source /usr/local/bin/virtualenvwrapper.sh
+}
 
 ######################################################################
 # temporary project links
