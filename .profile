@@ -47,10 +47,8 @@ export PYTHONPATH=/usr/local/astra/python:$PYTHONPATH
 #export LD_LIBRARY_PATH=$HOME/Software/NiftyRec/NiftyRec-2.0.1/build/bin:$LD_LIBRARY_PATH
 
 # Python
-export PYTHONSTARTUP=~/.pythonrc:$PYTHONSTARTUP
+# export PYTHONSTARTUP=~/.pythonrc:$PYTHONSTARTUP
 # export PYTHONPATH=~/Dropbox/python:$PYTHONPATH
-#export PYTHONPATH=~/git/LCR/libastra/python:$PYTHONPATH
-#export PYTHONPATH=~/git/LCR/libastra/pyastra:$PYTHONPATH
 # export PYTHONPATH=~/git/LCR/ODL/odl:$PYTHONPATH
 
 # for odlpp
