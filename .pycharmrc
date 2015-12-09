@@ -1,0 +1,2 @@
+source ~/.bashrc
+source ~/VirtualEnv/odl_python3/bin/activate
