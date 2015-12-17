@@ -123,6 +123,18 @@ for i in range(30000):
         plt.pause(1)
 plt.close()
 ----------------------------------------------------------------------
+Fehlermeldung beim ausfuehren von pip:
+
+julian@moosmann:/usr/local/bin$ pip2
+Traceback (most recent call last):
+  File "/usr/bin/pip2", line 5, in <module>
+    from pkg_resources import load_entry_point
+ImportError: No module named pkg_resources
+
+
+sudo apt-get install --reinstall python-pkg-resources
+----------------------------------------------------------------------
+
 Install python related package using pip
 sudo -H pip install PACKAGE
 

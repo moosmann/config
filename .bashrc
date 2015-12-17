@@ -637,6 +637,8 @@ function gitStatus()
 #alias sshdrestart='sudo service ssh restart'
 alias sshdrestart='sudo restart ssh'
 
+alias pip2UpgradeAllPythonPackages='pip2 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs sudo -H pip2 install -U'
+
 ######################################################################
 # temporary project links
 alias cdhamburg='cd ~/hamburg'
