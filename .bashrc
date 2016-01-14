@@ -684,6 +684,9 @@ function senv(){
     source /usr/local/bin/virtualenvwrapper.sh
 }
 
+# 
+alias findanddelete='find . -name "*.pyc" -exec rm -rf {} \;'
+
 ######################################################################
 # temporary project links
 alias cdhamburg='cd ~/latex/beamer/2015-08-17_Moosmann_Hamburg-Philipps'

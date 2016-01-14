@@ -41,6 +41,11 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 # PyASTRA
 export LD_LIBRARY_PATH=/usr/local/astra/lib:$LD_LIBRARY_PATH
 export PYTHONPATH=/usr/local/astra/python:$PYTHONPATH
+# ASTRA matplotlib lexical cast bug
+export LC_ALL=en_US.UTF-8
+export LC_NUMERIC=C
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
 
 # NiftyRec
 #export LD_LIBRARY_PATH=/usr/local/niftyrec:$LD_LIBRARY_PATH 
@@ -81,3 +86,5 @@ export PYTHONPATH=/usr/local/astra/python:$PYTHONPATH
 
 # virtualenv virutalenvwrapper
 export WORKON_HOME=~/VirtualEnv
+source /usr/local/bin/virtualenvwrapper.sh
+

@@ -2519,6 +2519,10 @@ sudo rm gcc; sudo ln -s gcc-4.7 gcc; sudo rm g++; sudo ln -s g++-4.7 g++
 Configure command
 ./configure --with-cuda=/usr/local/cuda --with-matlab=/usr/local/MATLAB/R2014b --with-python=/usr/bin/python2 --prefix=/usr/local/astra 
 
+Speed up compilation choosing compute option: --with-cuda-compute=50
+
+./configure --with-cuda=/usr/local/cuda --with-matlab=/usr/local/MATLAB/R2014b --with-python=/usr/bin/python2 --prefix=/usr/local/astra --with-cuda-compute=50
+
 ----------------------------------------------------------------------
 README.txt
 
@@ -2537,21 +2541,6 @@ Add /usr/local/astra/matlab and its subdirectories (tools, mex)
   to your matlab path.
 Add /usr/local/astra/python to your PYTHONPATH.
 
-----------------------------------------------------------------------
-
-COMPILATION OUTPUT AFTER MAKE INSTALL:
-
-jmoosmann@moosmann:~/Software/ASTRA/astra-1.5/build/linux$ sudo make install
-[sudo] password for jmoosmann: 
-./install-sh -m 755 -d /usr/local/astra/lib
-./libtool --mode=install ./install-sh -m 644 libastra.la /usr/local/astra/lib
-libtool: install: ./install-sh -m 644 .libs/libastra.so.0.0.0 /usr/local/astra/lib/libastra.so.0.0.0
-libtool: install: (cd /usr/local/astra/lib && { ln -s -f libastra.so.0.0.0 libastra.so.0 || { rm -f libastra.so.0 && ln -s libastra.so.0.0.0 libastra.so.0; }; })
-libtool: install: (cd /usr/local/astra/lib && { ln -s -f libastra.so.0.0.0 libastra.so || { rm -f libastra.so && ln -s libastra.so.0.0.0 libastra.so; }; })
-libtool: install: ./install-sh -m 644 .libs/libastra.lai /usr/local/astra/lib/libastra.la
-libtool: install: warning: remember to run `libtool --finish /usr/local/lib'
-./libtool --mode=finish /usr/local/astra/lib
-libtool: finish: PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/sbin" ldconfig -n /usr/local/astra/lib
 ----------------------------------------------------------------------
 Libraries have been installed in:
    /usr/local/astra/lib
@@ -2586,9 +2575,11 @@ in a future release.
 
 Fix:
 
-The nvcc doesn't like compute_1X flags where X is 1,2,3. Simply remove
-this: -gencode arch=compute_11,code=sm_11 code from the Makefile and
-you should compile correctly.
+The nvcc doesn't like compute_1X flags where X is 1,2,3. Simply remove:
+
+-gencode arch=compute_11,code=sm_11 
+
+code from the Makefile andyou should compile correctly.
 ----------------------------------------------------------------------
 Cuda kernel error
 Failed to force completion of cuda kernels: 4: unspecified launch failure
@@ -2601,36 +2592,6 @@ astra_mex_data3d('info')
 ----------------------------------------------------------------------
 Clear all ASTRA toolbox memory
 astra_clear
-----------------------------------------------------------------------
-----------------------------------------------------------------------
-PyASTRAToolbox
-----------------------------------------------------------------------
-Install Python wrapper for ASTRA
-
-sudo ./install.sh -i ~/Software/ASTRA/astra-1.5/include/ -l /usr/local/astra/  -p /usr/bin/python  -c /usr/local/cuda 
-
-----------------------------------------------------------------------
-ERROR MESSAGE WHEN RUNNING install.sh:
-
-Traceback (most recent call last):
-  File "builder.py", line 40, in <module>
-    if StrictVersion(Cython.__version__)>=StrictVersion('0.13'):
-  File "/usr/lib/python2.7/distutils/version.py", line 40, in __init__
-    self.parse(vstring)
-  File "/usr/lib/python2.7/distutils/version.py", line 107, in parse
-    raise ValueError, "invalid version number '%s'" % vstring
-ValueError: invalid version number '0.20.1post0'
-
-SOLVED BY:
-
-Replace following in  line builder.py
-
-    if StrictVersion(Cython.__version__)>=StrictVersion('0.13'):
-
-by
-
-    if StrictVersion(Cython.__version__[0:4])>=StrictVersion('0.13'):
-
 ----------------------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 XDVI
