@@ -57,6 +57,9 @@ close all;
 %% DTI code
 addpath( genpath( [getenv('HOME') '/Software/DTIcode/dticode/matlab'] ) );
 
+%% TV regularistaion by preconditioned PDHG method (Chambolle-Pock)
+addpath( genpath( [getenv('HOME') '/matlab/TV-reg_by_precond_PDHG_method'] ) );
+
 %% Scripts and functions
 addpath( genpath( [getenv('HOME') '/matlab'] ) );
 
