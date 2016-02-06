@@ -1,0 +1,253 @@
+[columns]
+chatrooms = {}
+hideflags = True
+search = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+uploads = [1, 1, 1, 1, 1, 1, 1, 1, 1]
+userlist = [1, 0, 1, 1, 1, 1, 1, 1, 1, 1]
+
+[interests]
+dislikes = []
+likes = []
+
+[language]
+language = fi
+setlanguage = False
+
+[logging]
+chatrooms = False
+debug = False
+debugmodes = [0]
+log_timestamp = %Y-%m-%d %H:%M:%S
+logcollapsed = True
+logsdir = /home/julian/nicotine
+private_timestamp = %Y-%m-%d %H:%M:%S
+privatechat = False
+privatelogsdir = /home/julian/nicotine
+readprivatelines = 15
+readroomlines = 15
+readroomlogs = False
+roomlogsdir = /home/julian/nicotine
+rooms = []
+rooms_timestamp = %H:%M:%S
+timestamps = False
+transfers = False
+
+[players]
+default = xdg-open $
+npformat = 
+npformatlist = []
+npothercommand = 
+npplayer = infopipe
+
+[plugins]
+enable = False
+enabled = []
+
+[private_rooms]
+enabled = 0
+rooms = {}
+
+[privatechat]
+store = False
+users = []
+
+[searches]
+defilter = ['', '', '', '', False, '']
+distrib_ignore = 70
+distrib_timer = False
+enablefilters = False
+filterbr = []
+filtercc = []
+filterin = []
+filterout = []
+filtersize = []
+history = ['Garden of Worm Idle Stones', 'Garden of Worm:Idle Stones', 'Panopticon Autumn Eternal', 'Khemmis Absolution', 'Myrkur M', 'Bosse-de-Nage                All Fours', 'Locrian Infinite Dissolution', 'Dead to a Dying World    Litany', 'Bell Witch  Four Phantoms', 'Tribulation    The Children of the Night', 'Arca                Mutant', 'Skepticism                Ordeal', 'Kowloon Walled City                Grievances', 'Pinkish Black Bottom of the Morning', 'Tom Carter                Long Time Underground']
+max_displayed_results = 250
+max_stored_results = 300
+maxresults = 50
+re_filter = True
+reopen_tabs = False
+search_results = True
+
+[server]
+autoaway = 15
+autojoin = []
+autoreply = 
+autosearch = ['levin goes lightly', 'Kristy And The Kraks Smile', 'hank mike soundtrack', 'romantic speedways']
+banlist = ['RamBad', 'quasar']
+ctcpmsgs = False
+enc = utf-8
+fallbackencodings = ['utf-8', 'cp1252']
+firewalled = False
+ignorelist = ['marina62', 'RamBad', 'quasar', 'Balou10']
+ipblocklist = {'72.172.88.*': 'MediaDefender Bots'}
+ipignorelist = {}
+lastportstatuscheck = 1337331913.72
+login = buschhopfer
+passw = hopft
+portrange = (5555, 5566)
+private_chatrooms = False
+roomencoding = {}
+server = ('server.slsknet.org', 2242)
+serverlist = ['server.slsknet.org:2242', 'server.slsknet.org:2240']
+upnp = True
+userencoding = {}
+userlist = []
+
+[ticker]
+default = 
+hide = True
+rooms = {}
+
+[transfers]
+afterfinish = 
+afterfolder = 
+autoclear_uploads = 0
+autoretry_downloads = True
+buddyshared = []
+customban = [Banned.]
+download_doubleclick = 6
+downloaddir = /home/julian/nicotine/downloads
+downloadfilters = [['*.db', 1], ['*.m3u', 1], ['*.nfo', 1], ['*.sfv', 1], ['*.url', 1], ['AlbumArt(_{........-....-....-....-............}_)?(_?(large|small))?\\.jpg', 1], ['albumart(_{........-....-....-....-............}_)?(_?(large|small))?\\.jpg', 1], ['desktop.ini', 1], ['folder.jpg', 0], ['thumbs.db', 1]]
+downloadlimit = 0
+downloadregexp = (\\(.*\.db|.*\.m3u|.*\.nfo|.*\.sfv|.*\.url|AlbumArt\(\_\{\.\.\.\.\.\.\.\.\-\.\.\.\.\-\.\.\.\.\-\.\.\.\.\-\.\.\.\.\.\.\.\.\.\.\.\.\}\_\)\?\(\_\?\(large\|small\)\)\?\\\.jpg|albumart\(\_\{\.\.\.\.\.\.\.\.\-\.\.\.\.\-\.\.\.\.\-\.\.\.\.\-\.\.\.\.\.\.\.\.\.\.\.\.\}\_\)\?\(\_\?\(large\|small\)\)\?\\\.jpg|desktop\.ini|folder.jpg|thumbs\.db)$)
+downloadsexpanded = True
+enablebuddyshares = False
+enablefilters = True
+enabletransferbuttons = True
+fifoqueue = False
+filelimit = 1000
+friendsnolimits = True
+friendsonly = False
+geoblock = False
+geoblockcc = ['']
+geopanic = False
+groupdownloads = False
+groupuploads = True
+incompletedir = /home/julian/nicotine/incomplete
+limitby = True
+lock = True
+pmqueueddir = True
+preferfriends = False
+prioritize = False
+queuelimit = 1000
+remotedownloads = False
+rescanonstartup = False
+reverseorder = False
+shared = ['/home/julian/Musik']
+sharedownloaddir = False
+shownotification = False
+shownotificationperfolder = False
+upload_doubleclick = 0
+uploadallowed = 0
+uploadbandwidth = 10
+uploaddir = /home/julian/Downloads
+uploadlimit = 150
+uploadsexpanded = True
+uploadsinsubdirs = 1
+uploadslots = 2
+usecustomban = False
+uselimit = False
+useupslots = False
+
+[ui]
+browserfont = Sans 9
+buddylistinchatrooms = 0
+chat_hidebuttons = True
+chatfont = Sans 9
+chathilite = red
+chatlocal = BLUE
+chatme = FOREST GREEN
+chatremote = 
+decimalsep = ,
+enabletrans = False
+exitdialog = 0
+filemanager = nautilus --no-desktop $
+height = 744
+icontheme = 
+inputcolor = 
+labelbrowse = 0
+labelinfo = 0
+labelmain = 0
+labelprivate = 0
+labelrooms = 0
+labelsearch = 0
+listfont = Sans 9
+modes_order = ['chatrooms', 'private', 'downloads', 'uploads', 'search', 'userinfo', 'userbrowse', 'interests', 'userlist']
+modes_visible = {'interests': 1, 'userbrowse': 1, 'search': 1, 'uploads': 1, 'chatrooms': 1, 'downloads': 1, 'userlist': 1, 'private': 1, 'userinfo': 1}
+mozembed = False
+notexists = 1
+open_in_mozembed = False
+roomlistcollapsed = True
+search = 
+searchfont = Sans 9
+searchoffline = #aa0000
+searchq = #898787
+showaway = 0
+soundcommand = play -q
+soundenabled = False
+soundtheme = 
+speechcommand = flite -t $
+speechenabled = False
+speechprivate = %(user)s told you.. %(message)s
+speechrooms = In %(room)s, %(user)s said %(message)s
+spellcheck = True
+tab_changed = #0000ff
+tab_colors = False
+tab_default = 
+tab_hilite = red
+tab_icons = True
+tab_reorderable = False
+tab_status_icons = False
+tabbrowse = Top
+tabclosers = True
+tabinfo = Top
+tabmain = Top
+tabprivate = Top
+tabrooms = Top
+tabsearch = Top
+textbg = 
+tooltips = True
+transalpha = 150.0
+transfersfont = Sans 9
+transfilter = 0
+transtint = #aaaaaa
+trayicon = False
+urgencyhint = True
+urlcolor = #3D2B7F
+useraway = ORANGE
+usernamehotspots = True
+usernamestyle = bold
+useroffline = #aa0000
+useronline = BLACK
+width = 1321
+xposition = 45
+yposition = 24
+
+[urls]
+humanizeurls = False
+protocols = {'http': 'sensible-browser "$"', 'https': 'sensible-browser "$"'}
+urlcatching = False
+
+[userinfo]
+descr = "DON'T SHARE YOUR DOWNLOAD FOLDER!!"
+descrutf8 = 1
+pic = 
+
+[words]
+aliases = True
+autoreplaced = {'tihng': 'thing', 'jsut': 'just', 'youre': "you're", 'teh ': 'the ', 'tihs': 'this', 'thier': 'their', 'taht ': 'that '}
+buddies = False
+censored = []
+censorfill = *
+censorwords = False
+characters = 2
+commands = True
+cycle = False
+dropdown = True
+onematch = True
+replacewords = False
+roomnames = False
+roomusers = False
+tab = False
+
