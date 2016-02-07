@@ -154,6 +154,7 @@ and sudo pip uninstall every package you find there.
 ----------------------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Build python wrapper for C code
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ----------------------------------------------------------------------
 
 copy arbitrary lib*py and modify:
@@ -323,35 +324,6 @@ freeglut:
 /usr/lib/x86_64-linux-gnu/libglut.so
 
 ----------------------------------------------------------------------
-Basic VI commands and principles
-----------------------------------------------------------------------
-vi has two modes: the command mode and the insert mode. In command
-mode, letters of the keyboard will be interpreted as commands. When
-you are in insert mode the same letters of the keyboard will type or
-edit text. vi always starts out in command mode.  You can type i to
-enter the insert mode. If you wish to leave insert mode and return to
-the command mode, hit the ESC key. If you're not sure where you are,
-hit ESC a couple of times and that should put you back in command
-mode.
-
-
-Change from the command mode to the insert mode: i
-
-If the Backspace key doesn't work properly on your system, try using
-the Ctrl h key combination.
-
-If you've just finished typing text, you're still in insert mode and
-will need to press ESC to return to the command mode.
-
-
-Closing and Saving Files
-
-:w	to save your file but not quit vi (this is good to do periodically in
-	case of machine crash!).
-:q	to quit if you haven't made any edits.
-:wq	to quit and save edits (basically the same as ZZ).
-----------------------------------------------------------------------
-----------------------------------------------------------------------
 FIREFOX
 ----------------------------------------------------------------------
 Add-ons:
@@ -457,6 +429,54 @@ config editor is found under:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 LINUX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+xclip - command line interface to X selections (clipboard)
+
+Copy file content of FILE to clipboard
+xclip -sel clip < FILE
+
+-sel is short for -selection an specifies which X selection to use:
+'primary', 'secondary', or 'clipboar'; only the first character of the
+specified selection is important
+
+Short cut added to bashrc for the above function:
+copyFileContentToClipboard
+
+Read working directory into clipboard
+pwd | xclip
+
+Save clipboard content to file
+xclip -o > pwd.txt
+
+----------------------------------------------------------------------
+Basic VI commands and principles
+
+vi has two modes: the command mode and the insert mode. In command
+mode, letters of the keyboard will be interpreted as commands. When
+you are in insert mode the same letters of the keyboard will type or
+edit text. vi always starts out in command mode.  You can type i to
+enter the insert mode. If you wish to leave insert mode and return to
+the command mode, hit the ESC key. If you're not sure where you are,
+hit ESC a couple of times and that should put you back in command
+mode.
+
+
+Change from the command mode to the insert mode: i
+
+If the Backspace key doesn't work properly on your system, try using
+the Ctrl h key combination.
+
+If you've just finished typing text, you're still in insert mode and
+will need to press ESC to return to the command mode.
+
+
+Closing and Saving Files
+
+:w	to save your file but not quit vi (this is good to do periodically in
+	case of machine crash!).
+:q	to quit if you haven't made any edits.
+:wq	to quit and save edits (basically the same as ZZ).
 ----------------------------------------------------------------------
 getdeb software portal 
 

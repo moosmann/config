@@ -208,7 +208,7 @@ alias sanka8='ssh -XYp24 moosmann@anka8.anka.kit.edu'
 alias sanka8noX='ssh -Xp24 moosmann@anka8.anka.kit.edu'
 alias sjumo='ssh -X julian@192.168.0.101'
 alias sesrf='ssh -Xp5022 ls2395@firewall.esrf.fr'
-alias skth='ssh -X jmoosmann@130.237.41.55'
+alias skth='ssh -YX jmoosmann@130.237.41.55'
 
 alias prinkth='echo 130.237.41.55'
 
@@ -278,93 +278,93 @@ function slocalnoX () {
 
 #ssh -f -L 12345:anka-nc-gpu1:22 anka8.anka.kit.edu -p24 -N
 
-# ssh function 
-function sncgpu ()
-{
-  ssh -X hp9361@anka-nc-gpu$1.anka.kit.edu
-}
-function snccpu ()
-{
-  ssh -X hp9361@anka-nc-cpu$1.anka.kit.edu
-}
+# # Ssh function 
+# function sncgpu ()
+# {
+#   ssh -X hp9361@anka-nc-gpu$1.anka.kit.edu
+# }
+# function snccpu ()
+# {
+#   ssh -X hp9361@anka-nc-cpu$1.anka.kit.edu
+# }
 
-# ssh aliases for guake
-alias ufo='guake -n UFO -r ufo -e sufo'
-alias ufonoX='guake -n UFONOX -r ufonoX -e sufonoX'
-alias tesla='guake -n TESLA -r tesla -e stesla'
-alias teslanoX='guake -n TESLANOX -r teslanoX -e steslanoX'
-alias tomo2='guake -n TOMO2 -r tomo2 -e stomo2'
-alias tomo2noX='guake -n TOMO2NOX -r tomonoX -e stomo2noX'
-alias las='guake -n LAS -r las -e slas'
-alias lasnoX='guake -n LASNOX -r lasnoX -e slasnoX'
-alias anka8='guake -n ANKA8 -r anka8 -e sanka8'
-alias moschd='guake -n MOSCHD -r moschd -e smoschd'
-alias esrf='guake -n ESRF -r esrf -e sesrf'
-alias kth='guake -n KTH -r kth -e skth'
+# # ssh aliases for guake
+# alias ufo='guake -n UFO -r ufo -e sufo'
+# alias ufonoX='guake -n UFONOX -r ufonoX -e sufonoX'
+# alias tesla='guake -n TESLA -r tesla -e stesla'
+# alias teslanoX='guake -n TESLANOX -r teslanoX -e steslanoX'
+# alias tomo2='guake -n TOMO2 -r tomo2 -e stomo2'
+# alias tomo2noX='guake -n TOMO2NOX -r tomonoX -e stomo2noX'
+# alias las='guake -n LAS -r las -e slas'
+# alias lasnoX='guake -n LASNOX -r lasnoX -e slasnoX'
+# alias anka8='guake -n ANKA8 -r anka8 -e sanka8'
+# alias moschd='guake -n MOSCHD -r moschd -e smoschd'
+# alias esrf='guake -n ESRF -r esrf -e sesrf'
+# alias kth='guake -n KTH -r kth -e skth'
 
-# ssh function for guake
-function jumo ()
-{
-    guake -n JUMO -r jumo -e  sjumo
-}
-function ncgpu ()
-{
-    local VAR=$1;
-    if [ -z "${1}" ]; then
-	VAR=$[RANDOM % 4 + 1];
-    fi
-    guake -n NCGPU$VAR -r ncgpu$VAR -e  "ssh -X hp9361@anka-nc-gpu$VAR.anka.kit.edu"
-}
-function nccpu ()
-{
-    local VAR=$1;
-    if [ -z "${1}" ]; then
-	VAR=$[RANDOM % 4 + 1];
-    fi
-    guake -n NCCPU$VAR -r nccpu$VAR -e  "ssh -X hp9361@anka-nc-cpu$VAR.anka.kit.edu"
-}
-function ncgpunoX ()
-{
-    local VAR=$1;
-    if [ -z "${1}" ]; then
-	VAR=$[RANDOM % 4 + 1];
-    fi
-    guake -n NCGPUNOX$VAR -r ncgpunoX$VAR -e  "ssh hp9361@anka-nc-gpu$VAR.anka.kit.edu"
-}
-function nccpunoX ()
-{
-    local VAR=$1;
-    if [ -z "${1}" ]; then
-	VAR=$[RANDOM % 4 + 1];
-    fi
-    guake -n NCCPUNOX$VAR -r nccpunoX$VAR -e  "ssh hp9361@anka-nc-cpu$VAR.anka.kit.edu"
-}
+# # ssh function for guake
+# function jumo ()
+# {
+#     guake -n JUMO -r jumo -e  sjumo
+# }
+# function ncgpu ()
+# {
+#     local VAR=$1;
+#     if [ -z "${1}" ]; then
+# 	VAR=$[RANDOM % 4 + 1];
+#     fi
+#     guake -n NCGPU$VAR -r ncgpu$VAR -e  "ssh -X hp9361@anka-nc-gpu$VAR.anka.kit.edu"
+# }
+# function nccpu ()
+# {
+#     local VAR=$1;
+#     if [ -z "${1}" ]; then
+# 	VAR=$[RANDOM % 4 + 1];
+#     fi
+#     guake -n NCCPU$VAR -r nccpu$VAR -e  "ssh -X hp9361@anka-nc-cpu$VAR.anka.kit.edu"
+# }
+# function ncgpunoX ()
+# {
+#     local VAR=$1;
+#     if [ -z "${1}" ]; then
+# 	VAR=$[RANDOM % 4 + 1];
+#     fi
+#     guake -n NCGPUNOX$VAR -r ncgpunoX$VAR -e  "ssh hp9361@anka-nc-gpu$VAR.anka.kit.edu"
+# }
+# function nccpunoX ()
+# {
+#     local VAR=$1;
+#     if [ -z "${1}" ]; then
+# 	VAR=$[RANDOM % 4 + 1];
+#     fi
+#     guake -n NCCPUNOX$VAR -r nccpunoX$VAR -e  "ssh hp9361@anka-nc-cpu$VAR.anka.kit.edu"
+# }
 
-# sshfs
-USERID=43637;#ID of hp9361
-GROUPID=80605;#ANKA-universal-imaging-group
-alias anka8_home='sshfs -p24 moosman@anka8.anka.kit.edu:/home/moosman /home/hp9361/mounts/anka8_home -o uid=$USERID -o gid=$GROUPID'
-alias tesla_home='sshfs hp9361@anka-tesla.anka.kit.edu:/home/ws/hp9361 /home/hp9361/mounts/tesla_home -o uid=$USERID -o gid=$GROUPID'
-alias tesla_lsdf='sshfs hp9361@anka-tesla.anka.kit.edu:/mnt/tomoraid-LSDF /home/hp9361/mounts/tesla_lsdf -o uid=$USERID -o gid=$GROUPID'
-alias tomo2_home='sshfs hp9361@anka-tomo2.anka.kit.edu:/home/ws/hp9361 /home/hp9361/mounts/tomo2_home -o uid=$USERID -o gid=$GROUPID'
-alias tomo2_lsdf='sshfs hp9361@anka-tomo2.anka.kit.edu:/mnt/tomoraid-LSDF /home/hp9361/mounts/tomo2_lsdf -o uid=$USERID -o gid=$GROUPID'
-alias las_home='sshfs hp9361@anka-las.anka.kit.edu:/home/ws/hp9361 /home/hp9361/mounts/las_home -o uid=$USERID -o gid=$GROUPID'
-alias las_lsdf='sshfs hp9361@anka-las.anka.kit.edu:/mnt/tomoraid-LSDF /home/hp9361/mounts/las_lsdf -o uid=$USERID -o gid=$GROUPID'
-alias nccpu4_home='sshfs hp9361@anka-nc-cpu4.anka.kit.edu:/home/ws/hp9361 /home/hp9361/mounts/nccpu_home -o uid=$USERID -o gid=$GROUPID'
-alias nccpu4_lsdf='sshfs hp9361@anka-nc-cpu4.anka.kit.edu:/mnt/LSDF /home/hp9361/mounts/nccpu_lsdf -o uid=$USERID -o gid=$GROUPID'
-alias moschd_home='sshfs bembel@192.168.0.1:/home/bembel /home/hp9361/mounts/home_moschd -o uid=$USERID -o gid=$GROUPID'
-alias lsdf_tomo2='sshfs hp9361@anka-tomo2.anka.kit.edu:/mnt/tomoraid-LSDF /mnt/tomoraid-LSDF -o uid=$USERID -o gid=$GROUPID'
-alias lsdf_tesla='sshfs hp9361@anka-tesla.anka.kit.edu:/mnt/tomoraid-LSDF /mnt/tomoraid-LSDF -o uid=$USERID -o gid=$GROUPID'
-alias lsdf_las='sshfs hp9361@anka-las.anka.kit.edu:/mnt/tomoraid-LSDF /mnt/tomoraid-LSDF -o uid=$USERID -o gid=$GROUPID'
-function lsdf_ncgpu ()
-{
-    local VAR=$1;
-    if [ -z "${1}" ]; then
-	VAR=$[RANDOM % 4 + 1];
-    fi
-    echo "Mount LSDF on /mnt/LSDF/ using anka-nc-gpu$VAR.anka.kit.edu"
-    sshfs hp9361@anka-nc-gpu$VAR.anka.kit.edu:/mnt/tomoraid-LSDF /home/hp9361/mounts/ncgpu_lsdf -o uid=$USERID -o gid=$GROUPID
-}
+# # sshfs
+# USERID=43637;#ID of hp9361
+# GROUPID=80605;#ANKA-universal-imaging-group
+# alias anka8_home='sshfs -p24 moosman@anka8.anka.kit.edu:/home/moosman /home/hp9361/mounts/anka8_home -o uid=$USERID -o gid=$GROUPID'
+# alias tesla_home='sshfs hp9361@anka-tesla.anka.kit.edu:/home/ws/hp9361 /home/hp9361/mounts/tesla_home -o uid=$USERID -o gid=$GROUPID'
+# alias tesla_lsdf='sshfs hp9361@anka-tesla.anka.kit.edu:/mnt/tomoraid-LSDF /home/hp9361/mounts/tesla_lsdf -o uid=$USERID -o gid=$GROUPID'
+# alias tomo2_home='sshfs hp9361@anka-tomo2.anka.kit.edu:/home/ws/hp9361 /home/hp9361/mounts/tomo2_home -o uid=$USERID -o gid=$GROUPID'
+# alias tomo2_lsdf='sshfs hp9361@anka-tomo2.anka.kit.edu:/mnt/tomoraid-LSDF /home/hp9361/mounts/tomo2_lsdf -o uid=$USERID -o gid=$GROUPID'
+# alias las_home='sshfs hp9361@anka-las.anka.kit.edu:/home/ws/hp9361 /home/hp9361/mounts/las_home -o uid=$USERID -o gid=$GROUPID'
+# alias las_lsdf='sshfs hp9361@anka-las.anka.kit.edu:/mnt/tomoraid-LSDF /home/hp9361/mounts/las_lsdf -o uid=$USERID -o gid=$GROUPID'
+# alias nccpu4_home='sshfs hp9361@anka-nc-cpu4.anka.kit.edu:/home/ws/hp9361 /home/hp9361/mounts/nccpu_home -o uid=$USERID -o gid=$GROUPID'
+# alias nccpu4_lsdf='sshfs hp9361@anka-nc-cpu4.anka.kit.edu:/mnt/LSDF /home/hp9361/mounts/nccpu_lsdf -o uid=$USERID -o gid=$GROUPID'
+# alias moschd_home='sshfs bembel@192.168.0.1:/home/bembel /home/hp9361/mounts/home_moschd -o uid=$USERID -o gid=$GROUPID'
+# alias lsdf_tomo2='sshfs hp9361@anka-tomo2.anka.kit.edu:/mnt/tomoraid-LSDF /mnt/tomoraid-LSDF -o uid=$USERID -o gid=$GROUPID'
+# alias lsdf_tesla='sshfs hp9361@anka-tesla.anka.kit.edu:/mnt/tomoraid-LSDF /mnt/tomoraid-LSDF -o uid=$USERID -o gid=$GROUPID'
+# alias lsdf_las='sshfs hp9361@anka-las.anka.kit.edu:/mnt/tomoraid-LSDF /mnt/tomoraid-LSDF -o uid=$USERID -o gid=$GROUPID'
+
+# function lsdf_ncgpu (){
+#     local VAR=$1;
+#     if [ -z "${1}" ]; then
+# 	VAR=$[RANDOM % 4 + 1];
+#     fi
+#     echo "Mount LSDF on /mnt/LSDF/ using anka-nc-gpu$VAR.anka.kit.edu"
+#     sshfs hp9361@anka-nc-gpu$VAR.anka.kit.edu:/mnt/tomoraid-LSDF /home/hp9361/mounts/ncgpu_lsdf -o uid=$USERID -o gid=$GROUPID
+# }
 
 # mayavi2
 # function mavi ()
@@ -400,8 +400,7 @@ alias topme='top -u $USER'
 alias topm='topme'
 
 # convert images of format $1 to fomrat $2
-function imconverter ()
-{
+function imconverter (){
     if [ -z "${1}" ]; then
 	echo -e USAGE: imconverter FORMAT1 FORMAT2
 	return
@@ -412,8 +411,7 @@ function imconverter ()
 alias convertimages='imconverter'
 
 # convert videos of input format $1 to format msmpeg4 compatible with Microsoft Office 2010 64-bit
-function vidconverter ()
-{
+function vidconverter (){
     if [ -z "${1}" ]; then
 	echo -e USAGE: vidconverter INPUTFORMAT BITRATE \(DEFAULT: vidconverter \$1 8000k\)
 	return
@@ -427,8 +425,7 @@ function vidconverter ()
 }
 
 # create poster images from video
-function posterimage ()
-{
+function posterimage (){
     local file=$1
     avconv -i $file -vframes 1 -an -f image2 -y ${file/.avi/}.jpg
 }
@@ -449,8 +446,7 @@ function posterimage ()
 # recursively count files in current folder
 alias countfiles='echo -e "Current folder: $PWD\nNumber of files contained in current folder: ";find . -type f -print | wc -l'
 # recursively count folders in current folder
-function countdir ()
-{    
+function countdir (){    
     local OUTPUT;
     OUTPUT=$(find . -type d | wc -l);
     echo $OUTPUT-1 | bc
@@ -497,8 +493,8 @@ alias wiki='emacs $HOME/wiki.txt &'
 alias media='/usr/bin/libreoffice -o $HOME/Dropbox/doc_conf/media.ods &'
 
 # start globus connect
-alias globusconnect='~/bin/globusconnectpersonal-2.0.2/globusconnect &'
-alias gb='globusconnect'
+# alias globusconnect='~/bin/globusconnectpersonal-2.0.2/globusconnect &'
+# alias gb='globusconnect'
 
 # define phd working directory in  bash variable
 pd=~/LATEX/phdthesis/
@@ -510,8 +506,8 @@ function phd ()
 }
 
 # fex belwue
-alias fexsend='$HOME/bin/fex/fexsend'
-alias fexget='$HOME/bin/fex/fexget'
+# alias fexsend='$HOME/bin/fex/fexsend'
+# alias fexget='$HOME/bin/fex/fexget'
 
 # check 3D-support
 alias checkunity3d='sudo /usr/lib/nux/unity_support_test -p'
@@ -520,7 +516,7 @@ alias checkunity3d='sudo /usr/lib/nux/unity_support_test -p'
 alias jr='jabref -s &'
 
 # XOP
-alias xop='/home/hp9361/Software/imaging/xop/xop2.3/xop &'
+# alias xop='/home/hp9361/Software/imaging/xop/xop2.3/xop &'
 
 # cd aliases
 alias cdphd='cd ~/LATEX/phdthesis'
@@ -547,14 +543,13 @@ alias echocudaroot='echo $CUDA_ROOT'
 #alias pv='paraview'
 
 # FreeSurfer Tutorial
-function freesurfer_tutorial() 
-{
-    #Set variables to point FreeSurfer to data
-    export TUTORIAL_DATA=/media/datadrive/FreeSurfer_Tutorial_Datasets
-    export SUBJECTS_DIR=$TUTORIAL_DATA/buckner_data/tutorial_subjs/
-    #source $FREESURFER_HOME/SetUpFreeSurfer.sh
-    cd $SUBJECTS_DIR
-}
+# function freesurfer_tutorial(){
+#     #Set variables to point FreeSurfer to data
+#     export TUTORIAL_DATA=/media/datadrive/FreeSurfer_Tutorial_Datasets
+#     export SUBJECTS_DIR=$TUTORIAL_DATA/buckner_data/tutorial_subjs/
+#     #source $FREESURFER_HOME/SetUpFreeSurfer.sh
+#     cd $SUBJECTS_DIR
+# }
 
 # X-server
 alias xstop='sudo service lightdm stop'
@@ -606,13 +601,12 @@ function installPyCharmCommunity(){
 
 
 # Spyder with multithread
-alias spydermt='spyder --multithread &'
+#alias spydermt='spyder --multithread &'
 
 # git
 alias gitShowTrackedFiles='git ls-tree -r master --name-only'
 
-function gitStatus()
-{    
+function gitStatus(){    
     local cwd=$(pwd)
 
     echo -e "\nConfig repo: .bashrc, .profile, bin, ..."
@@ -639,14 +633,21 @@ alias sshdrestart='sudo restart ssh'
 
 alias pip2UpgradeAllPythonPackages='pip2 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs sudo -H pip2 install -U'
 
+function copyFileContentToClipboard(){
+    local FILENAME=$1
+    xclip -sel clip < $FILENAME
+}
+
 ######################################################################
 # temporary project links
+
+# SIEMENS Hamburg
 alias cdhamburg='cd ~/hamburg'
 alias hamburg='pdfpc ~/hamburg/hamburg.pdf'
 alias hamburgwindowedmode='pdfpc -w ~/hamburg/hamburg.pdf'
 alias hamburgswitchscreen='pdfpc -s ~/hamburg/hamburg.pdf'
 
-
+# SFB Göttingen
 alias cdgoettingen='cd ~/latex/beamer/2015-11-06_Moosmann_Goettingen'
 alias goettingentex='e ~/latex/beamer/2015-11-06_Moosmann_Goettingen/goettingen.tex'
 alias goettingenokular='okular ~/latex/beamer/2015-11-06_Moosmann_Goettingen/goettingen.pdf'
