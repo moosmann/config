@@ -653,10 +653,11 @@ alias gitShowTrackedFiles='git ls-tree -r master --name-only'
 alias sshdrestart='sudo restart ssh'
 
 # pip
-alias pip2UpgradeAllPythonPackages='pip2 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs sudo -H pip2 install -U'
-alias pip2ListOutdatePackages='pip2 list -o --allow-all-external'
-alias pip3UpgradeAllPythonPackages='pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs sudo -H pip3 install -U'
-alias pip3ListOutdatePackages='pip3 list -o --allow-all-external'
+# -n1 to xargs, prevents stopping everything if updating one package fails
+alias pip2UpgradeAll='pip2 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo -H pip2 install -U'
+alias pip2ListOutdated='pip2 list -o'
+alias pip3UpgradeAll='pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo -H pip3 install -U'
+alias pip3ListOutdated='pip3 list -o'
 alias pipSecurity='pip install requests[security]'
 
 # ubuntu version
