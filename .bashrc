@@ -87,7 +87,7 @@ fi
 # some more ls aliases
 alias ll='ls -lF'
 alias la='ls -A'
-alias l='ls -CF'
+alias l='ls -CF -1'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -503,7 +503,7 @@ alias astra_configure='./configure --with-cuda=/usr/local/cuda --with-matlab=/us
 # open files
 #alias gnomeshorts='emacs $HOME/Documents/gnomeShorts.txt '&
 #alias shorts='gnomeshorts'
-alias wiki='emacs $HOME/wiki.txt &'
+alias wiki='emacs $HOME/Dropbox/files/wiki.txt &'
 alias media='/usr/bin/libreoffice -o $HOME/Dropbox/doc_conf/media.ods &'
 
 # start globus connect
@@ -654,10 +654,10 @@ alias sshdrestart='sudo restart ssh'
 
 # pip
 # -n1 to xargs, prevents stopping everything if updating one package fails
-alias pip2UpgradeAll='pip2 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo -H pip2 install -U'
-alias pip2ListOutdated='pip2 list -o'
-alias pip3UpgradeAll='pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo -H pip3 install -U'
-alias pip3ListOutdated='pip3 list -o'
+alias pip2upgradeAll='pip2 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo -H pip2 install -U'
+alias pip2listOutdated='pip2 list -o'
+alias pip3upgradeAll='pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo -H pip3 install -U'
+alias pip3listOutdated='pip3 list -o'
 alias pipSecurity='pip install requests[security]'
 
 # ubuntu version
@@ -685,8 +685,8 @@ function senv(){
     source /usr/local/bin/virtualenvwrapper.sh
 }
 
-# 
-alias findanddelete='find . -name "*.pyc" -exec rm -rf {} \;'
+# Find and delte python compilde files
+alias delete_pyc_file='find . -name "*.pyc" -exec rm -rf {} \;'
 
 ######################################################################
 # temporary project links
