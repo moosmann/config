@@ -667,7 +667,8 @@ alias gto47='echo link to compiler version 4.7;sudo rm gcc; sudo ln -s gcc-4.7 g
 alias gto48='echo  link to compiler version 4.8;sudo rm gcc; sudo ln -s gcc-4.8 gcc; sudo rm g++; sudo ln -s g++-4.8 g++'
 
 # mouse middle click
-alias middleClick='~/bin/middleClick.sh'
+# alias middleClick='~/bin/middleClick.sh' 
+alias middleClick='xdotool click 2'
 
 # update-pciids - download new version of the PCI ID list
 # This is in order that lspci show correct GPU model and version
