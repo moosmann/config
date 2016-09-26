@@ -1,0 +1,89 @@
+# Aliases
+
+alias ..='cd ..'
+alias ...='cd ...'
+alias ....='cd ....'
+alias .....='cd .....'
+alias ......='cd ......'
+alias .......='cd .......'
+
+alias emacs='emacs-24.3' 
+alias e='emacs &'
+
+alias matlab='matlab_R2016a'
+alias ml='matlab &'
+alias mlhard='matlab -nosoftwareopengl &'
+
+alias cdsynchroload='cd /asap3/petra3/gpfs/p05/2016/data/11002518/processed/synchroload'
+alias cdcommissioningP05='cd /asap3/petra3/gpfs/p05/2016/commissioning'
+alias cddataP05='cd /asap3/petra3/gpfs/p05/2016/data'
+
+alias pipInstall='pip install --user'
+alias pip='$HOME/.local/bin/pip'
+alias pip3='$HOME/.local/bin/pip3'
+
+alias pycharm='$HOME/pycharm/pycharm-community-2016.2/bin/pycharm.sh &'
+
+# source
+alias sourcealiases='source $HOME/.aliases'
+alias sourcezshr='source $HOME/.zshrc'
+
+# edit
+#alias editaliases='emacs -nw $HOME/.aliases'
+alias editzshrc='emacs -nw $HOME/.zshrc'
+alias editemacs='emacs -nw $HOME/.emacs'
+function editaliases {
+	 local ALIASES=$HOME/.aliases
+	 emacs -nw $ALIASES
+	 source $ALIASES
+}
+
+# environment variables
+function echos {
+	 echo -e '\nHOME:' $HOME
+	 echo -e 'HOST:' $HOST
+	 echo -e 'shell 0' $0
+	 echo -e 'PATH:\n' $PATH
+	 echo -e 'LD_LIBRARY_PATH:\n' $LD_LIBRARY_PATH
+	 echo -e 'PYTHONPATH:\n' $PYTHONPATH
+	 echo -e '\n'
+}
+
+
+# print processes matching PATTERN
+# alias psgrep='ps -eo pid,user,ni,%cpu,%mem,time,etime,start,comm | grep -e PID -e'
+function psgrep() 
+{
+    ps -eo pid,user,ni,%cpu,%mem,time,etime,start,comm | grep -e COMMAND -i -e $1
+}
+
+# IDL
+alias idl='idl_8.5'
+alias idlde='idlde_8.5'
+
+# ImageJ
+alias imagej='/home/moosmanj/imagej/ImageJ.app/ImageJ-linux64'
+alias ij='imagej &'
+
+# Fiji
+alias fiji='/home/moosmanj/fiji/Fiji.app/ImageJ-linux64'
+alias fijis='fiji --run "Image Sequence..."'
+alias fj='fiji &'
+
+# save PWD to file
+function saveworkingdirectory {
+	 echo $PWD > $HOME/.savedworkingdirectory
+	 echo "SAVED WORKING DIRECTORY: \n $(<$HOME/.savedworkingdirectory)"
+}
+alias swd='saveworkingdirectory'
+alias savewd='saveworkingdirectory'
+
+# go to  to saved working directory
+function gotosavedworkingdirectory {
+	 local swd=$(<$HOME/.savedworkingdirectory)
+	 cd $swd
+}
+alias gotoswd='gotosavedworkingdirectory'
+alias cdswd='gotosavedworkingdirectory'
+
+alias topm='top -u moosmanj'
