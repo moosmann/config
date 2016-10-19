@@ -1,11 +1,11 @@
 # Aliases
 
 alias ..='cd ..'
-alias ...='cd ...'
-alias ....='cd ....'
-alias .....='cd .....'
-alias ......='cd ......'
-alias .......='cd .......'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias .......='cd ../../../../../..'
 
 alias emacs='emacs-24.3' 
 alias e='emacs &'
@@ -17,6 +17,7 @@ alias mlhard='matlab -nosoftwareopengl &'
 alias cdsynchroload='cd /asap3/petra3/gpfs/p05/2016/data/11002518/processed/synchroload'
 alias cdcommissioningP05='cd /asap3/petra3/gpfs/p05/2016/commissioning'
 alias cddataP05='cd /asap3/petra3/gpfs/p05/2016/data'
+alias cdscripts='cd /asap3/petra3/gpfs/common/p05/jm'
 
 alias pipInstall='pip install --user'
 alias pip='$HOME/.local/bin/pip'
@@ -73,7 +74,9 @@ alias fj='fiji &'
 # save PWD to file
 function saveworkingdirectory {
 	 echo $PWD > $HOME/.savedworkingdirectory
-	 echo "SAVED WORKING DIRECTORY: \n $(<$HOME/.savedworkingdirectory)"
+	 echo "Saved working directory to \$HOME/.savedworkingdirectory"
+	 echo "Return to saved directory with one of the following equivalent command:\ncdswd gotoswd gotosavedworkingdirectory"
+	 #echo "$(<$HOME/.savedworkingdirectory)"
 }
 alias swd='saveworkingdirectory'
 alias savewd='saveworkingdirectory'
@@ -86,4 +89,25 @@ function gotosavedworkingdirectory {
 alias gotoswd='gotosavedworkingdirectory'
 alias cdswd='gotosavedworkingdirectory'
 
-alias topm='top -u moosmanj'
+# top of user
+alias topm='top -u $USER'
+
+# PETRA III Storage cd between raw and processed
+function cdother {
+
+	 local WD=$PWD
+	 local OTHER=${WD//raw/processed}
+	 
+	 if [[ $OTHER = $WD ]]
+	 then
+	    local OTHER=${WD//processed/raw}
+	    cd $OTHER
+	 else
+	    cd $OTHER
+	 fi
+}
+
+# Search PATTERN within files under current directory and subfolder
+function findinfiles {
+	 grep -nrw . -e $1
+}

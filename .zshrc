@@ -47,12 +47,16 @@ export PYTHONPATH=$HOME/.local/lib/python3.4/
 # NVIDIA CUDA
 export PATH=/usr/local/cuda/bin/:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64/:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-7.0/targets/x86_64-linux/lib/:$LD_LIBRARY_PATH
 export CUDA_HOME=/usr/local/cuda/
 export PYTHONPATH=/usr/local/cuda/lib64/:$PYTHONPATH
 
 # ASTRA
+# local
 export PYTHONPATH=$HOME/astra/python/:$PYTHONPATH
-export LD_LIBRARY_PATH=$HOME/astra/lib/:$LD_LIBRARY_PATH
+#export LD_LIBRARY_PATH=$HOME/astra/lib/:$LD_LIBRARY_PATH
+# glocal ASTRA
+export LD_LIBRARY_PATH=/usr/local/astra/lib:$LD_LIBRARY_PATH
 
 # Virtualenvwrapper
 #export WORKON_HOME=$HOME/virtual_env
@@ -61,7 +65,7 @@ export LD_LIBRARY_PATH=$HOME/astra/lib/:$LD_LIBRARY_PATH
 #export MPLBACKEND="module://PyQt4"
 
 # GTK accessibility warning 
-export NO_AT_BRIDGE=1
+# export NO_AT_BRIDGE=1
 
 # IDL unit test
 export PATH=/home/moosmanj/idl/mgunit/src:$PATH
