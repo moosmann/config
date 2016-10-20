@@ -10,7 +10,7 @@ alias .......='cd ../../../../../..'
 alias emacs='emacs-24.3' 
 alias e='emacs &'
 
-alias matlab='matlab_R2016a'
+alias matlab='matlab_R2016b'
 alias ml='matlab &'
 alias mlhard='matlab -nosoftwareopengl &'
 
@@ -40,13 +40,15 @@ function editaliases {
 }
 
 # environment variables
+alias echoshell='echo $0'
 function echos {
 	 echo -e '\nHOME:' $HOME
 	 echo -e 'HOST:' $HOST
-	 echo -e 'shell 0' $0
+	 echo -e 'SHELL:' $SHELL
 	 echo -e 'PATH:\n' $PATH
 	 echo -e 'LD_LIBRARY_PATH:\n' $LD_LIBRARY_PATH
 	 echo -e 'PYTHONPATH:\n' $PYTHONPATH
+	 echo -e 'MATLABPATH:\n' $MATLABPATH
 	 echo -e '\n'
 }
 
