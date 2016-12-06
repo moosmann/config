@@ -18,6 +18,7 @@ alias cdsynchroload='cd /asap3/petra3/gpfs/p05/2016/data/11002518/processed/sync
 alias cdcommissioningP05='cd /asap3/petra3/gpfs/p05/2016/commissioning'
 alias cddataP05='cd /asap3/petra3/gpfs/p05/2016/data'
 alias cdscripts='cd /asap3/petra3/gpfs/common/p05/jm'
+alias cdmatlab='cd $HOME/matlab'
 
 alias pipInstall='pip install --user'
 alias pip='$HOME/.local/bin/pip'
@@ -83,13 +84,21 @@ function saveworkingdirectory {
 alias swd='saveworkingdirectory'
 alias savewd='saveworkingdirectory'
 
-# go to  to saved working directory
+# go to saved working directory
 function gotosavedworkingdirectory {
 	 local swd=$(<$HOME/.savedworkingdirectory)
 	 cd $swd
 }
 alias gotoswd='gotosavedworkingdirectory'
 alias cdswd='gotosavedworkingdirectory'
+
+# go to last reconstruction 
+function gotolastreco {
+	 local reco_path=$(<$HOME/matlab/experiments/p05/pathtolastreco)
+	 cd $reco_path
+}
+alias cdlastreco='gotolastreco'
+alias cdreco='gotolastreco'
 
 # top of user
 alias topm='top -u $USER'
