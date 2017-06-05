@@ -1,24 +1,49 @@
-# Aliases
+#!/bin/zsh
+#
+# .aliases is sourced by .zshrc and contains all aliases.
 
 alias ..='cd ..'
+alias cd..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias .......='cd ../../../../../..'
 
+alias lt='ls -lt'
+alias lrt='ls -lrt'
+alias la='ls -A'
+alias lla='ls -lA'
+alias l1='ls -1'
+alias l1a='ls -1A'
+
 alias emacs='emacs-24.3' 
 alias e='emacs &'
 
-alias matlab='matlab_R2016b'
-alias ml='matlab &'
-alias mlhard='matlab -nosoftwareopengl &'
+alias screenr='screen -r'
+alias screenls='screen -ls'
 
-alias cdsynchroload='cd /asap3/petra3/gpfs/p05/2016/data/11002518/processed/synchroload'
+alias matlab='matlab_R2016b'
+alias ml='matlab -nosplash &'
+alias mln='matlab -nosplash -nodesktop -softwareopengl'
+alias mlscreen='matlab -nosplash -nodesktop -softwareopengl -display 0.0'
+alias mlnojvm='matlab -nosplash -nodesktop -nojvm -softwareopengl'
+alias mlnosoftgl='matlab -nosplash -nodesktop -nosoftwareopengl -nojvm'
+
+alias cdscratch='cd /gpfs/petra3/scratch/moosmanj'
+alias cdsynchroload='cd /asap3/petra3/gpfs/common/p05/jm/synchroload'
+alias cdsynchroload2016nov='cd /asap3/petra3/gpfs/p05/2016/data/11001978'
+alias cdsynchroload2016commDiana='/asap3/petra3/gpfs/p05/2016/data/11002518/processed/synchroload'
+alias cdsynchroload2017may='cd /asap3/petra3/gpfs/p05/2017/data/11003950'
 alias cdcommissioningP05='cd /asap3/petra3/gpfs/p05/2016/commissioning'
-alias cddataP05='cd /asap3/petra3/gpfs/p05/2016/data'
+alias cdp05='cd /asap3/petra3/gpfs/p05'
+alias cdp05common='cd /asap3/petra3/gpfs/common/p05'
 alias cdscripts='cd /asap3/petra3/gpfs/common/p05/jm'
-alias cdmatlab='cd $HOME/matlab'
+alias cdmatlab='cd /asap3/petra3/gpfs/common/p05/jm/matlab'
+IDL_PATH='/asap3/petra3/gpfs/common/p05/jm/idl'
+alias cdidl='cd $IDL_PATH'
+alias cdidlreco='cd $IDL_PATH/reco_scripts_juh_test'
+
 
 alias pipInstall='pip install --user'
 alias pip='$HOME/.local/bin/pip'
@@ -39,6 +64,7 @@ function editaliases {
 	 emacs -nw $ALIASES
 	 source $ALIASES
 }
+alias editgit='emacs -nw $HOME/.gitconfig'
 
 # environment variables
 alias echoshell='echo $0'
@@ -46,10 +72,13 @@ function echos {
 	 echo -e '\nHOME:' $HOME
 	 echo -e 'HOST:' $HOST
 	 echo -e 'SHELL:' $SHELL
-	 echo -e 'PATH:\n' $PATH
-	 echo -e 'LD_LIBRARY_PATH:\n' $LD_LIBRARY_PATH
-	 echo -e 'PYTHONPATH:\n' $PYTHONPATH
-	 echo -e 'MATLABPATH:\n' $MATLABPATH
+	 echo -e 'PS1:' $PS1
+	 echo -e 'TZ:' $TZ
+	 echo -e 'PATH:' $PATH
+	 echo -e 'LD_LIBRARY_PATH:' $LD_LIBRARY_PATH
+	 echo -e 'PYTHONPATH:' $PYTHONPATH
+	 echo -e 'MATLABPATH:' $MATLABPATH
+	 echo -e 'CUDA_PATH:' $CUDA_PATH
 	 echo -e '\n'
 }
 
@@ -62,27 +91,41 @@ function psgrep()
 }
 
 # IDL
-alias idl='idl_8.5'
-alias idlde='idlde_8.5'
+alias idl='idl_8.6'
+alias idlde='idlde_8.6'
 
 # ImageJ
 alias imagej='/home/moosmanj/imagej/ImageJ.app/ImageJ-linux64'
 alias ij='imagej &'
+function ij_open_image_sequence {
+	filename=$(ls *00001.tif | head -1)
+	filename=$PWD/$filename
+	imagej -run "Image Sequence..." "open=$filename sort"
+}
+alias ijsequ='ij_open_image_sequence'
 
 # Fiji
 alias fiji='/home/moosmanj/fiji/Fiji.app/ImageJ-linux64'
-alias fijis='fiji --run "Image Sequence..."'
+
 alias fj='fiji &'
+function fiji_open_image_sequence {
+	filename=$(ls *0001.tif | head -1)
+	filename=$PWD/$filename
+	fiji -run "Image Sequence..." "open=$filename sort"
+}
+alias fijis='fiji_open_image_sequence'
+
 
 # save PWD to file
 function saveworkingdirectory {
 	 echo $PWD > $HOME/.savedworkingdirectory
-	 echo "Saved working directory to \$HOME/.savedworkingdirectory"
-	 echo "Return to saved directory with one of the following equivalent command:\ncdswd gotoswd gotosavedworkingdirectory"
-	 #echo "$(<$HOME/.savedworkingdirectory)"
+	 echo "Working directory saved. Return with: back"
+	# echo "Return to saved directory with one of the following equivalent command:\ncdswd gotoswd gotosavedworkingdirectory"
+
 }
 alias swd='saveworkingdirectory'
 alias savewd='saveworkingdirectory'
+alias save='saveworkingdirectory'
 
 # go to saved working directory
 function gotosavedworkingdirectory {
@@ -91,14 +134,35 @@ function gotosavedworkingdirectory {
 }
 alias gotoswd='gotosavedworkingdirectory'
 alias cdswd='gotosavedworkingdirectory'
+alias back='gotosavedworkingdirectory'
 
 # go to last reconstruction 
 function gotolastreco {
-	 local reco_path=$(<$HOME/matlab/experiments/p05/pathtolastreco)
+	 local reco_path=$(<$MATLAB_USER_PATH/experiments/p05/pathtolastreco)
 	 cd $reco_path
 }
 alias cdlastreco='gotolastreco'
 alias cdreco='gotolastreco'
+alias reco='gotolastreco'
+
+# go to last processed scan
+function gotolastscan {
+	 local scan_path=$(<$MATLAB_USER_PATH/experiments/p05/pathtolastscan)
+	 cd $scan_path
+}
+alias cdlastscan='gotolastscan'
+alias cdscan='gotolastscan'
+alias scan='gotolastscan'
+
+# go to last processed raw
+function gotolastscan {
+	 local raw_path=$(<$MATLAB_USER_PATH/experiments/p05/pathtolastraw)
+	 cd $raw_path
+}
+alias cdlastraw='gotolastscan'
+alias cdraw='gotolastscan'
+alias raw='gotolastscan'
+
 
 # top of user
 alias topm='top -u $USER'
@@ -117,8 +181,49 @@ function cdother {
 	    cd $OTHER
 	 fi
 }
+alias other='cdother'
 
 # Search PATTERN within files under current directory and subfolder
 function findinfiles {
 	 grep -nrw . -e $1
 }
+
+function grep_in_reco_log {
+ 
+    grep -H $1 ./*/reco/reco.log
+}
+
+
+
+alias dus='du -s'
+alias duhs='du -hs'
+
+# ASTRA config
+ASTRA_HOME=/asap3/petra3/gpfs/p05/astra
+alias astra_conf_17='$ASTRA_HOME/1.7/astra_conf_17'
+alias astra_conf_18='$ASTRA_HOME/1.8/astra_conf_18'
+
+# feh image viewer
+alias feh='/asap3/petra3/gpfs/common/p05/jm/feh/bin/feh'
+
+# GPFS P05 common directory
+alias home='cd /asap3/petra3/gpfs/common/p05/jm'
+
+
+# SSH
+alias maxfsg='ssh moosmanj@max-fsg'
+alias fsg='maxfsg'
+alias maxfsc='ssh moosmanj@max-fsc'
+alias fsc='maxfsc'
+alias maxhzg='ssh moosmanj@max-hzgg001'
+alias hzg='maxhzg'
+alias maxnova='ssh moosmanj@max-nova'
+alias nova='maxnova'
+
+alias fsgnox='ssh -x moosmanj@max-fsg'
+alias fscnox='ssh -x moosmanj@max-fsc'
+alias hzgnox='ssh -x moosmanj@max-hzgg001'
+alias novanox='ssh -x moosmanj@max-nova'
+
+alias maxnovac='ssh -CXY moosmanj@max-nova'
+alias novac='maxnovac'
