@@ -23,7 +23,7 @@ alias e='emacs &'
 alias screenr='screen -r'
 alias screenls='screen -ls'
 
-alias matlab='matlab_R2016b'
+alias matlab='matlab_R2017a'
 alias ml='matlab -nosplash &'
 alias mln='matlab -nosplash -nodesktop -softwareopengl'
 alias mlscreen='matlab -nosplash -nodesktop -softwareopengl -display 0.0'
@@ -79,6 +79,7 @@ function echos {
 	 echo -e 'PYTHONPATH:' $PYTHONPATH
 	 echo -e 'MATLABPATH:' $MATLABPATH
 	 echo -e 'CUDA_PATH:' $CUDA_PATH
+	 echo -e 'ASTRA_HOME:' $ASTRA_HOME
 	 echo -e '\n'
 }
 
@@ -95,7 +96,7 @@ alias idl='idl_8.6'
 alias idlde='idlde_8.6'
 
 # ImageJ
-alias imagej='/home/moosmanj/imagej/ImageJ.app/ImageJ-linux64'
+alias imagej='/asap3/petra3/gpfs/common/p05/jm/imagej/ImageJ.app/ImageJ-linux64'
 alias ij='imagej &'
 function ij_open_image_sequence {
 	filename=$(ls *00001.tif | head -1)
@@ -105,7 +106,7 @@ function ij_open_image_sequence {
 alias ijsequ='ij_open_image_sequence'
 
 # Fiji
-alias fiji='/home/moosmanj/fiji/Fiji.app/ImageJ-linux64'
+alias fiji='/asap3/petra3/gpfs/common/p05/jm/fiji/Fiji.app/ImageJ-linux64'
 
 alias fj='fiji &'
 function fiji_open_image_sequence {
@@ -138,7 +139,7 @@ alias back='gotosavedworkingdirectory'
 
 # go to last reconstruction 
 function gotolastreco {
-	 local reco_path=$(<$MATLAB_USER_PATH/experiments/p05/pathtolastreco)
+	 local reco_path=$(<$MATLAB_USER_PATH/experiments/p05/path_to_latest_reco)
 	 cd $reco_path
 }
 alias cdlastreco='gotolastreco'
@@ -147,7 +148,7 @@ alias reco='gotolastreco'
 
 # go to last processed scan
 function gotolastscan {
-	 local scan_path=$(<$MATLAB_USER_PATH/experiments/p05/pathtolastscan)
+	 local scan_path=$(<$MATLAB_USER_PATH/experiments/p05/path_to_latest_scan)
 	 cd $scan_path
 }
 alias cdlastscan='gotolastscan'
@@ -156,7 +157,7 @@ alias scan='gotolastscan'
 
 # go to last processed raw
 function gotolastscan {
-	 local raw_path=$(<$MATLAB_USER_PATH/experiments/p05/pathtolastraw)
+	 local raw_path=$(<$MATLAB_USER_PATH/experiments/p05/path_to_latest_raw)
 	 cd $raw_path
 }
 alias cdlastraw='gotolastscan'
@@ -199,9 +200,9 @@ alias dus='du -s'
 alias duhs='du -hs'
 
 # ASTRA config
-ASTRA_HOME=/asap3/petra3/gpfs/p05/astra
-alias astra_conf_17='$ASTRA_HOME/1.7/astra_conf_17'
-alias astra_conf_18='$ASTRA_HOME/1.8/astra_conf_18'
+ASTRA_HOME=/asap3/petra3/gpfs/common/p05/astra          
+alias astra_conf_17='$ASTRA_HOME/astra_conf_17'
+alias astra_conf_18='$ASTRA_HOME/astra_conf_18'
 
 # feh image viewer
 alias feh='/asap3/petra3/gpfs/common/p05/jm/feh/bin/feh'
@@ -227,3 +228,10 @@ alias novanox='ssh -x moosmanj@max-nova'
 
 alias maxnovac='ssh -CXY moosmanj@max-nova'
 alias novac='maxnovac'
+
+# AVIZO
+function load_avizo {
+    module load maxwell
+    module load avizo
+    Avizo &
+}

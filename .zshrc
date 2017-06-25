@@ -46,7 +46,7 @@ source $HOME/.aliases
 #export LD_LIBRARY_PATH=/usr/local/lib/
 
 # NVIDIA CUDA
-CUDA_PATH=/usr/local/cuda
+export CUDA_PATH=/usr/local/cuda-7.5
 #export PATH=/usr/local/cuda-7.0/bin/:$PATH
 #export LD_LIBRARY_PATH=/usr/local/cuda/lib64/:$LD_LIBRARY_PATH
 #export LD_LIBRARY_PATH=/usr/local/cuda-7.0/targets/x86_64-linux/lib/:$LD_LIBRARY_PATH
