@@ -13,42 +13,56 @@ alias .......='cd ../../../../../..'
 alias lt='ls -lt'
 alias lrt='ls -lrt'
 alias la='ls -A'
+alias llh='ls -lh'
 alias lla='ls -lA'
 alias l1='ls -1'
 alias l1a='ls -1A'
 
+# Emacs
 alias emacs='emacs-24.3' 
 alias e='emacs &'
 
+# Screen
 alias screenr='screen -r'
 alias screenls='screen -ls'
 
-alias matlab='matlab_R2017a'
+# Matlab
+alias matlab='matlab_R2017b'
 alias ml='matlab -nosplash &'
 alias mln='matlab -nosplash -nodesktop -softwareopengl'
 alias mlscreen='matlab -nosplash -nodesktop -softwareopengl -display 0.0'
 alias mlnojvm='matlab -nosplash -nodesktop -nojvm -softwareopengl'
 alias mlnosoftgl='matlab -nosplash -nodesktop -nosoftwareopengl -nojvm'
 
+# GPFS directories
 alias cdscratch='cd /gpfs/petra3/scratch/moosmanj'
 alias cdsynchroload='cd /asap3/petra3/gpfs/common/p05/jm/synchroload'
 alias cdsynchroload2016nov='cd /asap3/petra3/gpfs/p05/2016/data/11001978'
-alias cdsynchroload2016commDiana='/asap3/petra3/gpfs/p05/2016/data/11002518/processed/synchroload'
+alias cdsynchroload2016commDiana='cd /asap3/petra3/gpfs/p05/2016/data/11002518/processed/synchroload'
 alias cdsynchroload2017may='cd /asap3/petra3/gpfs/p05/2017/data/11003950'
+alias cdsynchroload2017oct='cd /asap3/petra3/gpfs/p05/2017/data/11003440'
+alias cdsynchroload2017nov1='cd /asap3/petra3/gpfs/p05/2017/data/11003773'
+alias cdsynchroload2017nov2='cd /asap3/petra3/gpfs/p05/2017/data/11003288'
 alias cdcommissioningP05='cd /asap3/petra3/gpfs/p05/2016/commissioning'
 alias cdp05='cd /asap3/petra3/gpfs/p05'
-alias cdp05common='cd /asap3/petra3/gpfs/common/p05'
+alias cdp05common='cd /asap3/petra3/gpfs/common/p05/jm'
+alias com='cdp05common'
 alias cdscripts='cd /asap3/petra3/gpfs/common/p05/jm'
 alias cdmatlab='cd /asap3/petra3/gpfs/common/p05/jm/matlab'
+alias cdmatlabp05='cd /asap3/petra3/gpfs/common/p05/jm/matlab/experiments/p05'
+alias cdmatlabdata='cd /asap3/petra3/gpfs/common/p05/jm/matlab/experiments/p05/data/moosmanj'
 IDL_PATH='/asap3/petra3/gpfs/common/p05/jm/idl'
 alias cdidl='cd $IDL_PATH'
 alias cdidlreco='cd $IDL_PATH/reco_scripts_juh_test'
+alias cdinvivo2016='cd /asap3/petra3/gpfs/p05/2016/data/11001994'
+alias cdinvivo2017nov1='cd /asap3/petra3/gpfs/p05/2017/data/11003656'
+alias cdinvivo2017nov2='cd /asap3/petra3/gpfs/p05/2017/data/11003527'
+alias cdxenopus='cd /asap3/petra3/gpfs/p05/2017/data/11003288/processed/xenopus'
 
-
+# Python
 alias pipInstall='pip install --user'
 alias pip='$HOME/.local/bin/pip'
 alias pip3='$HOME/.local/bin/pip3'
-
 alias pycharm='$HOME/pycharm/pycharm-community-2016.2/bin/pycharm.sh &'
 
 # source
@@ -96,30 +110,46 @@ alias idl='idl_8.6'
 alias idlde='idlde_8.6'
 
 # ImageJ
-alias imagej='/asap3/petra3/gpfs/common/p05/jm/imagej/ImageJ.app/ImageJ-linux64'
+alias imagej='/asap3/petra3/gpfs/common/p05/jm/imagej/ImageJ.app/ImageJ-linux64 --no-splash -Xss2m --'
 alias ij='imagej &'
+alias ijmacros='cd /asap3/petra3/gpfs/common/p05/jm/imagej/macros'
 function ij_open_image_sequence {
 	filename=$(ls *00001.tif | head -1)
+	echo -e '\n filename: ' $filename
 	filename=$PWD/$filename
-	imagej -run "Image Sequence..." "open=$filename sort"
+	echo -e '\n filename: ' $filename
+	args="open=[$filename] file=tif sort use"
+	echo -e '\n args: ' $args
+
+	imagej -run "Image Sequence..." $args
 }
 alias ijsequ='ij_open_image_sequence'
 
 # Fiji
-alias fiji='/asap3/petra3/gpfs/common/p05/jm/fiji/Fiji.app/ImageJ-linux64'
-
+alias fiji='/asap3/petra3/gpfs/common/p05/jm/fiji/Fiji.app/ImageJ-linux64 --no-splash -Xss2m --'
 alias fj='fiji &'
 function fiji_open_image_sequence {
-	filename=$(ls *0001.tif | head -1)
+	filename=$(ls *00001.tif | head -1)
+	echo -e '\n filename: ' $filename
 	filename=$PWD/$filename
-	fiji -run "Image Sequence..." "open=$filename sort"
+	echo -e '\n filename: ' $filename
+	args="open=[$filename] file=tif sort use"
+	echo -e '\n args: ' $args
+
+	fiji -run "Image Sequence..." $args
 }
-alias fijis='fiji_open_image_sequence'
+alias fjsequ='fiji_open_image_sequence'
 
+function fjtif {    
+    fiji -macro /asap3/petra3/gpfs/common/p05/jm/imagej/macros/open_image_sequence.ijm
+}
 
+#############################
+# convenience cd functions
 # save PWD to file
 function saveworkingdirectory {
 	 echo $PWD > $HOME/.savedworkingdirectory
+	 echo $PWD | tr -d '\n' | xclip -sel clipboard
 	 echo "Working directory saved. Return with: back"
 	# echo "Return to saved directory with one of the following equivalent command:\ncdswd gotoswd gotosavedworkingdirectory"
 
@@ -141,6 +171,7 @@ alias back='gotosavedworkingdirectory'
 function gotolastreco {
 	 local reco_path=$(<$MATLAB_USER_PATH/experiments/p05/path_to_latest_reco)
 	 cd $reco_path
+	 echo $reco_path | tr -d '\n' | xclip -sel clipboard	 
 }
 alias cdlastreco='gotolastreco'
 alias cdreco='gotolastreco'
@@ -150,20 +181,22 @@ alias reco='gotolastreco'
 function gotolastscan {
 	 local scan_path=$(<$MATLAB_USER_PATH/experiments/p05/path_to_latest_scan)
 	 cd $scan_path
+	 echo $scan_path | tr -d '\n' | xclip -sel clipboard	 
 }
 alias cdlastscan='gotolastscan'
 alias cdscan='gotolastscan'
 alias scan='gotolastscan'
 
 # go to last processed raw
-function gotolastscan {
+function gotolastraw {
 	 local raw_path=$(<$MATLAB_USER_PATH/experiments/p05/path_to_latest_raw)
 	 cd $raw_path
+	 echo $raw_path | tr -d '\n' | xclip -sel clipboard	 
 }
-alias cdlastraw='gotolastscan'
-alias cdraw='gotolastscan'
-alias raw='gotolastscan'
-
+alias cdlastraw='gotolastraw'
+alias cdraw='gotolastraw'
+alias raw='gotolastraw'
+#############################
 
 # top of user
 alias topm='top -u $USER'
@@ -186,18 +219,25 @@ alias other='cdother'
 
 # Search PATTERN within files under current directory and subfolder
 function findinfiles {
-	 grep -nrw . -e $1
+	 grep -nrwi . -e $1
 }
 
 function grep_in_reco_log {
  
-    grep -H $1 ./*/reco/reco.log
+    grep -Hi $1 ./*/reco/reco.log
+}
+
+function grep_in_raw_log {
+ 
+    grep -Hi $1 ./*/*scan.log
 }
 
 
-
+# disk usage
 alias dus='du -s'
 alias duhs='du -hs'
+alias du1='du -hd1'
+alias du2='du -hd2'
 
 # ASTRA config
 ASTRA_HOME=/asap3/petra3/gpfs/common/p05/astra          
@@ -205,11 +245,7 @@ alias astra_conf_17='$ASTRA_HOME/astra_conf_17'
 alias astra_conf_18='$ASTRA_HOME/astra_conf_18'
 
 # feh image viewer
-alias feh='/asap3/petra3/gpfs/common/p05/jm/feh/bin/feh'
-
-# GPFS P05 common directory
-alias home='cd /asap3/petra3/gpfs/common/p05/jm'
-
+alias feh='/asap3/petra3/gpfs/common/p05/jm/bin/feh'
 
 # SSH
 alias maxfsg='ssh moosmanj@max-fsg'
@@ -234,4 +270,17 @@ function load_avizo {
     module load maxwell
     module load avizo
     Avizo &
+}
+
+# xclip
+alias test_xclip_primary='echo ''test primary'' | xclip -sel primary'
+alias test_xclip_secondary='echo ''test  secondary '' | xclip -sel  secondary XA_SECONDARY'
+alias test_xclip_clipboard='echo ''test clipboard '' | xclip -sel clipboard'
+function echo_clipboard {
+    echo 'test primary' | xclip -sel primary
+    echo 'test secondary' | xclip -sel secondary
+    echo 'test clipboard' | xclip -sel clipboard
+    echo -e '\nXA_PRIMARY:' $XA_PRIMARY
+    echo -e 'XA_SECONDARY:' $XA_SECONDARY
+    echo -e 'XA_PRIMARY:' $XA_PRIMARY '\n'
 }
