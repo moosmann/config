@@ -63,7 +63,65 @@ alias cdxenopus='cd /asap3/petra3/gpfs/p05/2017/data/11003288/processed/xenopus'
 alias pipInstall='pip install --user'
 alias pip='$HOME/.local/bin/pip'
 alias pip3='$HOME/.local/bin/pip3'
-alias pycharm='$HOME/pycharm/pycharm-community-2016.2/bin/pycharm.sh &'
+
+# PyCharm
+function installPyCharm(){
+    
+    # Arguments and variables
+    local VERSION=$1
+    local INSTALLDIR=$2
+    local SYMLINK=$3
+    local LINKDIR=$4
+    if [ -z "${2}" ]; then
+	INSTALLDIR=$HOME/pycharm/
+    fi
+    if [ -z "${3}" ]; then
+	SYMLINK=pycharm
+    fi
+    if [ -z "${4}" ]; then
+	LINKDIR=/asap3/petra3/gpfs/common/p05/jm/bin/
+    fi
+    
+    # Usage
+    if [ -z "${1}" ]; then
+	echo -e USAGE: installPyCharm VERSION INSTALLDIR SYMLINKNAME SYMLINKDIR \(DEFAULT: \$1 $INSTALLDIR $SYMLINK $LINKDIR\);
+	    return
+    fi
+    
+    local NAME=pycharm-community-$VERSION.tar.gz 
+    local PYCHARM=${NAME%.tar.gz}    
+
+    # Download from jetbrains
+    local FILE=$HOME/Downloads/$NAME
+    local URL=https://download.jetbrains.com/python/$FILE
+    if [ -e $FILE ]
+    then
+	echo -e Not downloading. File exists: $FILE
+    else
+	echo -e Downloading pycharm version $VERSION from $URL
+	wget $URL
+    fi
+
+    # Extract to standard location
+    echo -e Unpack $FILE to $INSTALLDIR:
+    tar xfz $FILE --directory $INSTALLDIR
+    
+    # Remove symbolic link
+    if [ -e $PYCHARM_LINK ]
+    then
+	echo -e Remove symbolic link $PYCHARM_LINK to
+	readlink $PYCHARM_LINK
+	rm $PYCHARM_LINK
+    fi
+    
+    # Create new symbolic link
+    local PYCHARM_LINK=$LINKDIR$SYMLINK
+    local LOC=$INSTALLDIR/$PYCHARM/bin/pycharm.sh
+    echo -e Create symbolic link $LINK to $LOC:
+    ln -s  $LOC $LINK
+    readlink $LINKDIR$SYMLINK
+}
+
 
 # source
 alias sourcealiases='source $HOME/.aliases'

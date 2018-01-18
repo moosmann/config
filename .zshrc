@@ -82,7 +82,8 @@ export MATLAB_USER_PATH=/asap3/petra3/gpfs/common/p05/jm/matlab
 ASTRA_PATH=/asap3/petra3/gpfs/common/p05/astra/1.8
 export LD_LIBRARY_PATH=$ASTRA_PATH/lib:$CUDA_PATH/lib64/:$LD_LIBRARY_PATH
 export MATLABPATH=$ASTRA_PATH/matlab/mex/:$ASTRA_PATH/matlab/tools/:$ASTRA_PATH/samples/matlab/:$MATLABPATH
-export PYTHONPATH=$ASTRA_PATH/python:$PYTHONPATH
+################ commented because of conda
+#export PYTHONPATH=$ASTRA_PATH/python:$PYTHONPATH
 
 #export LD_LIBRARY_PATH=/usr/local/cuda/lib64/:$LD_LIBRARY_PATH
 
