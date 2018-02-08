@@ -142,6 +142,90 @@ ex ()
 export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
 
 
+## user section ###########
+
+alias ..='cd ..'
+alias cd..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias .......='cd ../../../../../..'
+
+alias lt='ls -lt'
+alias lrt='ls -lrt'
+alias la='ls -A'
+alias llh='ls -lh'
+alias lla='ls -lA'
+alias l1='ls -1'
+alias l1a='ls -1A'
+
+# Emacs
+alias e='emacs &'
+
+# source
+alias sourcealiases='source $HOME/.aliases'
+alias sourcezshr='source $HOME/.zshrc'
+
+# edit
+#alias editaliases='emacs -nw $HOME/.aliases'
+alias editprofile='emacs -nw $HOME/.profile'
+alias editemacs='emacs -nw $HOME/.emacs'
+function editbashrc {
+	 local ALIASES=$HOME/.bashrc
+	 emacs -nw $ALIASES
+	 source $ALIASES
+}
+alias editgit='emacs -nw $HOME/.gitconfig'
+
+# environment variables
+alias echoshell='echo $0'
+function echos {
+	 echo -e '\nHOME:' $HOME
+	 echo -e 'HOST:' $HOST
+	 echo -e 'SHELL:' $SHELL
+	 echo -e 'PS1:' $PS1
+	 echo -e 'TZ:' $TZ
+	 echo -e 'PATH:' $PATH
+	 echo -e 'LD_LIBRARY_PATH:' $LD_LIBRARY_PATH
+	 echo -e 'PYTHONPATH:' $PYTHONPATH
+	 echo -e 'MATLABPATH:' $MATLABPATH
+	 echo -e 'CUDA_PATH:' $CUDA_PATH
+	 echo -e 'ASTRA_HOME:' $ASTRA_HOME
+	 echo -e '\n'
+}
+
+# print processes matching PATTERN
+# alias psgrep='ps -eo pid,user,ni,%cpu,%mem,time,etime,start,comm | grep -e PID -e'
+function psgrep() 
+{
+    ps -eo pid,user,ni,%cpu,%mem,time,etime,start,comm | grep -e COMMAND -i -e $1
+}
+
+
+
+# convenience cd functions
+# save PWD to file
+function saveworkingdirectory {
+	 echo $PWD > $HOME/.savedworkingdirectory
+	 echo $PWD | tr -d '\n' | xclip -sel clipboard
+	 echo "Working directory saved. Return with: back"
+	# echo "Return to saved directory with one of the following equivalent command:\ncdswd gotoswd gotosavedworkingdirectory"
+
+}
+alias swd='saveworkingdirectory'
+alias savewd='saveworkingdirectory'
+alias save='saveworkingdirectory'
+
+# go to saved working directory
+function gotosavedworkingdirectory {
+	 local swd=$(<$HOME/.savedworkingdirectory)
+	 cd $swd
+}
+alias gotoswd='gotosavedworkingdirectory'
+alias cdswd='gotosavedworkingdirectory'
+alias back='gotosavedworkingdirectory'
+
 # To enable the keyring for applications run through the terminal, such as SSH
 if [ -n "$DESKTOP_SESSION" ];then
     eval $(gnome-keyring-daemon --start)
@@ -177,3 +261,25 @@ alias setkeycode_flightmode='sudo setkeycodes e02b 120'
 
 
 alias info_keycodes='echo_and_execute "xmodmap -pke"'
+
+# top of user
+alias topm='top -u $USER'
+
+# disk usage
+alias dus='du -s'
+alias duhs='du -hs'
+alias du1='du -hd1'
+alias du2='du -hd2'
+
+# xclip
+alias test_xclip_primary='echo ''test primary'' | xclip -sel primary'
+alias test_xclip_secondary='echo ''test  secondary '' | xclip -sel  secondary XA_SECONDARY'
+alias test_xclip_clipboard='echo ''test clipboard '' | xclip -sel clipboard'
+function echo_clipboard {
+    echo 'test primary' | xclip -sel primary
+    echo 'test secondary' | xclip -sel secondary
+    echo 'test clipboard' | xclip -sel clipboard
+    echo -e '\nXA_PRIMARY:' $XA_PRIMARY
+    echo -e 'XA_SECONDARY:' $XA_SECONDARY
+    echo -e 'XA_PRIMARY:' $XA_PRIMARY '\n'
+}
