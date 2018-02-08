@@ -1,0 +1,16 @@
+[user]
+	name = Julian Moosmann
+	email = julian.moosmann@gmail.com
+[core]
+	editor = emacs -nw
+
+[color]
+	ui = auto
+
+[alias]
+	br = branch
+	ch = checkout
+	st = status
+	s = status -s -b
+[push]
+	default = simple
