@@ -14,6 +14,7 @@ alias lt='ls -lt'
 alias lrt='ls -lrt'
 alias la='ls -A'
 alias llh='ls -lh'
+alias lh='llh'
 alias lla='ls -lA'
 alias l1='ls -1'
 alias l1a='ls -1A'
@@ -58,6 +59,7 @@ alias cdinvivo2016='cd /asap3/petra3/gpfs/p05/2016/data/11001994'
 alias cdinvivo2017nov1='cd /asap3/petra3/gpfs/p05/2017/data/11003656'
 alias cdinvivo2017nov2='cd /asap3/petra3/gpfs/p05/2017/data/11003527'
 alias cdxenopus='cd /asap3/petra3/gpfs/p05/2017/data/11003288/processed/xenopus'
+alias cdastra='cd /asap3/petra3/gpfs/common/p05/astra'
 
 # Python
 alias pipInstall='pip install --user'
@@ -130,6 +132,7 @@ alias sourcezshr='source $HOME/.zshrc'
 # edit
 #alias editaliases='emacs -nw $HOME/.aliases'
 alias editzshrc='emacs -nw $HOME/.zshrc'
+alias editzshrcw='emacs $HOME/.zshrc'
 alias editemacs='emacs -nw $HOME/.emacs'
 function editaliases {
 	 local ALIASES=$HOME/.aliases
@@ -160,6 +163,7 @@ function echos {
 # alias psgrep='ps -eo pid,user,ni,%cpu,%mem,time,etime,start,comm | grep -e PID -e'
 function psgrep() 
 {
+    echo 'ps -eo pid,user,ni,%cpu,%mem,time,etime,start,comm | grep -e COMMAND -i -e $1'
     ps -eo pid,user,ni,%cpu,%mem,time,etime,start,comm | grep -e COMMAND -i -e $1
 }
 
@@ -299,7 +303,6 @@ alias du2='du -hd2'
 
 # ASTRA config
 ASTRA_HOME=/asap3/petra3/gpfs/common/p05/astra          
-alias astra_conf_17='$ASTRA_HOME/astra_conf_17'
 alias astra_conf_18='$ASTRA_HOME/astra_conf_18'
 
 # feh image viewer
@@ -324,10 +327,34 @@ alias maxnovac='ssh -CXY moosmanj@max-nova'
 alias novac='maxnovac'
 
 # AVIZO
-function load_avizo {
+function module_load_avizo {
     module load maxwell
     module load avizo
     Avizo &
+}
+
+# Tensorflow
+function module_load_tensorflow_cpu {    
+    module load maxwell
+    module load anaconda/3
+    module load tf14/CPU-py3
+    module list
+    source activate tf14c
+    echo Acitvating virtual conda environment activated:
+    conda info --envs | grep "*"
+    echo Starting pycharm.
+    pycharm &
+}
+function module_load_tensorflow_gpu {
+    module load maxwell
+    module load anaconda/3
+    module load tf14/GPU-py3
+    module list
+    source activate tf14g
+    echo Acitvating virtual conda environment activated:
+    conda info --envs | grep "*"
+    echo Starting pycharm.
+    pycharm &
 }
 
 # xclip
@@ -341,4 +368,34 @@ function echo_clipboard {
     echo -e '\nXA_PRIMARY:' $XA_PRIMARY
     echo -e 'XA_SECONDARY:' $XA_SECONDARY
     echo -e 'XA_PRIMARY:' $XA_PRIMARY '\n'
+}
+
+
+function list_folders_and_filecount (){
+
+    local pattern=$1
+    if [ -z "${1}" ]; then
+	pattern=.
+    fi
+
+    
+    find $pattern -type d -print0 | while read -d '' -r dir
+    do
+	files=("$dir"/*)
+	printf "%5d files in directory %s\n" "${#files[@]}" "$dir"
+    done
+}
+
+function list_folders_and_filecount2 (){
+
+    local pattern=$1
+    if [ -z "${1}" ]; then
+	pattern=.
+    fi
+
+    find $pattern -maxdepth 1 -type d -print0 | while read -d '' -r dir; do num=$(find "$dir" -ls | wc -l); printf "%5d files in  %s\n" "$num" "$dir"; done | sort -rn -k1
+}
+
+function count_files {
+    ls -l | wc -l
 }

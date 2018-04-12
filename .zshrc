@@ -100,3 +100,10 @@ export LD_LIBRARY_PATH=/asap3/petra3/gpfs/common/p05/jm/lib:$LD_LIBRARY_PATH
 # xclip, feh
 export PATH=/asap3/petra3/gpfs/common/p05/jm/bin:$PATH
 export MANPATH=/asap3/petra3/gpfs/common/p05/jm/share/man:$MANPATH
+
+# anaconda
+# maxwell installation
+# export PATH=/opt/anaconda/3/bin:$PATH
+# local installation
+export PATH=$HOME/anaconda3/bin:$PATH
+export OPENCL_VENDOR_PATH=/etc/OpenCL/vendors
