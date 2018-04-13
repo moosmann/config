@@ -36,15 +36,6 @@ setopt COMPLETE_IN_WORD
 
 source $HOME/.aliases
 
-# PYTHON_PATH
-#export PYTHONPATH=$HOME/.local/lib/python2.7/
-#export PYTHONPATH=$HOME/.local/lib/python3.4/
-# export PYTHONPATH=$HOME/hzg/:$PYTHONPATH
-#PYTHONPATH=$PYTHONPATH:$HOME/.local/bin/
-
-# LD_LIBRARY_PATH
-#export LD_LIBRARY_PATH=/usr/local/lib/
-
 # NVIDIA CUDA
 export CUDA_PATH=/usr/local/cuda-7.5
 #export PATH=/usr/local/cuda-7.0/bin/:$PATH
@@ -53,31 +44,16 @@ export CUDA_PATH=/usr/local/cuda-7.5
 #export CUDA_HOME=/usr/local/cuda/
 export PYTHONPATH=$CUDA_PATH/lib64/:$PYTHONPATH
 
-# ASTRA
-# local
-#export PYTHONPATH=$HOME/astra/python/:$PYTHONPATH
-#export LD_LIBRARY_PATH=$HOME/astra/lib/:$LD_LIBRARY_PATH
-# glocal ASTRA
-#export LD_LIBRARY_PATH=/usr/local/astra/lib:$LD_LIBRARY_PATH
-
-# Virtualenvwrapper
-#export WORKON_HOME=$HOME/virtual_env
-
-# matplotib backend to use, necessary for virtualenv
-#export MPLBACKEND="module://PyQt4"
-
 # GTK accessibility warning 
 export NO_AT_BRIDGE=1
-
-# IDL unit test
-#export PATH=/home/moosmanj/idl/mgunit/src/:$PATH
 
 # Set timezone. If empty it can raise a Matlab warning when batch jops are executed
 export TZ='Europe/Berlin'
 
 # ASTRA
-export PATH=/opt/matlab/R2016b/bin/:$PATH
+#export PATH=/opt/matlab/R2016b/bin/:$PATH
 export MATLAB_USER_PATH=/asap3/petra3/gpfs/common/p05/jm/matlab
+
 # ASTRA 1.8 local
 ASTRA_PATH=/asap3/petra3/gpfs/common/p05/astra/1.8
 export LD_LIBRARY_PATH=$ASTRA_PATH/lib:$CUDA_PATH/lib64/:$LD_LIBRARY_PATH
@@ -91,6 +67,7 @@ export MATLABPATH=$ASTRA_PATH/matlab/mex/:$ASTRA_PATH/matlab/tools/:$ASTRA_PATH/
 #export LD_LIBRARY_PATH=$HOME/gcc/gcc/lib64/:$LD_LIBRARY_PATH
 #export PATH=$HOME/gcc/gcc/bin:$PATH
 COMMON_HOME=/asap3/petra3/gpfs/common/p05/jm
+##### CLEAN UP THAT MESS
 export LD_LIBRARY_PATH=$COMMON_HOME/gcc/lib64/:$LD_LIBRARY_PATH
 export PATH=$COMMON_HOME/gcc/bin:$PATH
 
@@ -101,9 +78,11 @@ export LD_LIBRARY_PATH=/asap3/petra3/gpfs/common/p05/jm/lib:$LD_LIBRARY_PATH
 export PATH=/asap3/petra3/gpfs/common/p05/jm/bin:$PATH
 export MANPATH=/asap3/petra3/gpfs/common/p05/jm/share/man:$MANPATH
 
+export OPENCL_VENDOR_PATH=/etc/OpenCL/vendors
+
 # anaconda
 # maxwell installation
 # export PATH=/opt/anaconda/3/bin:$PATH
 # local installation
 export PATH=$HOME/anaconda3/bin:$PATH
-export OPENCL_VENDOR_PATH=/etc/OpenCL/vendors
+export PYTHONPATH=/anaconda3/bin:$PYTHONPATH

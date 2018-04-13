@@ -61,11 +61,6 @@ alias cdinvivo2017nov2='cd /asap3/petra3/gpfs/p05/2017/data/11003527'
 alias cdxenopus='cd /asap3/petra3/gpfs/p05/2017/data/11003288/processed/xenopus'
 alias cdastra='cd /asap3/petra3/gpfs/common/p05/astra'
 
-# Python
-alias pipInstall='pip install --user'
-alias pip='$HOME/.local/bin/pip'
-alias pip3='$HOME/.local/bin/pip3'
-
 # PyCharm
 function installPyCharm(){
     
@@ -83,6 +78,9 @@ function installPyCharm(){
     if [ -z "${4}" ]; then
 	LINKDIR=/asap3/petra3/gpfs/common/p05/jm/bin/
     fi
+    echo -e INSTALLDIR: $INSTALLDIR
+    echo -e SYMLINK: $SYMLINK
+    echo -e LINKDIR: $LINKDIR
     
     # Usage
     if [ -z "${1}" ]; then
@@ -91,11 +89,15 @@ function installPyCharm(){
     fi
     
     local NAME=pycharm-community-$VERSION.tar.gz 
+    echo -e NAME : $NAME
+
     local PYCHARM=${NAME%.tar.gz}    
 
     # Download from jetbrains
     local FILE=$HOME/Downloads/$NAME
-    local URL=https://download.jetbrains.com/python/$FILE
+    local URL=https://download.jetbrains.com/python/$NAME
+    echo -e URL: $URL
+
     if [ -e $FILE ]
     then
 	echo -e Not downloading. File exists: $FILE
@@ -107,6 +109,9 @@ function installPyCharm(){
     # Extract to standard location
     echo -e Unpack $FILE to $INSTALLDIR:
     tar xfz $FILE --directory $INSTALLDIR
+
+    local PYCHARM_LINK=$LINKDIR$SYMLINK
+    echo -e PYCHARM_LINK: $PYCHARM_LINK
     
     # Remove symbolic link
     if [ -e $PYCHARM_LINK ]
@@ -117,11 +122,12 @@ function installPyCharm(){
     fi
     
     # Create new symbolic link
-    local PYCHARM_LINK=$LINKDIR$SYMLINK
     local LOC=$INSTALLDIR/$PYCHARM/bin/pycharm.sh
+    echo -e LOC: $LOC
+    local LINK=$LINKDIR$SYMLINK
     echo -e Create symbolic link $LINK to $LOC:
-    ln -s  $LOC $LINK
-    readlink $LINKDIR$SYMLINK
+    ln -s $LOC $LINK
+    readlink $LINK
 }
 
 
