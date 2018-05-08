@@ -34,7 +34,39 @@ setopt COMPLETE_IN_WORD
 # autoload -U colors
 #colors
 
+# Aliases
 source $HOME/.aliases
+
+# GTK accessibility warning 
+export NO_AT_BRIDGE=1
+
+# Set timezone. If empty it can raise a Matlab warning when batch jops are executed
+export TZ='Europe/Berlin'
+
+# feh
+export LD_LIBRARY_PATH=/asap3/petra3/gpfs/common/p05/jm/lib:$LD_LIBRARY_PATH
+
+# xclip, feh
+export PATH=/asap3/petra3/gpfs/common/p05/jm/bin:$PATH
+export MANPATH=/asap3/petra3/gpfs/common/p05/jm/share/man:$MANPATH
+# ???
+export OPENCL_VENDOR_PATH=/etc/OpenCL/vendors
+
+# Anaconda maxwell installation
+# export PATH=/opt/anaconda/3/bin:$PATH
+
+# Anaconda local installation
+export PATH=$HOME/anaconda3/bin:$PATH
+#export PYTHONPATH=/anaconda3/bin:$PYTHONPATH
+
+# gcc 4.9, local installation
+##### CLEAN UP THAT MESS
+#export LD_LIBRARY_PATH=$HOME/gcc/gcc/lib64/:$LD_LIBRARY_PATH
+#export PATH=$HOME/gcc/gcc/bin:$PATH
+COMMON_HOME=/asap3/petra3/gpfs/common/p05/jm
+export LD_LIBRARY_PATH=$COMMON_HOME/gcc/lib64/:$LD_LIBRARY_PATH
+export PATH=$COMMON_HOME/gcc/bin:$PATH
+
 
 # NVIDIA CUDA
 export CUDA_PATH=/usr/local/cuda-7.5
@@ -44,11 +76,10 @@ export CUDA_PATH=/usr/local/cuda-7.5
 #export CUDA_HOME=/usr/local/cuda/
 export PYTHONPATH=$CUDA_PATH/lib64/:$PYTHONPATH
 
-# GTK accessibility warning 
-export NO_AT_BRIDGE=1
+# NVIDIA cuDNN
+# probably conflicts with cuda-9.0
+#export LD_LIBRARY_PATH=/asap3/petra3/gpfs/common/p05/jm/cuda/lib64:$LD_LIBRARY_PATH
 
-# Set timezone. If empty it can raise a Matlab warning when batch jops are executed
-export TZ='Europe/Berlin'
 
 # ASTRA
 #export PATH=/opt/matlab/R2016b/bin/:$PATH
@@ -58,31 +89,6 @@ export MATLAB_USER_PATH=/asap3/petra3/gpfs/common/p05/jm/matlab
 ASTRA_PATH=/asap3/petra3/gpfs/common/p05/astra/1.8
 export LD_LIBRARY_PATH=$ASTRA_PATH/lib:$CUDA_PATH/lib64/:$LD_LIBRARY_PATH
 export MATLABPATH=$ASTRA_PATH/matlab/mex/:$ASTRA_PATH/matlab/tools/:$ASTRA_PATH/samples/matlab/:$MATLABPATH
-################ commented because of conda
+# ASTRA python wrapper, local compilation, commented because of conda
 #export PYTHONPATH=$ASTRA_PATH/python:$PYTHONPATH
 
-#export LD_LIBRARY_PATH=/usr/local/cuda/lib64/:$LD_LIBRARY_PATH
-
-# local gcc 4.9
-#export LD_LIBRARY_PATH=$HOME/gcc/gcc/lib64/:$LD_LIBRARY_PATH
-#export PATH=$HOME/gcc/gcc/bin:$PATH
-COMMON_HOME=/asap3/petra3/gpfs/common/p05/jm
-##### CLEAN UP THAT MESS
-export LD_LIBRARY_PATH=$COMMON_HOME/gcc/lib64/:$LD_LIBRARY_PATH
-export PATH=$COMMON_HOME/gcc/bin:$PATH
-
-# feh
-export LD_LIBRARY_PATH=/asap3/petra3/gpfs/common/p05/jm/lib:$LD_LIBRARY_PATH
-
-# xclip, feh
-export PATH=/asap3/petra3/gpfs/common/p05/jm/bin:$PATH
-export MANPATH=/asap3/petra3/gpfs/common/p05/jm/share/man:$MANPATH
-
-export OPENCL_VENDOR_PATH=/etc/OpenCL/vendors
-
-# anaconda
-# maxwell installation
-# export PATH=/opt/anaconda/3/bin:$PATH
-# local installation
-export PATH=$HOME/anaconda3/bin:$PATH
-export PYTHONPATH=/anaconda3/bin:$PYTHONPATH

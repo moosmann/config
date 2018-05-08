@@ -10,6 +10,7 @@ alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias .......='cd ../../../../../..'
 
+alias l='ls -A';
 alias lt='ls -lt'
 alias lrt='ls -lrt'
 alias la='ls -A'
@@ -44,6 +45,7 @@ alias cdsynchroload2017may='cd /asap3/petra3/gpfs/p05/2017/data/11003950'
 alias cdsynchroload2017oct='cd /asap3/petra3/gpfs/p05/2017/data/11003440'
 alias cdsynchroload2017nov1='cd /asap3/petra3/gpfs/p05/2017/data/11003773'
 alias cdsynchroload2017nov2='cd /asap3/petra3/gpfs/p05/2017/data/11003288'
+alias cdsynchroload2018apr='cd /asap3/petra3/gpfs/p05/2018/data/11004263'
 alias cdcommissioningP05='cd /asap3/petra3/gpfs/p05/2016/commissioning'
 alias cdp05='cd /asap3/petra3/gpfs/p05'
 alias cdp05common='cd /asap3/petra3/gpfs/common/p05/jm'
@@ -60,6 +62,11 @@ alias cdinvivo2017nov1='cd /asap3/petra3/gpfs/p05/2017/data/11003656'
 alias cdinvivo2017nov2='cd /asap3/petra3/gpfs/p05/2017/data/11003527'
 alias cdxenopus='cd /asap3/petra3/gpfs/p05/2017/data/11003288/processed/xenopus'
 alias cdastra='cd /asap3/petra3/gpfs/common/p05/astra'
+alias cdholz='cd /asap3/petra3/gpfs/p05/2018/data/11004450'
+
+
+#idea
+alias idea='/home/moosmanj/idea/idea-IC-181.4668.68/bin/idea.sh'
 
 # PyCharm
 function installPyCharm(){
@@ -293,6 +300,7 @@ function findinfiles {
 function grep_in_reco_log {
  
     grep -Hi $1 ./*/reco/reco.log
+    grep -Hi $1 ./*/reco*/*/reco.log
 }
 
 function grep_in_raw_log {
@@ -339,25 +347,14 @@ function module_load_avizo {
     Avizo &
 }
 
-# Tensorflow
-function module_load_tensorflow_cpu {    
-    module load maxwell
-    module load anaconda/3
-    module load tf14/CPU-py3
+# Tensorflow / ASTRA / ODL / PyCharm
+function module_load_reco {
+    module load cuda/9.0
     module list
-    source activate tf14c
-    echo Acitvating virtual conda environment activated:
-    conda info --envs | grep "*"
-    echo Starting pycharm.
-    pycharm &
-}
-function module_load_tensorflow_gpu {
-    module load maxwell
-    module load anaconda/3
-    module load tf14/GPU-py3
-    module list
-    source activate tf14g
-    echo Acitvating virtual conda environment activated:
+    echo Export environment variables for cuDNN.
+    export LD_LIBRARY_PATH=/asap3/petra3/gpfs/common/p05/jm/cuda/lib64:$LD_LIBRARY_PATH
+    source activate reco
+    echo -e Activated Conda environment:
     conda info --envs | grep "*"
     echo Starting pycharm.
     pycharm &
@@ -405,3 +402,5 @@ function list_folders_and_filecount2 (){
 function count_files {
     ls -l | wc -l
 }
+
+alias hdf5view='~/hdf/hdfview.sh &'
