@@ -12,6 +12,7 @@ alias .......='cd ../../../../../..'
 
 alias l='ls -A';
 alias lt='ls -lt'
+alias llt='ls -lt'
 alias lrt='ls -lrt'
 alias la='ls -A'
 alias llh='ls -lh'
@@ -46,6 +47,8 @@ alias cdsynchroload2017oct='cd /asap3/petra3/gpfs/p05/2017/data/11003440'
 alias cdsynchroload2017nov1='cd /asap3/petra3/gpfs/p05/2017/data/11003773'
 alias cdsynchroload2017nov2='cd /asap3/petra3/gpfs/p05/2017/data/11003288'
 alias cdsynchroload2018apr='cd /asap3/petra3/gpfs/p05/2018/data/11004263'
+alias cdsynchroload2018may='cd /asap3/petra3/gpfs/p05/2018/data/11004936'
+alias cdsynchroload2018june='cd /asap3/petra3/gpfs/p05/2017/data/11004016'
 alias cdcommissioningP05='cd /asap3/petra3/gpfs/p05/2016/commissioning'
 alias cdp05='cd /asap3/petra3/gpfs/p05'
 alias cdp05common='cd /asap3/petra3/gpfs/common/p05/jm'
@@ -63,7 +66,8 @@ alias cdinvivo2017nov2='cd /asap3/petra3/gpfs/p05/2017/data/11003527'
 alias cdxenopus='cd /asap3/petra3/gpfs/p05/2017/data/11003288/processed/xenopus'
 alias cdastra='cd /asap3/petra3/gpfs/common/p05/astra'
 alias cdholz='cd /asap3/petra3/gpfs/p05/2018/data/11004450'
-
+alias cdimagejmacros='cd /asap3/petra3/gpfs/common/p05/jm/imagej/macros'
+alias cdnextcloud='cd /gpfs/petra3/scratch/moosmanj/nextcloud'
 
 #idea
 alias idea='/home/moosmanj/idea/idea-IC-181.4668.68/bin/idea.sh'
@@ -318,19 +322,30 @@ alias du2='du -hd2'
 # ASTRA config
 ASTRA_HOME=/asap3/petra3/gpfs/common/p05/astra          
 alias astra_conf_18='$ASTRA_HOME/astra_conf_18'
+alias astra_conf_19='$ASTRA_HOME/astra_conf_19'
 
 # feh image viewer
 alias feh='/asap3/petra3/gpfs/common/p05/jm/bin/feh'
 
 # SSH
-alias maxfsg='ssh moosmanj@max-fsg'
+alias maxfsg='ssh -X moosmanj@max-fsg'
 alias fsg='maxfsg'
-alias maxfsc='ssh moosmanj@max-fsc'
+alias maxfsc='ssh -X moosmanj@max-fsc'
 alias fsc='maxfsc'
-alias maxhzg='ssh moosmanj@max-hzgg001'
+alias maxhzg='ssh -X moosmanj@max-hzgg001'
 alias hzg='maxhzg'
-alias maxnova='ssh moosmanj@max-nova'
+alias maxnova='ssh -X moosmanj@max-nova'
+alias maxnova1='ssh -X moosmanj@max-nova001'
+alias maxnova2='ssh -X moosmanj@max-nova002'
 alias nova='maxnova'
+alias nova1='maxnova1'
+alias nova2='maxnova2'
+alias maxfsg1='ssh -X moosmanj@max-p3ag001'
+alias fsg1='maxfsg1'
+alias maxfsg2='ssh -X moosmanj@max-p3ag002'
+alias fsg2='maxfsg2'
+alias maxfsg3='ssh -X moosmanj@max-p3ag003'
+alias fsg3='maxfsg3'
 
 alias fsgnox='ssh -x moosmanj@max-fsg'
 alias fscnox='ssh -x moosmanj@max-fsc'
@@ -362,17 +377,17 @@ function module_load_reco {
 
 # xclip
 alias test_xclip_primary='echo ''test primary'' | xclip -sel primary'
-alias test_xclip_secondary='echo ''test  secondary '' | xclip -sel  secondary XA_SECONDARY'
+alias test_xclip_secondary='echo ''test  secondary '' | xclip -sel  secondary '
 alias test_xclip_clipboard='echo ''test clipboard '' | xclip -sel clipboard'
 function echo_clipboard {
     echo 'test primary' | xclip -sel primary
     echo 'test secondary' | xclip -sel secondary
     echo 'test clipboard' | xclip -sel clipboard
-    echo -e '\nXA_PRIMARY:' $XA_PRIMARY
+    echo -e 'XA_PRIMARY:' $XA_PRIMARY 
     echo -e 'XA_SECONDARY:' $XA_SECONDARY
-    echo -e 'XA_PRIMARY:' $XA_PRIMARY '\n'
-}
 
+}
+alias xclippaste='xclip -o'
 
 function list_folders_and_filecount (){
 
@@ -404,3 +419,9 @@ function count_files {
 }
 
 alias hdf5view='~/hdf/hdfview.sh &'
+
+alias nextcloud='$HOME/Nextcloud/Nextcloud-2.3.3-x86_64.AppImage &'
+alias desycloud='nextcloud'
+
+NEXTCLOUD=/gpfs/petra3/scratch/moosmanj/nextcloud/
+NCload=$NEXTCLOUD/load_sequences

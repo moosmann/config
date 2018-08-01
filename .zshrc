@@ -56,16 +56,21 @@ export OPENCL_VENDOR_PATH=/etc/OpenCL/vendors
 # export PATH=/opt/anaconda/3/bin:$PATH
 
 # Anaconda local installation
-export PATH=$HOME/anaconda3/bin:$PATH
+# uncomment for ASTRA Installation
+#export PATH=$HOME/anaconda3/bin:$PATH
 #export PYTHONPATH=/anaconda3/bin:$PYTHONPATH
 
 # gcc 4.9, local installation
 ##### CLEAN UP THAT MESS
-#export LD_LIBRARY_PATH=$HOME/gcc/gcc/lib64/:$LD_LIBRARY_PATH
-#export PATH=$HOME/gcc/gcc/bin:$PATH
-COMMON_HOME=/asap3/petra3/gpfs/common/p05/jm
-export LD_LIBRARY_PATH=$COMMON_HOME/gcc/lib64/:$LD_LIBRARY_PATH
-export PATH=$COMMON_HOME/gcc/bin:$PATH
+# for Matlab < 2018a
+export LD_LIBRARY_PATH=$HOME/gcc/gcc/lib64/:$LD_LIBRARY_PATH
+export PATH=$HOME/gcc/gcc/bin:$PATH
+# for Matlab >=2018a
+#export LD_LIBRARY_PATH=/opt/rh/devtoolset-6/root/lib64:$LD_LIBRARY_PATH
+#export PATH=/opt/rh/devtoolset-6/root/bin:$PATH
+#COMMON_HOME=/asap3/petra3/gpfs/common/p05/jm
+#$export LD_LIBRARY_PATH=$COMMON_HOME/gcc/lib64/:$LD_LIBRARY_PATH
+#export PATH=$COMMON_HOME/gcc/bin:$PATH
 
 
 # NVIDIA CUDA
@@ -92,3 +97,5 @@ export MATLABPATH=$ASTRA_PATH/matlab/mex/:$ASTRA_PATH/matlab/tools/:$ASTRA_PATH/
 # ASTRA python wrapper, local compilation, commented because of conda
 #export PYTHONPATH=$ASTRA_PATH/python:$PYTHONPATH
 
+# resize/move window issues, test:
+AWT_TOOLKIT=MToolkit
