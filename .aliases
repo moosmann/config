@@ -30,47 +30,178 @@ alias screenr='screen -r'
 alias screenls='screen -ls'
 
 # Matlab
-alias matlab='matlab_R2017b'
-alias ml='matlab -nosplash &'
+alias matlab='matlab_$MATLAB_VERSION'
+alias ml='echo Starting MATLAB $MATLAB_VERSION && matlab -nosplash &'
 alias mln='matlab -nosplash -nodesktop -softwareopengl'
 alias mlscreen='matlab -nosplash -nodesktop -softwareopengl -display 0.0'
 alias mlnojvm='matlab -nosplash -nodesktop -nojvm -softwareopengl'
 alias mlnosoftgl='matlab -nosplash -nodesktop -nosoftwareopengl -nojvm'
 
+IDL_PATH='/asap3/petra3/gpfs/common/p05/jm/idl'
+
 # GPFS directories
 alias cdscratch='cd /gpfs/petra3/scratch/moosmanj'
-alias cdsynchroload='cd /asap3/petra3/gpfs/common/p05/jm/synchroload'
-alias cdsynchroload2016nov='cd /asap3/petra3/gpfs/p05/2016/data/11001978'
-alias cdsynchroload2016commDiana='cd /asap3/petra3/gpfs/p05/2016/data/11002518/processed/synchroload'
-alias cdsynchroload2017may='cd /asap3/petra3/gpfs/p05/2017/data/11003950'
-alias cdsynchroload2017oct='cd /asap3/petra3/gpfs/p05/2017/data/11003440'
-alias cdsynchroload2017nov1='cd /asap3/petra3/gpfs/p05/2017/data/11003773'
-alias cdsynchroload2017nov2='cd /asap3/petra3/gpfs/p05/2017/data/11003288'
-alias cdsynchroload2018apr='cd /asap3/petra3/gpfs/p05/2018/data/11004263'
-alias cdsynchroload2018may='cd /asap3/petra3/gpfs/p05/2018/data/11004936'
-alias cdsynchroload2018june='cd /asap3/petra3/gpfs/p05/2017/data/11004016'
+alias cdp05review='cd /asap3/petra3/gpfs/p05/2017/data/11003288/processed/syn166_104R_Mg10Gd_4w/p05_review'
 alias cdcommissioningP05='cd /asap3/petra3/gpfs/p05/2016/commissioning'
 alias cdp05='cd /asap3/petra3/gpfs/p05'
+alias cdp07='cd /asap3/petra3/gpfs/p07'
 alias cdp05common='cd /asap3/petra3/gpfs/common/p05/jm'
 alias com='cdp05common'
-alias cdscripts='cd /asap3/petra3/gpfs/common/p05/jm'
+alias home='cdp05common'
 alias cdmatlab='cd /asap3/petra3/gpfs/common/p05/jm/matlab'
 alias cdmatlabp05='cd /asap3/petra3/gpfs/common/p05/jm/matlab/experiments/p05'
 alias cdmatlabdata='cd /asap3/petra3/gpfs/common/p05/jm/matlab/experiments/p05/data/moosmanj'
-IDL_PATH='/asap3/petra3/gpfs/common/p05/jm/idl'
+alias cdastra='cd /asap3/petra3/gpfs/common/p05/astra'
 alias cdidl='cd $IDL_PATH'
 alias cdidlreco='cd $IDL_PATH/reco_scripts_juh_test'
-alias cdinvivo2016='cd /asap3/petra3/gpfs/p05/2016/data/11001994'
-alias cdinvivo2017nov1='cd /asap3/petra3/gpfs/p05/2017/data/11003656'
-alias cdinvivo2017nov2='cd /asap3/petra3/gpfs/p05/2017/data/11003527'
-alias cdxenopus='cd /asap3/petra3/gpfs/p05/2017/data/11003288/processed/xenopus'
-alias cdastra='cd /asap3/petra3/gpfs/common/p05/astra'
-alias cdholz='cd /asap3/petra3/gpfs/p05/2018/data/11004450'
+
+# Test I/O
+alias cd_test_io='cd /asap3/petra3/gpfs/p07/2020/data/11010172/scratch_cc/test_io'
+
+# HZG Manke
+alias cd_hzb_11008476='cd /asap3/petra3/gpfs/p05/2020/data/11008476/processed'
+
+# Nova 2020 
+alias cd_nova2020june_11008823='cd /asap3/petra3/gpfs/p05/2020/data/11008823'
+
+# Industry
+alias cd_industry_tissue='cd /asap3/petra3/gpfs/p05/2020/data/11008993/processed/hzg_01_container_test_a'
+alias cd_tissue='cd_industry_tissue'
+alias cd_industry_swerim='cd /asap3/petra3/gpfs/p07/2020/data/11010172'
+
+# PPC z sequence implant titanium
+alias cd_ppc_zsequence_p07='cd /asap3/petra3/gpfs/p07/2019/data/11006991/processed'
+
+# Xenopus ex vivo kit
+alias cd_xeno_kit_20191016_11007359='cd /asap3/petra3/gpfs/p05/2019/data/11007359'
+alias cd_kit_xeno_20191016_11007359='cd /asap3/petra3/gpfs/p05/2019/data/11007359'
+alias cd_xeno_kit_20190325_11005954='cd /asap3/petra3/gpfs/p05/2019/data/11005954'
+alias cd_kit_xeno_20190325_11005954='cd /asap3/petra3/gpfs/p05/2019/data/11005954'
+
+# Mason Dean shark
+alias cd_shark='cd /asap3/petra3/gpfs/p05/2018/data/11004667'
+
+# Propagation-based phase contrast, human brain, Bukreeva/Fratini
+alias cd_brain_phase_contrast='cd /asap3/petra3/gpfs/p05/2019/data/11007456'
+
+# interactive rot axis mode
+alias cd_demo_interactive__tilt_plus_registration='cd /asap3/petra3/gpfs/p05/2016/data/11001978/processed/mah_35_1R_bottom/reco'
+
+# SynchroLoad
+alias cdmagnim='cd //asap3/petra3/gpfs/p05/2019/data/11007540'
+
+alias cdsynchroload_sampleholder='cd /asap3/petra3/gpfs/p05/2016/data/11001978/processed/SynchroLoad'
+
+alias cdsynchroload_dvc='cd /asap3/petra3/gpfs/p05/2017/data/11003288/processed/syn166_104R_Mg10Gd_4w/dvc'
+alias cd_dvc='cdsynchroload_dvc'
+
+alias cdsynchroload_dose='cd /asap3/petra3/gpfs/p05/2019/data/11006704/processed/dose/'
+alias cd_dose='cdsynchroload_dose'
+
+alias cdsynchroload_segmentation1='cd /asap3/petra3/gpfs/p05/2017/data/11003288/processed/segmentation'
+alias cdsegmentation1='cdsynchroload_segmentation1'
+
+alias cdsynchroload_segmentation2='cd /asap3/petra3/gpfs/p05/2018/data/11004936/processed/segmentation'
+alias cdsegmentation2='cdsynchroload_segmentation2'
+
+alias cdsynchroload_segmentation3='cd /asap3/petra3/gpfs/p05/2016/data/11001978/processed/segmentation'
+alias cdsegmentation3='cdsynchroload_segmentation3'
+
+alias cdsegmentation='cdsegmentation3'
+
+alias cdsynchroload='cd /asap3/petra3/gpfs/common/p05/jm/synchroload'
+
+alias cdsynchroload_11001978='cd /asap3/petra3/gpfs/p05/2016/data/11001978'
+alias cdsynchroload2016nov_11001978='cdsynchroload_11001978'
+
+alias cdsynchroload_11002518='cd /asap3/petra3/gpfs/p05/2016/data/11002518/processed/synchroload'
+alias cdsynchroload2016commDiana_11002518='cd /asap3/petra3/gpfs/p05/2016/data/11002518/processed/synchroload'
+
+alias cdsynchroload_11003950='cd /asap3/petra3/gpfs/p05/2017/data/11003950'
+alias cdsynchroload2017may_11003950='cdsynchroload_11003950'
+alias cdsynchroload_11003950_syn13='cd /asap3/petra3/gpfs/p05/2017/data/11003950/processed/syn13_55L_Mg10Gd_12w_load'
+
+alias cdsynchroload_11003440='cd /asap3/petra3/gpfs/p05/2017/data/11003440'
+alias cdsynchroload2017oct_11003440='cdsynchroload_11003440'
+
+alias cdsynchroload_11003773='cd /asap3/petra3/gpfs/p05/2017/data/11003773'
+alias cdsynchroload2017nov03_11003773='cdsynchroload_11003773'
+
+alias cdsynchroload_11004016='cd /asap3/petra3/gpfs/p05/2017/data/11004016'
+alias cdsynchroload2017nov13_11004016='cdsynchroload_11004016'
+
+alias cdsynchroload_11003288='cd /asap3/petra3/gpfs/p05/2017/data/11003288'
+alias cdsynchroload2017nov23_11003288='cdsynchroload_11003288'
+alias cdsynchroload_11003288_syn166='cd /asap3/petra3/gpfs/p05/2017/data/11003288/processed/syn166_104R_Mg10Gd_4w'
+
+alias cdsynchroload_11004263='cd /asap3/petra3/gpfs/p05/2018/data/11004263'
+alias cdsynchroload2018apr_11004263='cdsynchroload_11004263'
+
+alias cdsynchroload_11004936='cd /asap3/petra3/gpfs/p05/2018/data/11004936'
+alias cdsynchroload2018may_11004936='cdsynchroload_11004936'
+
+alias cdsynchroload_11005553='cd /asap3/petra3/gpfs/p05/2018/data/11005553'
+alias cdsynchroload2018nov_11005553='cdsynchroload_11005553'
+
+alias cdsynchroload_11006704='cd /asap3/petra3/gpfs/p05/2019/data/11006704'
+alias cdsynchroload2019july_11006704='cdsynchroload_11006704'
+
+alias cdsynchroload_11005842='cd /asap3/petra3/gpfs/p05/2019/data/11005842'
+alias cdsynchroload2019may_11005842='cdsynchroload_11005842'
+
+alias cdsynchroload_11006991='cd /asap3/petra3/gpfs/p07/2019/data/11006991'
+alias cdsynchroload2019dec_11006991='cdsynchroload_11006991'
+
+alias cdsynchroload_50000258='cd /asap3/petra3/gpfs/external/2019/data/50000258'
+alias cdsynchroload2019apr_diamond_50000258='cd /asap3/petra3/gpfs/external/2019/data/50000258'
+
+# Diamond light source dls 2019 WBB
+alias cddiamond2019='cd /asap3/petra3/gpfs/external/2019/data/50000258'
+alias cddls2019='cddiamond2019'
+
+# Diamond light source dls 2019 Kiel
+alias cddiamond2018='cd /asap3/petra3/gpfs/external/2018/data/50000224'
+alias cddls2018='cddiamond2018'
+
+# P07
+alias cdp07_20191125_11007902='cd /asap3/petra3/gpfs/p07/2019/data/11007902'
+alias cd_dpc1_11007902='cdp07_20191125_11007902'
+alias cd_dpc1='cdp07_20191125_11007902'
+alias cdp07_20191129_11007454='cd /asap3/petra3/gpfs/p07/2019/data/11007454'
+alias cd_dpc2_11007454='cdp07_20191129_11007454'
+alias cd_dpc2='cdp07_20191129_11007454'
+alias cdp07_20191206_11006991='cd /asap3/petra3/gpfs/p07/2019/data/11006991'
+alias cd_dpc3_11006991='cdp07_20191206_11006991'
+alias cd_dpc3='cdp07_20191206_11006991'
+
+alias cd_bmc01_greek_brain='cd /asap3/petra3/gpfs/p07/2019/data/11007902/raw/bmc01_greek_brain_e'
+alias cd_bmc_tooth='cd /asap3/petra3/gpfs/p07/2020/data/11010172'
+
+# KTH paper
+alias cd_kth_paper='cd /asap3/petra3/gpfs/p05/2019/data/11006077'
+alias cd_paper_kth='cd_kth_paper'
+
+# in vivo
+alias cd_invivo2016='cd /asap3/petra3/gpfs/p05/2016/data/11001994'
+alias cd_invivo2017nov1='cd /asap3/petra3/gpfs/p05/2017/data/11003656'
+alias cd_invivo2017nov2='cd /asap3/petra3/gpfs/p05/2017/data/11003527'
+alias cd_xenopus='cd /asap3/petra3/gpfs/p05/2017/data/11003288/processed/xenopus'
+
+# HNEE
+alias cd_holz_hnee='cd /asap3/petra3/gpfs/p05/2018/data/11004450'
+alias cd_hnee_holz='cd_holz_hnee'
+
 alias cdimagejmacros='cd /asap3/petra3/gpfs/common/p05/jm/imagej/macros'
 alias cdnextcloud='cd /gpfs/petra3/scratch/moosmanj/nextcloud'
 
+# MPI Le cabec
+alias cd_tooth_lecabec='cd /asap3/petra3/gpfs/p07/2018/data/11005148'
+
 #idea
 alias idea='/home/moosmanj/idea/idea-IC-181.4668.68/bin/idea.sh'
+
+# savu
+alias cdsavu='cd /asap3/petra3/gpfs/common/p05/savu/Savu_2.4'
 
 # PyCharm
 function installPyCharm(){
@@ -80,6 +211,8 @@ function installPyCharm(){
     local INSTALLDIR=$2
     local SYMLINK=$3
     local LINKDIR=$4
+    local TYPE=professional
+    #community
     if [ -z "${2}" ]; then
 	INSTALLDIR=$HOME/pycharm/
     fi
@@ -99,7 +232,7 @@ function installPyCharm(){
 	    return
     fi
     
-    local NAME=pycharm-community-$VERSION.tar.gz 
+    local NAME=pycharm-$TYPE-$VERSION.tar.gz 
     echo -e NAME : $NAME
 
     local PYCHARM=${NAME%.tar.gz}    
@@ -117,9 +250,23 @@ function installPyCharm(){
 	wget $URL
     fi
 
+    # Make folder
+    if [ -d $INSTALLDIR ]
+	then
+	echo Folder exist
+	else
+	echo -e Make folder $INSTALLDIR
+	mkdir $INSTALLDIR
+    fi
+
     # Extract to standard location
-    echo -e Unpack $FILE to $INSTALLDIR:
-    tar xfz $FILE --directory $INSTALLDIR
+    if [ -d $INSTALLDIR/pycharm-$VERSION ]
+    then
+	echo -e Already extracted
+    else
+	echo -e Unpack $FILE to $INSTALLDIR:
+	tar xfz $FILE --directory $INSTALLDIR
+    fi
 
     local PYCHARM_LINK=$LINKDIR$SYMLINK
     echo -e PYCHARM_LINK: $PYCHARM_LINK
@@ -133,14 +280,18 @@ function installPyCharm(){
     fi
     
     # Create new symbolic link
-    local LOC=$INSTALLDIR/$PYCHARM/bin/pycharm.sh
+    local LOC=$INSTALLDIR/pycharm-$VERSION/bin/pycharm.sh
     echo -e LOC: $LOC
     local LINK=$LINKDIR$SYMLINK
     echo -e Create symbolic link $LINK to $LOC:
     ln -s $LOC $LINK
+    echo readlink:
     readlink $LINK
+    echo ls -l LOC
+    ls -l $LOC
 }
 
+alias pc='pycharm &'
 
 # source
 alias sourcealiases='source $HOME/.aliases'
@@ -153,25 +304,34 @@ alias editzshrcw='emacs $HOME/.zshrc'
 alias editemacs='emacs -nw $HOME/.emacs'
 function editaliases {
 	 local ALIASES=$HOME/.aliases
-	 emacs -nw $ALIASES
+	 emacs $ALIASES
+	 echo -e source $ALIASES
 	 source $ALIASES
 }
 alias editgit='emacs -nw $HOME/.gitconfig'
+
+# GIT
+alias git_date_of_last_commit='git rev-parse HEAD | git show -s --format=%ci'
 
 # environment variables
 alias echoshell='echo $0'
 function echos {
 	 echo -e '\nHOME:' $HOME
 	 echo -e 'HOST:' $HOST
+	 echo -e 'HOSTNAME:' $HOSTNAME
 	 echo -e 'SHELL:' $SHELL
 	 echo -e 'PS1:' $PS1
 	 echo -e 'TZ:' $TZ
 	 echo -e 'PATH:' $PATH
 	 echo -e 'LD_LIBRARY_PATH:' $LD_LIBRARY_PATH
 	 echo -e 'PYTHONPATH:' $PYTHONPATH
-	 echo -e 'MATLABPATH:' $MATLABPATH
+	 echo -e 'PYTHONHOME:' $PYTHONHOME
+	 echo -e 'CONDA_PREFIX' $CONDA_PREFIX
+	 echo -e 'MATLAB_VERSION:' $MATLAB_VERSION
+	 echo -e 'MATLAB_PATH:' $MATLAB_PATH
+	 echo -e 'MATLAB_USER_PATH:' $MATLAB_USER_PATH
 	 echo -e 'CUDA_PATH:' $CUDA_PATH
-	 echo -e 'ASTRA_HOME:' $ASTRA_HOME
+	 echo -e 'ASTRA_PATH:' $ASTRA_PATH
 	 echo -e '\n'
 }
 
@@ -189,7 +349,8 @@ alias idl='idl_8.6'
 alias idlde='idlde_8.6'
 
 # ImageJ
-alias imagej='/asap3/petra3/gpfs/common/p05/jm/imagej/ImageJ.app/ImageJ-linux64 --no-splash -Xss2m --'
+#alias imagej='/asap3/petra3/gpfs/common/p05/jm/imagej/ImageJ.app/ImageJ-linux64 --no-splash -Xss2m --'
+alias imagej='/asap3/petra3/gpfs/common/p05/jm/imagej/ImageJ/ImageJ --no-splash -Xss2m --'
 alias ij='imagej &'
 alias ijmacros='cd /asap3/petra3/gpfs/common/p05/jm/imagej/macros'
 function ij_open_image_sequence {
@@ -197,7 +358,7 @@ function ij_open_image_sequence {
 	echo -e '\n filename: ' $filename
 	filename=$PWD/$filename
 	echo -e '\n filename: ' $filename
-	args="open=[$filename] file=tif sort use"
+	args="open=$filename sort use"
 	echo -e '\n args: ' $args
 
 	imagej -run "Image Sequence..." $args
@@ -205,14 +366,14 @@ function ij_open_image_sequence {
 alias ijsequ='ij_open_image_sequence'
 
 # Fiji
-alias fiji='/asap3/petra3/gpfs/common/p05/jm/fiji/Fiji.app/ImageJ-linux64 --no-splash -Xss2m --'
+alias fiji='/asap3/petra3/gpfs/common/p05/jm/imagej/Fiji.app/ImageJ-linux64 --no-splash -Xss2m --'
 alias fj='fiji &'
 function fiji_open_image_sequence {
 	filename=$(ls *00001.tif | head -1)
 	echo -e '\n filename: ' $filename
 	filename=$PWD/$filename
 	echo -e '\n filename: ' $filename
-	args="open=[$filename] file=tif sort use"
+	args="open=$filename sort use"
 	echo -e '\n args: ' $args
 
 	fiji -run "Image Sequence..." $args
@@ -230,11 +391,7 @@ function saveworkingdirectory {
 	 echo $PWD > $HOME/.savedworkingdirectory
 	 echo $PWD | tr -d '\n' | xclip -sel clipboard
 	 echo "Working directory saved. Return with: back"
-	# echo "Return to saved directory with one of the following equivalent command:\ncdswd gotoswd gotosavedworkingdirectory"
-
 }
-alias swd='saveworkingdirectory'
-alias savewd='saveworkingdirectory'
 alias save='saveworkingdirectory'
 
 # go to saved working directory
@@ -242,39 +399,34 @@ function gotosavedworkingdirectory {
 	 local swd=$(<$HOME/.savedworkingdirectory)
 	 cd $swd
 }
-alias gotoswd='gotosavedworkingdirectory'
-alias cdswd='gotosavedworkingdirectory'
 alias back='gotosavedworkingdirectory'
 
 # go to last reconstruction 
-function gotolastreco {
-	 local reco_path=$(<$MATLAB_USER_PATH/experiments/p05/path_to_latest_reco)
+function gotoreco {
+	 local reco_path=$(<$MATLAB_USER_PATH/path_to_reco)
 	 cd $reco_path
 	 echo $reco_path | tr -d '\n' | xclip -sel clipboard	 
 }
-alias cdlastreco='gotolastreco'
-alias cdreco='gotolastreco'
-alias reco='gotolastreco'
+alias cdreco='gotoreco'
+alias reco='gotoreco'
 
 # go to last processed scan
-function gotolastscan {
-	 local scan_path=$(<$MATLAB_USER_PATH/experiments/p05/path_to_latest_scan)
+function gotoscan {
+	 local scan_path=$(<$MATLAB_USER_PATH/path_to_scan)
 	 cd $scan_path
 	 echo $scan_path | tr -d '\n' | xclip -sel clipboard	 
 }
-alias cdlastscan='gotolastscan'
-alias cdscan='gotolastscan'
-alias scan='gotolastscan'
+alias cdscan='gotoscan'
+alias scan='gotoscan'
 
 # go to last processed raw
-function gotolastraw {
-	 local raw_path=$(<$MATLAB_USER_PATH/experiments/p05/path_to_latest_raw)
+function gotoraw {
+	 local raw_path=$(<$MATLAB_USER_PATH/path_to_raw)
 	 cd $raw_path
 	 echo $raw_path | tr -d '\n' | xclip -sel clipboard	 
 }
-alias cdlastraw='gotolastraw'
-alias cdraw='gotolastraw'
-alias raw='gotolastraw'
+alias cdraw='gotoraw'
+alias raw='gotoraw'
 #############################
 
 # top of user
@@ -298,30 +450,40 @@ alias other='cdother'
 
 # Search PATTERN within files under current directory and subfolder
 function findinfiles {
-	 grep -nrwi . -e $1
+    echo 'grep -fnrwi . -e $1'
+    grep -fnrwi . -e $1
+}
+
+function findfolders {
+    echo 'find $(cd ..; pwd) -type d '
 }
 
 function grep_in_reco_log {
  
-    grep -Hi $1 ./*/reco/reco.log
-    grep -Hi $1 ./*/reco*/*/reco.log
+    grep -Hi $1 ./*/reco/reco*.log
+    grep -Hi $1 ./*/reco*/*/reco*.log
+    grep -Hi $1 ./*/processed/*/reco*/*/reco*.log
 }
 
 function grep_in_raw_log {
- 
     grep -Hi $1 ./*/*scan.log
+}
+
+function grep_in_beamtime-metadata {
+    grep -Hi $1 ./*/beamtime-metadata*.txt
+    grep -Hi $1 ./*/*/beamtime-metadata*.txt
 }
 
 
 # disk usage
+alias duh='du -h --max-depth=1 | sort -hr'
 alias dus='du -s'
 alias duhs='du -hs'
 alias du1='du -hd1'
 alias du2='du -hd2'
 
 # ASTRA config
-ASTRA_HOME=/asap3/petra3/gpfs/common/p05/astra          
-alias astra_conf_18='$ASTRA_HOME/astra_conf_18'
+ASTRA_HOME=/asap3/petra3/gpfs/common/p05/astra
 alias astra_conf_19='$ASTRA_HOME/astra_conf_19'
 
 # feh image viewer
@@ -332,8 +494,14 @@ alias maxfsg='ssh -X moosmanj@max-fsg'
 alias fsg='maxfsg'
 alias maxfsc='ssh -X moosmanj@max-fsc'
 alias fsc='maxfsc'
-alias maxhzg='ssh -X moosmanj@max-hzgg001'
-alias hzg='maxhzg'
+alias maxhzg1='ssh -X moosmanj@max-hzgg001'
+alias hzg1='maxhzg1'
+alias maxhzg2='ssh -X moosmanj@max-hzgg002'
+alias hzg2='maxhzg2'
+alias maxhzg3='ssh -t -Y max-hzgg003'
+alias hzg3='maxhzg3'
+alias maxhzg4='ssh -t -Y max-hzgg004'
+alias hzg4='maxhzg4'
 alias maxnova='ssh -X moosmanj@max-nova'
 alias maxnova1='ssh -X moosmanj@max-nova001'
 alias maxnova2='ssh -X moosmanj@max-nova002'
@@ -355,12 +523,43 @@ alias novanox='ssh -x moosmanj@max-nova'
 alias maxnovac='ssh -CXY moosmanj@max-nova'
 alias novac='maxnovac'
 
+alias bastion='ssh moosmanj@bastion'
+
+DLSFedID=bjn76225
+DLSssh=ssh.diamond.ac.uk
+DLSnx=nx.diamond.ac.uk
+DLSdata=/dls/i13/data/2018/mt19205-1/
+alias dlsssh='ssh -X $DLSFedID@$DLSssh'
+alias dlsnx='ssh -X $DLSFedID@$DLSnx'
+
+# SSH BEAMLINE
+alias p05t01='ssh -X p05user@hzgpp05t01'
+alias p05ct1='ssh -X p05user@hzgpp05ct1'
+alias p05ct2='ssh -X p05user@hzgpp05ct2'
+alias p05ct3='ssh -X p05user@hzgpp05ct3'
+alias p05ctcam1='ssh -X p05user@hzgpp05ctcam1'
+alias p05ctcam2='ssh -X p05user@hzgpp05ctcam2'
+
+
 # AVIZO
 function module_load_avizo {
     module load maxwell
-    module load avizo
+    module load avizo/9.7.0
     Avizo &
 }
+alias avizo='module_load_avizo'
+
+# Amira
+function module_load_amira {
+    module load maxwell
+    module load amira
+    Amira &
+}
+alias amira='module_load_amira'
+
+# Licenses
+alias myavizo='my-licenses -p avizo'
+alias mylicenses='my-licenses'
 
 # Tensorflow / ASTRA / ODL / PyCharm
 function module_load_reco {
@@ -385,6 +584,7 @@ function echo_clipboard {
     echo 'test clipboard' | xclip -sel clipboard
     echo -e 'XA_PRIMARY:' $XA_PRIMARY 
     echo -e 'XA_SECONDARY:' $XA_SECONDARY
+    echo -e 'XA_CLIPBOARD:' $XA_ClIPBOARD
 
 }
 alias xclippaste='xclip -o'
@@ -415,13 +615,53 @@ function list_folders_and_filecount2 (){
 }
 
 function count_files {
-    ls -l | wc -l
+    ls -1 | wc -l
 }
 
-alias hdf5view='~/hdf/hdfview.sh &'
+#alias hdf5view='~/hdf/hdfview.sh &'
+#alias hdfview='hdf5view'
+alias hdfview='/opt/xray/HDFView/3.1.0/hdfview.sh'
 
-alias nextcloud='$HOME/Nextcloud/Nextcloud-2.3.3-x86_64.AppImage &'
-alias desycloud='nextcloud'
+#alias nextcloud='$HOME/Nextcloud/Nextcloud-2.3.3-x86_64.AppImage &'
+#alias desycloud='nextcloud'
 
 NEXTCLOUD=/gpfs/petra3/scratch/moosmanj/nextcloud/
 NCload=$NEXTCLOUD/load_sequences
+
+# Memory consumption
+function memory_per_user {
+    local USER
+    echo -e forloop of\: ps haux \| awk -v user=\$USER \'\$1 \~ user \{ sum \+\= \$4\} END \{ print user\, sum\; \}\'
+    for USER in $(ps haux | awk '{print $1}' | sort -u)
+    do
+	ps haux | awk -v user=$USER '$1 ~ user { sum += $4} END { print user, sum; }'            
+    done
+}
+function memory_per_user_detailed {
+    local USER
+    TOTAL=$(free | awk '/Mem:/ { print $2 }')
+    for USER in $(ps haux | awk '{print $1}' | sort -u)
+    do
+	ps hux -U $USER | awk -v user=$USER -v total=$TOTAL '{ sum += $6 } END { printf "%s %.2f\n", user, sum / total * 100; }'
+    done
+}
+
+alias watchnvidia='watch -n 0.5 nvidia-smi'
+
+alias load_anaconda='module load anaconda/3'
+
+function grep_conda_pkgs {
+    grep $1 ~/anaconda3/pkgs/*/info/index.json
+}
+
+alias load_pycharm='module load maxwell jetbrains'
+
+alias load_hzg='module load maxwell jetbrains anaconda/3'
+
+alias tarxfz='tar xfz'
+
+#alias conda_hzg='conda activate hzg'
+alias conda_hzg="bash --rcfile <(echo '. ~/.bashrc;conda activate hzg;')"
+alias conda_pc="bash --rcfile <(echo '. ~/.bashrc;conda activate hzg;pycharm&')"
+
+# END
